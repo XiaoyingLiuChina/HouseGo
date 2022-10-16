@@ -1,5 +1,10 @@
 <template>
-  <div class="app"></div>
+  <!-- 一级路由 -->
+  <router-view></router-view>
 </template>
-
+<script>
+export default {
+  name: 'App'
+}
+</script>
 <style lang="less"></style>
