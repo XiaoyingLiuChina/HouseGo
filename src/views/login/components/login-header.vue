@@ -21,8 +21,8 @@ export default {
 
 <style scoped lang="less">
 .login-header {
-  background: #fff;
-  border-bottom: 1px solid #e4e4e4;
+  background: @appColor;
+  border-bottom: 1px solid @appColor;
   .container {
     display: flex;
     align-items: flex-end;
@@ -52,7 +52,7 @@ export default {
     font-size: 16px;
     i {
       font-size: 14px;
-      color: @appColor;
+      color: @sucColor;
       letter-spacing: -5px;
     }
   }

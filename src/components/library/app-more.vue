@@ -37,7 +37,7 @@ export default {
   &:hover {
     span,
     i {
-      color: @appColor;
+      color: @hoverColor;
     }
   }
 }

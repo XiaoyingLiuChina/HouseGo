@@ -28,7 +28,8 @@ export default {
 
 <style scoped lang="less">
 .home-panel {
-  background-color: #fff;
+  background-color: @appColor;
+  padding: 0 15px;
   .head {
     padding: 40px 0;
     display: flex;

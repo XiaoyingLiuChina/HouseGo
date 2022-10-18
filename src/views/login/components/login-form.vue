@@ -3,7 +3,7 @@
     <h3>账号登录</h3>
     <form>
       <div class="row">
-        <label for="account" class="col-form-label">账号</label>
+        <label for="account" class="col-form-label">学号</label>
         <div class="account">
           <input type="text" class="form-control" id="account" />
         </div>
@@ -15,7 +15,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="gree">
+        <div class="forget col"><a href="#">忘记密码？</a></div>
+        <div class="gree col">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="gridCheck1" />
             <label class="form-check-label" for="gridCheck1"> 是否同意协议? </label>
@@ -33,6 +34,9 @@ export default {
 </script>
 <style lang="less" scoped>
 .login-form {
+  background-color: @appColor;
+  padding: 25px 10px;
+  border-radius: 10px;
   h3 {
     text-align: center;
     margin: 10px auto;
@@ -50,6 +54,10 @@ export default {
       .gree {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
+      }
+      .forget {
+        display: flex;
         align-items: center;
       }
     }

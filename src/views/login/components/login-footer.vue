@@ -20,7 +20,7 @@ export default {
 </script>
 <style scoped lang="less">
 .app-footer {
-  background-color: #e3f2fd;
+  background-color: @appColor;
   .copyright {
     height: 140px;
     padding-top: 40px;

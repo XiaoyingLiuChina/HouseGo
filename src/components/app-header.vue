@@ -1,6 +1,6 @@
 <template>
   <div class="app-header">
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd">
+    <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e3f2fd">
       <div class="container-fluid">
         <span class="logo"><RouterLink class="navbar-brand" to="/">实验室招新系统</RouterLink></span>
         <button
@@ -29,8 +29,9 @@
               <a class="nav-link" href="#">招新信息</a>
             </li>
           </ul>
+          <slot />
           <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <input class="form-control me-2" type="search" placeholder="搜索感兴趣的实验室" aria-label="Search" />
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
         </div>
@@ -46,7 +47,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .app-header {
-  margin-top: 10px;
+  // margin-top: 10px;
   .container-fluid {
     align-items: center;
     .logo {
@@ -57,6 +58,11 @@ export default {
         width: 100%;
         text-indent: -9999px;
         background: url(../assets/images/logo.png) no-repeat center / contain;
+      }
+    }
+    form {
+      input {
+        padding: 5px;
       }
     }
   }

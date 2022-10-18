@@ -13,9 +13,9 @@
           </li>
         </ul> -->
 
-      <ul class="labs-list row row-cols-1 row-cols-md-2 row-cols-xl-4">
+      <ul class="labs-list row row-cols-1 row-cols-md-3 row-cols-xl-4">
         <li v-for="(item, index) in 4" :key="index" class="col">
-          <div class="card" style="width: 18rem">
+          <div class="card" style="width: 100%">
             <img src="@/assets/images/ma.png" class="card-img-top" alt="..." />
             <div class="card-body">
               <h5 class="card-title">软件测试实验室</h5>
@@ -40,7 +40,7 @@ export default {
 .home-hot {
   .labs-list {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
   }
 }
 </style>

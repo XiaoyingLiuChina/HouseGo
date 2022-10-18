@@ -30,11 +30,6 @@ export default {
   .wrapper {
     width: 380px;
     min-height: 400px;
-
-    // background: #e3f2fd;
-    // position: absolute;
-    // top: 54px;
-    // left: 50%;
   }
 }
 </style>

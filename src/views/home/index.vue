@@ -1,9 +1,7 @@
 <template>
   <div class="app-home-page">
-    <div class="container">
-      <HomeBanner />
-      <HomeHot />
-    </div>
+    <HomeBanner />
+    <HomeHot />
   </div>
 </template>
 
