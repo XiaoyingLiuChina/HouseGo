@@ -1,6 +1,6 @@
 <template>
   <div class="login-form">
-    <h3>账号登录</h3>
+    <h3>注册账号</h3>
     <form @submit.prevent="login()">
       <div class="row">
         <label for="account" class="col-form-label">学号</label>
@@ -14,27 +14,9 @@
           <input type="password" class="form-control" id="pw" name="pw" v-model.trim="userinfo.pw" />
         </div>
       </div>
-      <div class="row" style="height: 30px; padding-left: calc(var(--bs-gutter-x) * 0.5)">
-        <div class="form-check col-4">
-          <input class="form-check-input" type="radio" name="type" id="student" v-model="userinfo.type" value="student" />
-          <label class="form-check-label" for="student"> 学生 </label>
-        </div>
-        <div class="form-check col-4">
-          <input class="form-check-input" type="radio" name="type" id="teacher" v-model="userinfo.type" value="teacher" />
-          <label class="form-check-label" for="teacher"> 老师</label>
-        </div>
-      </div>
-      <div class="row" style="height: 30px">
-        <div class="forget col"><a href="#">忘记密码？</a></div>
-        <div class="gree col">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="greeCheck" name="greeCheck" v-model="userinfo.isgree" />
-            <label class="form-check-label" for="greeCheck"> 是否同意协议? </label>
-          </div>
-        </div>
-      </div>
+
       <!-- <RouterLink></RouterLink> -->
-      <button type="submit" class="btn btn-primary">登录</button>
+      <button type="submit" class="btn btn-primary">注册</button>
     </form>
   </div>
 </template>
@@ -52,18 +34,7 @@ export default {
       }
     }
   },
-  methods: {
-    login() {
-      console.log(this.userinfo)
-      if (this.userinfo.type === 'student') {
-        this.$router.push('/student')
-      } else if (this.userinfo.type === 'teacher') {
-        this.$router.push('/teacher')
-      } else {
-        this.$message({ type: 'warn', text: '请选择登录类型' })
-      }
-    }
-  }
+  methods: {}
 }
 </script>
 <style lang="less" scoped>

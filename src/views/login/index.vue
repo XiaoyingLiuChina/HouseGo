@@ -11,7 +11,7 @@
 </template>
 <script>
 import loginHeader from './components/login-header.vue'
-import loginFooter from './components/login-footer.vue'
+import loginFooter from '@/components/app-footer.vue'
 import loginForm from './components/login-form.vue'
 export default {
   name: 'PageLogin',

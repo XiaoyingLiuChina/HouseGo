@@ -19,16 +19,19 @@
     </div>
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingTwo">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">招新管理</button>
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">实验室管理</button>
       </h2>
       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
         <div class="accordion-body">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">子模块1</a>
+              <a class="nav-link active" aria-current="page" href="#">修改实验室简介</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">子模块2</a>
+              <RouterLink class="nav-link" to="/teacher/getnew">发布招新信息</RouterLink>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">修改招新信息</a>
             </li>
           </ul>
         </div>
@@ -36,18 +39,16 @@
     </div>
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingThree">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Accordion Item #3
-        </button>
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">新人管理</button>
       </h2>
       <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
         <div class="accordion-body">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">子模块1</a>
+              <a class="nav-link active" aria-current="page" href="#">加入新人</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">子模块2</a>
+              <a class="nav-link" href="#">查看实验室人员</a>
             </li>
           </ul>
         </div>
@@ -57,7 +58,7 @@
 </template>
 <script>
 export default {
-  name: 'StudentLeftNav',
+  name: 'TeacherLeftNav',
   state() {
     return {}
   }
