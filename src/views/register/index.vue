@@ -27,7 +27,7 @@ export default {
   align-items: center;
   background: url(../../assets/images/login-bg.png) no-repeat center/cover;
   .wrapper {
-    width: 380px;
+    width: 388px;
     min-height: 400px;
   }
 }
