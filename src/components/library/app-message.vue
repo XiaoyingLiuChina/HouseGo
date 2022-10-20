@@ -36,7 +36,7 @@ export default {
         borderColor: 'rgb(253, 226, 226)'
       },
       success: {
-        icon: 'icon-queren2',
+        icon: 'bi bi-check-circle',
         color: '#67C23A',
         backgroundColor: 'rgb(240, 249, 235)',
         borderColor: 'rgb(225, 243, 216)'

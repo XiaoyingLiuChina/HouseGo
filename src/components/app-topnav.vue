@@ -2,9 +2,9 @@
   <div class="app-topnav">
     <ul class="nav justify-content-end" style="background-color: #e3f2fd">
       <li class="nav-item"><RouterLink to="/login" class="nav-link">请先登录</RouterLink></li>
-      <li class="nav-item"><RouterLink to="/teacher" class="nav-link">测试点：教师个人中心</RouterLink></li>
+      <!-- <li class="nav-item"><RouterLink to="/teacher" class="nav-link">测试点：教师个人中心</RouterLink></li> -->
       <li class="nav-item"><RouterLink to="/register" class="nav-link">马上注册</RouterLink></li>
-      <li class="nav-item"><RouterLink to="/student" class="nav-link">测试点：学生个人中心</RouterLink></li>
+      <!-- <li class="nav-item"><RouterLink to="/student" class="nav-link">个人中心</RouterLink></li> -->
       <li class="nav-item"><a class="nav-link" href="#">关于我们</a></li>
       <li class="nav-item"><a class="nav-link" href="#">退出登录</a></li>
     </ul>
