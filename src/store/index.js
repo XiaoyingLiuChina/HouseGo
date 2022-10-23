@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-
+import user from './modules/user'
 // 创建vuex仓库并导出
 export default createStore({
   state: {
@@ -13,6 +13,7 @@ export default createStore({
   },
   modules: {
     // 分模块
+    user
   },
   getters: {
     // vuex的计算属性

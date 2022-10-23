@@ -2,7 +2,7 @@
   <div class="login-form">
     <h3>账号登录</h3>
     <!-- <form @submit.prevent="login()"> -->
-    <Form class="userinfo" :validation-schema="mySchema" autocomplete="off" v-slot="{ errors }">
+    <Form class="userinfo" :validation-schema="mySchema" autocomplete="off" v-slot="{ errors }" @submit="login">
       <div class="row">
         <label for="account" class="col-sm-2 col-form-label align-self-center">学号</label>
         <div class="col align-self-center">
@@ -19,11 +19,11 @@
       </div>
       <div class="row" style="height: 30px; padding-left: calc(var(--bs-gutter-x) * 0.5)">
         <div class="form-check col-4">
-          <input class="form-check-input" type="radio" name="type" id="student" v-model="userinfo.type" value="student" />
+          <Field class="form-check-input" type="radio" name="type" id="student" v-model="userinfo.type" value="student" />
           <label class="form-check-label" for="student"> 学生 </label>
         </div>
         <div class="form-check col-4">
-          <input class="form-check-input" type="radio" name="type" id="teacher" v-model="userinfo.type" value="teacher" />
+          <Field class="form-check-input" type="radio" name="type" id="teacher" v-model="userinfo.type" value="teacher" />
           <label class="form-check-label" for="teacher"> 老师</label>
         </div>
       </div>
@@ -44,7 +44,7 @@
         </div>
         <div class="gree col">
           <div class="form-check">
-            <Field class="form-check-input" type="checkbox" name="isAgree" v-model="userinfo.isAgree" />
+            <Field class="form-check-input" type="checkbox" name="isAgree" v-model="userinfo.isAgree" value="true" />
             <label class="form-check-label" for="greeCheck"> 是否同意协议? </label>
             <div class="errorShow" v-if="errors.isAgree">
               <i class="bi bi-exclamation-triangle" />
@@ -53,13 +53,14 @@
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary" @click="login">登录</button>
+      <button type="submit" class="btn btn-primary">登录</button>
     </Form>
   </div>
 </template>
 <script>
 import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
+// import { getStudentById } from '@/api/user'
 export default {
   name: 'LoginForm',
   components: {
@@ -84,11 +85,15 @@ export default {
     }
   },
   methods: {
-    login() {
-      console.log(this.userinfo)
-      if (this.userinfo.type === 'student') {
+    login(values) {
+      // console.log(JSON.stringify(values, null, 2))
+      // console.log(values)
+      // getStudentById('5120193378').then((data) => {
+      //   console.log(data)
+      // })
+      if (values.type === 'student') {
         this.$router.push('/student')
-      } else if (this.userinfo.type === 'teacher') {
+      } else if (values.type === 'teacher') {
         this.$router.push('/teacher')
       } else {
         this.$message({ type: 'warn', text: '请选择登录类型' })

@@ -26,11 +26,11 @@
               <a class="nav-link" href="#">讨论区</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">招新信息</a>
+              <RouterLink class="nav-link" to="/labs/renew">招新信息</RouterLink>
             </li>
           </ul>
           <slot />
-          <form class="d-flex" role="search">
+          <form class="d-flex" role="search" @submit="searchLabs">
             <input class="form-control me-2" type="search" placeholder="搜索感兴趣的实验室" aria-label="Search" />
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
@@ -42,7 +42,12 @@
 
 <script>
 export default {
-  name: 'AppHeader'
+  name: 'AppHeader',
+  methods: {
+    searchLabs() {
+      this.$router.push('/search/2')
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
