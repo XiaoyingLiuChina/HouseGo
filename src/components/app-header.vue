@@ -17,13 +17,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">首页</a>
+              <RouterLink class="nav-link active" aria-current="page" to="/">首页</RouterLink>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">公告信息</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">讨论区</a>
+              <RouterLink class="nav-link" to="/tell">讨论区</RouterLink>
             </li>
             <li class="nav-item">
               <RouterLink class="nav-link" to="/labs/renew">招新信息</RouterLink>
@@ -55,6 +55,7 @@ export default {
   // margin-top: 10px;
   .container-fluid {
     align-items: center;
+    font-size: 18px;
     .logo {
       width: 140px;
       a {
