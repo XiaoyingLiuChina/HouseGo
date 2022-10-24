@@ -6,7 +6,7 @@ export default {
   account(value) {
     if (!value) return '请输入你的学号'
     // 规则：字母开头6-20字符之间
-    if (!/^5120(\w){6}$/.test(value)) return '请输入正确的学号'
+    if (!/^5120(\d){6}$/.test(value)) return '请输入正确的学号'
     return true
   },
   // 用户校验且校验唯一性

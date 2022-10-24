@@ -1,16 +1,18 @@
 <template>
-  <div class="studentPage">
+  <div class="user-page">
     <AppHeader>
       <div class="info-header">
-        <span id="welcome">欢迎 小傻逼宋洋</span>
+        <span id="welcome">
+          欢迎 小傻逼宋洋
+          <span v-if="user.type === 'teacher'">老师</span>
+          <span v-else>同学</span>
+        </span>
         <RouterLink to="/" @click="logout">退出登录</RouterLink>
       </div>
     </AppHeader>
     <div class="container">
       <div class="row">
-        <div class="col-2">
-          <StudentLeftnav />
-        </div>
+        <div class="col-2"><UserLeftnav :user="user" /></div>
         <div class="col-10">
           <div class="iframe">
             <RouterView></RouterView>
@@ -23,11 +25,16 @@
 </template>
 <script>
 import AppHeader from '@/components/app-header.vue'
-import StudentLeftnav from './components/student-leftnav.vue'
 import AppFooter from '@/components/app-footer.vue'
+import UserLeftnav from './components/user-leftnav.vue'
 export default {
-  name: 'StudentPage',
-  components: { AppHeader, StudentLeftnav, AppFooter },
+  name: 'UserPage',
+  components: { AppHeader, AppFooter, UserLeftnav },
+  data() {
+    return {
+      user: this.$store.state.user.profile
+    }
+  },
   methods: {
     logout() {
       console.log('宋洋退出登录啦')
@@ -36,7 +43,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.studentPage {
+.user-page {
   .info-header {
     margin: 0 auto;
     a {

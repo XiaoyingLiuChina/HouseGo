@@ -89,15 +89,24 @@ export default {
       // console.log(JSON.stringify(values, null, 2))
       // console.log(values)
       // getStudentById('5120193378').then((data) => {
-      //   console.log(data)
+      //   console.log(data)h
       // })
-      if (values.type === 'student') {
-        this.$router.push('/student')
-      } else if (values.type === 'teacher') {
-        this.$router.push('/teacher')
-      } else {
-        this.$message({ type: 'warn', text: '请选择登录类型' })
+
+      console.log(values)
+      if (values) {
+        this.$store.dispatch('user/setUser', values)
+        this.$router.push({
+          path: '/user'
+        })
       }
+
+      // if (values.type === 'student') {
+      //   this.$router.push('/student')
+      // } else if (values.type === 'teacher') {
+      //   this.$router.push('/teacher')
+      // } else {
+      //   this.$message({ type: 'warn', text: '请选择登录类型' })
+      // }
     },
     ResetPassword() {
       console.log('重置密码')

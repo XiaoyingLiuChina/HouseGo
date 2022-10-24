@@ -1,5 +1,5 @@
 <template>
-  <div class="student-info">
+  <div class="user-info">
     <div class="card text-center">
       <div class="card-header"><h3>个人基本信息</h3></div>
       <div class="card-body">
@@ -21,11 +21,11 @@
 </template>
 <script>
 export default {
-  name: 'StudentInfo'
+  name: 'UserInfo'
 }
 </script>
 <style lang="less" scoped>
-.student-info {
+.user-info {
   margin-top: 20px;
   .list-group-item {
     &:last-child {

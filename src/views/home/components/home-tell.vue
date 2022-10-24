@@ -1,10 +1,17 @@
 <template>
   <div class="home-tell">
     <div class="card" v-for="item in 10" :key="item">
-      <h5 class="card-header"><img src="@/assets/images/ma.png" />宋洋小傻逼</h5>
+      <div class="card-header">
+        <div>
+          <img src="@/assets/images/ma.png" />
+          <span> 宋洋小傻逼 </span>
+        </div>
+        <small class="text-muted">移动实验室</small>
+      </div>
       <div class="card-body">
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         <ul class="talk-images">
           <li v-for="s in 3" :key="s"><img src="@/assets/images/logo.png" alt="xx" /></li>
         </ul>
@@ -23,6 +30,11 @@ export default {
   .card {
     margin-bottom: 15px;
     .card-header {
+      display: flex;
+      //   width: 500px;
+      justify-content: space-between;
+      align-items: center;
+
       img {
         width: 40px;
         height: 40px;

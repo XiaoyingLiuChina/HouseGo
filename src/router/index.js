@@ -6,12 +6,9 @@ const Hometell = () => import('@/views/home/components/home-tell.vue')
 const Login = () => import('@/views/login/index')
 const Labs = () => import('@/views/labs/index')
 
-const Student = () => import('@/views/user/student/index')
-const Studentinfo = () => import('@/views/user/student/components/student-info.vue')
-const Studentpwd = () => import('@/views/user/student/components/student-pwd.vue')
-
-const Teacher = () => import('@/views/user/teacher/index')
-const Teachergetnew = () => import('@/views/user/teacher/components/teacher-getnew.vue')
+const User = () => import('@/views/user/index')
+const UserInfo = () => import('@/views/user/components/user-info.vue')
+const UserPassword = () => import('@/views/user/components/user-password.vue')
 const Register = () => import('@/views/register/index')
 
 const SearchLabs = () => import('@/views/labs/components/labs-all.vue')
@@ -30,23 +27,32 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/register', component: Register },
   {
-    path: '/student',
-    component: Student,
+    path: '/user',
+    // name: 'User',
+    component: User,
     children: [
-      { path: '', component: Studentinfo },
-      { path: '/student/:id', component: Studentinfo },
-      { path: '/student/:id/updatepwd/', component: Studentpwd }
-    ]
-  },
-  {
-    path: '/teacher',
-    component: Teacher,
-    children: [
-      { path: '', component: Studentinfo },
-      { path: '/teacher/getnew', component: Teachergetnew },
-      { path: '/student/:id/updatepwd/', component: Studentpwd }
+      { path: '', component: UserInfo },
+      { path: '/user/updatepw', component: UserPassword }
     ]
   }
+  // {
+  //   path: '/student',
+  //   component: Student,
+  //   children: [
+  //     { path: '', component: Studentinfo },
+  //     { path: '/student/:id', component: Studentinfo },
+  //     { path: '/student/:id/updatepwd/', component: Studentpwd }
+  //   ]
+  // },
+  // {
+  //   path: '/teacher',
+  //   component: Teacher,
+  //   children: [
+  //     { path: '', component: Studentinfo },
+  //     { path: '/teacher/getnew', component: Teachergetnew },
+  //     { path: '/student/:id/updatepwd/', component: Studentpwd }
+  //   ]
+  // }
 ]
 
 // 创建路由实例

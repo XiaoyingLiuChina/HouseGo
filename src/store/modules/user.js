@@ -25,5 +25,10 @@ export default {
     setRedirectUrl(state, url) {
       state.redirectUrl = url
     }
+  },
+  actions: {
+    setUser(context, args) {
+      context.commit('setUser', args)
+    }
   }
 }

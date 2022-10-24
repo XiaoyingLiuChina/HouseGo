@@ -1,5 +1,5 @@
 <template>
-  <div class="student-info">
+  <div class="user-password">
     <div class="card">
       <div class="card-header"><h3>修改密码</h3></div>
       <div class="card-body">
@@ -23,11 +23,11 @@
 </template>
 <script>
 export default {
-  name: 'StudentInfo'
+  name: 'UserPassword'
 }
 </script>
 <style lang="less" scoped>
-.student-info {
+.user-password {
   margin-top: 20px;
   .card-body {
     & > div {
