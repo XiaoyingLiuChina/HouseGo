@@ -23,7 +23,7 @@
               <a class="nav-link" href="#">公告信息</a>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/tell">讨论区</RouterLink>
+              <RouterLink class="nav-link" to="/tell">分享区</RouterLink>
             </li>
             <li class="nav-item">
               <RouterLink class="nav-link" to="/labs/renew">招新信息</RouterLink>

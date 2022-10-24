@@ -26,18 +26,18 @@ export default {
       powerlist: [
         {
           name: '个人管理',
-          id: 'models1',
+          id: 'modules1',
           children: [
             { name: '查看信息', topath: `/user` },
             { name: '修改秘密', topath: `/user/updatepw` }
           ]
         },
         {
-          name: '讨论管理',
-          id: 'models2',
+          name: '分享管理',
+          id: 'modules2',
           children: [
-            { name: '查看信息', topath: '/user/' },
-            { name: '修改秘密', topath: '/user/updatepw' }
+            { name: '查看分享', topath: '/user/discuss' },
+            { name: '发布分享', topath: '/user/discuss/put' }
           ]
         }
       ]
@@ -58,4 +58,9 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.user-leftnav {
+  position: sticky;
+  top: 102px;
+}
+</style>

@@ -30,14 +30,20 @@
       <div class="row" style="height: 30px">
         <div class="forget col"><span @click="forgetClick = !forgetClick">忘记密码？</span></div>
         <div v-if="forgetClick" class="dialog-forget">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">重置密码</h5>
-              <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-              <p class="card-text">是否重置密码？重置后密码为：000000</p>
-              <div class="card-bottom">
-                <button class="btn btn-outline-primary btn-sm" @click="forgetClick = !forgetClick">取消</button>
-                <button class="btn btn-outline-primary btn-sm" @click="ResetPassword">确定</button>
+          <!-- <div class="modal dialog-forget" tabindex="-1" v-if="forgetClick"> -->
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">重置密码</h5>
+                <button type="button" class="btn-close" aria-label="Close" @click="forgetClick = !forgetClick"></button>
+              </div>
+              <div class="modal-body">
+                <p>是否重置密码？重置后密码为：</p>
+                <p>000000</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" @click="forgetClick = !forgetClick">取消</button>
+                <button type="button" class="btn btn-primary btn-sm" @click="ResetPassword">确认重置</button>
               </div>
             </div>
           </div>
@@ -93,6 +99,7 @@ export default {
       // })
 
       console.log(values)
+      values.token = '6'
       if (values) {
         this.$store.dispatch('user/setUser', values)
         this.$router.push({
@@ -137,15 +144,15 @@ export default {
 
       .dialog-forget {
         position: absolute;
-        width: 300px;
-        height: 100px;
+        width: 60%;
+        height: 30%;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        .card-bottom {
-          display: flex;
-          margin: 10px 0 0 0;
-        }
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        background-color: rgb(196, 193, 193);
       }
       .form-control {
         line-height: 2;
@@ -167,7 +174,7 @@ export default {
         }
       }
     }
-    button {
+    button[type='submit'] {
       display: block;
       width: 100px;
       height: 30px;

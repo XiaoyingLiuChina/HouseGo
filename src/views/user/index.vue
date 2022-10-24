@@ -3,11 +3,11 @@
     <AppHeader>
       <div class="info-header">
         <span id="welcome">
-          欢迎 小傻逼宋洋
-          <span v-if="user.type === 'teacher'">老师</span>
-          <span v-else>同学</span>
+          欢迎 <i class="bi bi-person"></i>小傻逼宋洋
+          <span v-if="user.type === 'teacher'" style="font-size: 12px">老师</span>
+          <span v-else style="font-size: 12px">同学</span>
         </span>
-        <RouterLink to="/" @click="logout">退出登录</RouterLink>
+        <a href="#" @click="logout">退出登录</a>
       </div>
     </AppHeader>
     <div class="container">
@@ -37,12 +37,18 @@ export default {
   },
   methods: {
     logout() {
-      console.log('宋洋退出登录啦')
+      this.$store.commit('user/setUser', {})
+      this.$router.push('/login')
     }
   }
 }
 </script>
 <style lang="less" scoped>
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
 .user-page {
   .info-header {
     margin: 0 auto;
@@ -54,7 +60,7 @@ export default {
     min-height: 470px;
   }
   .iframe {
-    margin-top: 20px;
+    margin-top: 10px;
   }
 }
 </style>

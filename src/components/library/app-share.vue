@@ -1,5 +1,5 @@
 <template>
-  <div class="home-tell">
+  <div class="app-share">
     <div class="card" v-for="item in 10" :key="item">
       <div class="card-header">
         <div>
@@ -22,11 +22,12 @@
 </template>
 <script>
 export default {
-  name: 'HomeTell'
+  name: 'AppShare'
 }
 </script>
 <style lang="less" scoped>
-.home-tell {
+.app-share {
+  padding: 12px;
   .card {
     margin-bottom: 15px;
     .card-header {
@@ -47,8 +48,8 @@ export default {
       .talk-images {
         display: flex;
         li {
-          width: 200px;
-          height: 200px;
+          width: 180px;
+          height: 180px;
           margin-right: 15px;
           border: 1px solid red;
         }

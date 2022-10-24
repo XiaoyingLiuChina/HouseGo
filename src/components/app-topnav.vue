@@ -1,18 +1,34 @@
 <template>
   <div class="app-topnav">
     <ul class="nav justify-content-end" style="background-color: #e3f2fd">
-      <li class="nav-item"><RouterLink to="/login" class="nav-link">请先登录</RouterLink></li>
-      <!-- <li class="nav-item"><RouterLink to="/teacher" class="nav-link">测试点：教师个人中心</RouterLink></li> -->
-      <li class="nav-item"><RouterLink to="/register" class="nav-link">马上注册</RouterLink></li>
-      <!-- <li class="nav-item"><RouterLink to="/student" class="nav-link">个人中心</RouterLink></li> -->
+      <template v-if="user.token">
+        <li class="nav-item">
+          <RouterLink to="/user" class="nav-link"><i class="bi bi-person"></i>{{ user.account }}</RouterLink>
+        </li>
+        <li class="nav-item"><a to="/" class="nav-link" href="#" @click="logout">退出登录</a></li>
+      </template>
+      <template v-else>
+        <li class="nav-item"><RouterLink to="/login" class="nav-link">请先登录</RouterLink></li>
+        <li class="nav-item"><RouterLink to="/register" class="nav-link">马上注册</RouterLink></li>
+      </template>
       <li class="nav-item"><a class="nav-link" href="#">关于我们</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">退出登录</a></li>
     </ul>
   </div>
 </template>
 <script>
 export default {
-  name: 'AppTopnav'
+  name: 'AppTopnav',
+  data() {
+    return {
+      user: this.$store.state.user.profile
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.commit('user/setUser', {})
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 
@@ -27,6 +43,10 @@ export default {
     a {
       margin: 10px;
       color: rgb(66, 66, 66);
+    }
+    i {
+      margin-right: 8px;
+      color: red;
     }
   }
 }
