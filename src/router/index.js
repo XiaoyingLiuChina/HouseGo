@@ -11,7 +11,7 @@ const UserInfo = () => import('@/views/user/components/user-info.vue')
 const UserPassword = () => import('@/views/user/components/user-password.vue')
 const UserDiscuss = () => import('@/views/user/components/user-discuss.vue')
 const UserShareform = () => import('@/views/user/components/user-discussput.vue')
-
+const UserAvatar = () => import('@/views/user/components/user-avatar.vue')
 const Register = () => import('@/views/register/index')
 
 const SearchLabs = () => import('@/views/labs/components/labs-all.vue')
@@ -36,7 +36,8 @@ const routes = [
       { path: '', component: UserInfo },
       { path: '/user/updatepw', component: UserPassword },
       { path: '/user/discuss', component: UserDiscuss },
-      { path: '/user/discuss/put', component: UserShareform }
+      { path: '/user/discuss/put', component: UserShareform },
+      { path: '/user/avatar', component: UserAvatar }
     ]
   }
 ]

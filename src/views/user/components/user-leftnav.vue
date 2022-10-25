@@ -39,6 +39,16 @@ export default {
             { name: '查看分享', topath: '/user/discuss' },
             { name: '发布分享', topath: '/user/discuss/put' }
           ]
+        },
+        {
+          name: '头像管理',
+          id: 'modules3',
+          children: [
+            {
+              name: '修改头像',
+              topath: '/user/avatar'
+            }
+          ]
         }
       ]
     }

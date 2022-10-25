@@ -24,11 +24,17 @@ export default {
     // 修改回跳地址
     setRedirectUrl(state, url) {
       state.redirectUrl = url
+    },
+    updateAvatar(state, avatar) {
+      state.profile.avatar = avatar
     }
   },
   actions: {
     setUser(context, args) {
       context.commit('setUser', args)
+    },
+    updateAvatar(context, args) {
+      context.commit('updateAvatar', args)
     }
   }
 }

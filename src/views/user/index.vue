@@ -3,7 +3,9 @@
     <AppHeader>
       <div class="info-header">
         <span id="welcome">
-          欢迎 <i class="bi bi-person"></i>小傻逼宋洋
+          欢迎
+          <img :src="user.avatar" alt="..." />
+          小傻逼宋洋
           <span v-if="user.type === 'teacher'" style="font-size: 12px">老师</span>
           <span v-else style="font-size: 12px">同学</span>
         </span>
@@ -54,6 +56,11 @@ export default {
     margin: 0 auto;
     a {
       margin-left: 50px;
+    }
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
     }
   }
   .container {
