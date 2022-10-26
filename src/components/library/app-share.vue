@@ -1,19 +1,24 @@
 <template>
   <div class="app-share">
-    <div class="card" v-for="item in 10" :key="item">
+    <div class="card" v-for="item in shareList" :key="item.id">
       <div class="card-header">
         <div>
           <img src="@/assets/images/ma.png" />
-          <span> 宋洋小傻逼 </span>
+          <span> {{ item.name }} </span>
         </div>
         <small class="text-muted">移动实验室</small>
       </div>
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        <h5 class="card-title">{{ item.title }}</h5>
+        <p class="card-text">{{ item.context }}</p>
+        <p class="card-text">
+          <small class="text-muted">{{ item.publishTime }}</small>
+        </p>
+
         <ul class="talk-images">
-          <li v-for="s in 3" :key="s"><img src="@/assets/images/logo.png" alt="xx" /></li>
+          <li v-for="img in item.images" :key="img">
+            <img :src="img" alt="xx" />
+          </li>
         </ul>
         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
       </div>
@@ -22,7 +27,30 @@
 </template>
 <script>
 export default {
-  name: 'AppShare'
+  name: 'AppShare',
+  props: {
+    shareList: {
+      type: Array,
+      default: () => [
+        {
+          id: 1,
+          name: '王松',
+          title: '实验室的第一天',
+          context: '王松老师带飞，快来',
+          publishTime: '2020-04-18',
+          images: ['@/assets/images/ma.png', '@/assets/images/logo.png']
+        },
+        {
+          id: 2,
+          name: '宋洋',
+          title: '实验室的第一天',
+          context: '谢先博老师带飞，快来',
+          publishTime: '2021-04-18',
+          images: ['@/assets/images/ma.png', '@/assets/images/logo.png']
+        }
+      ]
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

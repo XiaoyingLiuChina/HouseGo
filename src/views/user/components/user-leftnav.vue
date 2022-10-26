@@ -29,7 +29,7 @@ export default {
           id: 'modules1',
           children: [
             { name: '查看信息', topath: '/user' },
-            { name: '修改秘密', topath: '/user/updatepw' },
+            { name: '修改密码', topath: '/user/updatepw' },
             { name: '修改头像', topath: '/user/avatar' },
             { name: '个人简介', topath: '/manage/introduce' }
           ]
@@ -51,6 +51,11 @@ export default {
           name: '人员管理',
           id: 'modules4',
           children: [{ name: '查看已申请人员', topath: '/manage/labtor' }]
+        },
+        {
+          name: '招新管理',
+          id: 'modules5',
+          children: [{ name: '发布招新', topath: '/manage/recruit' }]
         }
       ]
     }
