@@ -18,16 +18,19 @@
         <Field :class="{ error: errors.password }" class="form-control" v-model.trim="userinfo.password" name="password" type="password" placeholder="请输入密码" />
       </div>
       <div class="row" style="height: 30px; padding-left: calc(var(--bs-gutter-x) * 0.5)">
-        <div class="form-check col-4">
-          <Field class="form-check-input" type="radio" name="type" id="student" v-model="userinfo.type" value="student" />
+        <div class="col-6 align-self-center">
+          <div class="errorShow" v-if="errors.type"><i class="bi bi-exclamation-triangle" />{{ errors.type }}</div>
+        </div>
+        <div class="form-check col-3 align-self-center">
+          <Field :class="{ error: errors.type }" class="form-check-input" type="radio" name="type" id="student" v-model="userinfo.type" value="student" />
           <label class="form-check-label" for="student"> 学生 </label>
         </div>
-        <div class="form-check col-4">
-          <Field class="form-check-input" type="radio" name="type" id="teacher" v-model="userinfo.type" value="teacher" />
+        <div class="form-check col-3 align-self-center">
+          <Field :class="{ error: errors.type }" class="form-check-input" type="radio" name="type" id="teacher" v-model="userinfo.type" value="teacher" />
           <label class="form-check-label" for="teacher"> 老师</label>
         </div>
       </div>
-      <div class="row" style="height: 30px">
+      <div class="row last-row" style="height: 30px">
         <div class="forget col"><span @click="forgetClick = !forgetClick">忘记密码？</span></div>
         <div v-if="forgetClick" class="dialog-forget">
           <!-- <div class="modal dialog-forget" tabindex="-1" v-if="forgetClick"> -->
@@ -48,14 +51,14 @@
             </div>
           </div>
         </div>
-        <div class="gree col">
+        <div class="gree col-9">
+          <div class="errorShow" v-if="errors.isAgree">
+            <i class="bi bi-exclamation-triangle" />
+            {{ errors.isAgree }}
+          </div>
           <div class="form-check">
-            <Field class="form-check-input" type="checkbox" name="isAgree" v-model="userinfo.isAgree" value="true" />
+            <Field class="form-check-input" :class="{ error: errors.isAgree }" type="checkbox" name="isAgree" v-model="userinfo.isAgree" value="true" />
             <label class="form-check-label" for="greeCheck"> 是否同意协议? </label>
-            <div class="errorShow" v-if="errors.isAgree">
-              <i class="bi bi-exclamation-triangle" />
-              {{ errors.isAgree }}
-            </div>
           </div>
         </div>
       </div>
@@ -85,6 +88,7 @@ export default {
         account: veeSchema.account,
         password: veeSchema.password,
         mobild: veeSchema.mobile,
+        type: veeSchema.type,
         isAgree: veeSchema.isAgree
       },
       forgetClick: false
@@ -92,12 +96,6 @@ export default {
   },
   methods: {
     login(values) {
-      // console.log(JSON.stringify(values, null, 2))
-      // console.log(values)
-      // getStudentById('5120193378').then((data) => {
-      //   console.log(data)h
-      // })
-
       console.log(values)
       values.token = '6'
       if (values) {
@@ -133,6 +131,11 @@ export default {
     margin: 10px auto;
   }
   form {
+    input {
+      &.error {
+        border: 1px solid red;
+      }
+    }
     .errorShow {
       color: red;
       font-size: 8px;
@@ -167,11 +170,7 @@ export default {
       .forget {
         display: flex;
         align-items: center;
-      }
-      input {
-        &.error {
-          border: 1px solid red;
-        }
+        padding-right: 0;
       }
     }
     button[type='submit'] {
@@ -181,6 +180,9 @@ export default {
       text-align: center;
       margin: 0 auto;
     }
+  }
+  .last-row {
+    font-size: 12px;
   }
 }
 </style>

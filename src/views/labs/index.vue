@@ -9,14 +9,20 @@
     </nav>
     <!-- 实验室信息 -->
     <div class="labs-info">
-      <p class="desc">参加测试大赛 招新人数 联系人电话</p>
+      <!-- 这里可以先展示简介 -->
+      <LabsIntroduction />
+      <!-- 再展示招新信息 -->
+      <LabsRecruitInfo />
       <button class="btn btn-primary"><RouterLink to="/">加入他们</RouterLink></button>
     </div>
   </div>
 </template>
 <script>
+import LabsIntroduction from './components/labs-introduction.vue'
+import LabsRecruitInfo from './components/labs-recruit-info.vue'
 export default {
-  name: 'AppLabsPage'
+  name: 'AppLabsPage',
+  components: { LabsIntroduction, LabsRecruitInfo }
 }
 </script>
 <style lang="less" scoped>

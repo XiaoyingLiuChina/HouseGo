@@ -23,41 +23,107 @@ export default {
   name: 'UserLeftnav',
   data() {
     return {
+      // powerlist: [
+      //   {
+      //     name: '个人管理',
+      //     id: 'modules1',
+      //     children: [
+      //       { name: '查看信息', topath: '/user' },
+      //       { name: '修改密码', topath: '/user/updatepw' },
+      //       { name: '修改头像', topath: '/user/avatar' },
+      //       { name: '个人简介', topath: '/manage/introduce' }
+      //     ]
+      //   },
+      //   {
+      //     name: '分享管理',
+      //     id: 'modules2',
+      //     children: [
+      //       { name: '查看分享', topath: '/user/discuss' },
+      //       { name: '发布分享', topath: '/user/discuss/put' }
+      //     ]
+      //   },
+      //   {
+      //     name: '申请管理',
+      //     id: 'modules3',
+      //     children: [{ name: '查看已申请', topath: '/user/labs' }]
+      //   },
+      //   {
+      //     name: '人员管理',
+      //     id: 'modules4',
+      //     children: [{ name: '查看已申请人员', topath: '/manage/labtor' }]
+      //   },
+      //   {
+      //     name: '招新管理',
+      //     id: 'modules5',
+      //     children: [{ name: '发布招新', topath: '/manage/recruit' }]
+      //   }
+      // ]
+
       powerlist: [
         {
-          name: '个人管理',
+          name: '个人中心',
           id: 'modules1',
           children: [
-            { name: '查看信息', topath: '/user' },
+            { name: '查看个人信息', topath: '/user' },
             { name: '修改密码', topath: '/user/updatepw' },
-            { name: '修改头像', topath: '/user/avatar' },
-            { name: '个人简介', topath: '/manage/introduce' }
+            { name: '修改头像', topath: '/user/avatar' }
           ]
         },
         {
-          name: '分享管理',
+          name: '分享区管理',
           id: 'modules2',
           children: [
             { name: '查看分享', topath: '/user/discuss' },
             { name: '发布分享', topath: '/user/discuss/put' }
           ]
         },
+
         {
-          name: '申请管理',
+          name: '实验室人员管理',
           id: 'modules3',
-          children: [{ name: '查看已申请', topath: '/user/labs' }]
-        },
-        {
-          name: '人员管理',
-          id: 'modules4',
           children: [{ name: '查看已申请人员', topath: '/manage/labtor' }]
         },
         {
           name: '招新管理',
+          id: 'modules4',
+          children: [
+            { name: '发布招新信息', topath: '/manage/recruit' },
+            { name: '查看已申请人员', topath: '/manage/labtor' }
+          ]
+        },
+        {
+          name: '实验室简介管理',
           id: 'modules5',
-          children: [{ name: '发布招新', topath: '/manage/recruit' }]
+          children: [{ name: '查看简介', topath: '/' }]
         }
       ]
+
+      // 学生
+      // powerlist: [
+      //   {
+      //     name: '个人中心',
+      //     id: 'modules1',
+      //     children: [
+      //       { name: '查看信息', topath: '/user' },
+      //       { name: '修改密码', topath: '/user/updatepw' },
+      //       { name: '修改头像', topath: '/user/avatar' },
+      //       { name: '个人简介', topath: '/manage/introduce' }
+      //     ]
+      //   },
+      //   {
+      //     name: '分享管理',
+      //     id: 'modules2',
+      //     children: [
+      //       { name: '查看分享', topath: '/user/discuss' },
+      //       { name: '发布分享', topath: '/user/discuss/put' }
+      //     ]
+      //   },
+      //   {
+      //     name: '申请管理',
+      //     id: 'modules3',
+      //     children: [{ name: '查看已申请', topath: '/user/labs' }]
+      //   },
+      // ]
     }
   },
   props: {
