@@ -12,6 +12,10 @@ const UserPassword = () => import('@/views/user/components/user-password.vue')
 const UserDiscuss = () => import('@/views/user/components/user-discuss.vue')
 const UserShareform = () => import('@/views/user/components/user-discussput.vue')
 const UserAvatar = () => import('@/views/user/components/user-avatar.vue')
+const Userlabs = () => import('@/views/user/components/user-labs.vue')
+const Managelabtor = () => import('@/views/user/components/teacher/manage-labtor.vue')
+const ManageIntroduce = () => import('@/views/user/components/student/manage-introduce.vue')
+
 const Register = () => import('@/views/register/index')
 
 const SearchLabs = () => import('@/views/labs/components/labs-all.vue')
@@ -37,7 +41,10 @@ const routes = [
       { path: '/user/updatepw', component: UserPassword },
       { path: '/user/discuss', component: UserDiscuss },
       { path: '/user/discuss/put', component: UserShareform },
-      { path: '/user/avatar', component: UserAvatar }
+      { path: '/user/avatar', component: UserAvatar },
+      { path: '/user/labs', component: Userlabs },
+      { path: '/manage/labtor', component: Managelabtor },
+      { path: '/manage/introduce', component: ManageIntroduce }
     ]
   }
 ]

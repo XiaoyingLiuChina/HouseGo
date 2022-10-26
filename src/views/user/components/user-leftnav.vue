@@ -28,8 +28,10 @@ export default {
           name: '个人管理',
           id: 'modules1',
           children: [
-            { name: '查看信息', topath: `/user` },
-            { name: '修改秘密', topath: `/user/updatepw` }
+            { name: '查看信息', topath: '/user' },
+            { name: '修改秘密', topath: '/user/updatepw' },
+            { name: '修改头像', topath: '/user/avatar' },
+            { name: '个人简介', topath: '/manage/introduce' }
           ]
         },
         {
@@ -41,14 +43,14 @@ export default {
           ]
         },
         {
-          name: '头像管理',
+          name: '申请管理',
           id: 'modules3',
-          children: [
-            {
-              name: '修改头像',
-              topath: '/user/avatar'
-            }
-          ]
+          children: [{ name: '查看已申请', topath: '/user/labs' }]
+        },
+        {
+          name: '人员管理',
+          id: 'modules4',
+          children: [{ name: '查看已申请人员', topath: '/manage/labtor' }]
         }
       ]
     }
