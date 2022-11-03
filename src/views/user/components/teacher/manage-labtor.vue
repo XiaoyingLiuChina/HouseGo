@@ -18,7 +18,7 @@
               <th scope="col">学号</th>
               <th scope="col">姓名</th>
               <th scope="col">班级</th>
-              <th scope="col">问卷详情</th>
+              <th scope="col">学生详情</th>
               <th scope="col">操作</th>
             </tr>
           </thead>
@@ -28,7 +28,7 @@
               <td>{{ `512019330${item}` }}</td>
               <td>宋洋</td>
               <td>软件1902</td>
-              <td>问卷</td>
+              <td><button class="btn btn-primary btn-sm">查看</button></td>
               <td>
                 <button class="btn btn-secondary btn-sm">拒绝</button>
                 <button class="btn btn-primary btn-sm">同意</button>

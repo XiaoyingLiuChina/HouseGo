@@ -66,7 +66,8 @@ export default {
           children: [
             { name: '查看个人信息', topath: '/user' },
             { name: '修改密码', topath: '/user/updatepw' },
-            { name: '修改头像', topath: '/user/avatar' }
+            { name: '修改头像', topath: '/user/avatar' },
+            { name: '个人简介', topath: '/manage/introduce' }
           ]
         },
         {
@@ -78,11 +79,11 @@ export default {
           ]
         },
 
-        {
-          name: '实验室人员管理',
-          id: 'modules3',
-          children: [{ name: '查看已申请人员', topath: '/manage/labtor' }]
-        },
+        // {
+        //   name: '实验室人员管理',
+        //   id: 'modules3',
+        //   children: [{ name: '查看已申请人员', topath: '/manage/labtor' }]
+        // },
         {
           name: '招新管理',
           id: 'modules4',
