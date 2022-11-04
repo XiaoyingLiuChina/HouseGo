@@ -1,8 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 const Layout = () => import('@/views/Layout.vue')
 const Home = () => import('@/views/home/index')
-const Homerenew = () => import('@/views/home/components/home-recruit.vue')
-const Homeshare = () => import('@/views/home/components/home-share.vue')
+
+// 分享区
+const Share = () => import('@/views/share/index')
+// 招新消息
+const Recruit = () => import('@/views/recruit/index')
+
 const Login = () => import('@/views/login/index')
 const Labs = () => import('@/views/labs/index')
 // 用户共有的
@@ -29,8 +33,8 @@ const routes = [
       { path: '/', name: 'Home', component: Home },
       { path: '/labs/:id', component: Labs },
       { path: '/search/:key', component: SearchLabs },
-      { path: '/recruit', name: 'Recruit', component: Homerenew },
-      { path: '/tell', name: 'Share', component: Homeshare }
+      { path: '/recruit', name: 'Recruit', component: Recruit },
+      { path: '/tell', name: 'Share', component: Share }
     ]
   },
   { path: '/login', component: Login },

@@ -1,6 +1,6 @@
 <template>
   <!-- 筛选区 -->
-  <div class="sub-filter container">
+  <div class="recruit-filter container">
     <div class="item" v-for="item in choicelist" :key="item.id">
       <div class="head">{{ item.name }}</div>
       <div class="body">
@@ -12,7 +12,7 @@
 </template>
 <script>
 export default {
-  name: 'SubFilter',
+  name: 'RecruitFilter',
   setup() {},
   data() {
     return {
@@ -27,7 +27,7 @@ export default {
 </script>
 <style scoped lang="less">
 // 筛选区
-.sub-filter {
+.recruit-filter {
   background: @appColor;
   padding: 15px;
   .item {
