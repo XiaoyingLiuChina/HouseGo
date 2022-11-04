@@ -1,6 +1,6 @@
 <template>
   <div class="app-header">
-    <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e3f2fd">
+    <nav class="navbar navbar-expand-sm navbar-light">
       <div class="container-fluid">
         <span class="logo"><RouterLink class="navbar-brand" to="/">实验室招新系统</RouterLink></span>
         <button
@@ -17,16 +17,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <RouterLink class="nav-link active" aria-current="page" to="/">首页</RouterLink>
+              <RouterLink class="nav-link" exact :to="{ name: 'Home' }">首页</RouterLink>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" href="#">公告信息</a>
+            </li> -->
+            <li class="nav-item">
+              <RouterLink class="nav-link" :to="{ name: 'Share' }">分享区</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/tell">分享区</RouterLink>
-            </li>
-            <li class="nav-item">
-              <RouterLink class="nav-link" to="/labs/renew">招新信息</RouterLink>
+              <RouterLink class="nav-link" :to="{ name: 'Recruit' }">招新信息</RouterLink>
             </li>
           </ul>
           <slot />
@@ -52,6 +52,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .app-header {
+  background-color: @appColor;
   // margin-top: 10px;
   .container-fluid {
     align-items: center;
@@ -71,6 +72,16 @@ export default {
         padding: 5px;
       }
     }
+    .nav-item {
+      margin: 0 15px;
+    }
   }
+}
+.router-link-exact-active {
+  // color: red;
+  font-style: italic;
+  // text-decoration: underline;
+  background-color: rgb(234, 161, 225);
+  border-radius: 15px;
 }
 </style>

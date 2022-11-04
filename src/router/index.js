@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 const Layout = () => import('@/views/Layout.vue')
 const Home = () => import('@/views/home/index')
-const Homerenew = () => import('@/views/home/components/home-renew.vue')
+const Homerenew = () => import('@/views/home/components/home-recruit.vue')
 const Homeshare = () => import('@/views/home/components/home-share.vue')
 const Login = () => import('@/views/login/index')
 const Labs = () => import('@/views/labs/index')
@@ -26,11 +26,11 @@ const routes = [
     path: '/',
     component: Layout,
     children: [
-      { path: '/', component: Home },
+      { path: '/', name: 'Home', component: Home },
       { path: '/labs/:id', component: Labs },
       { path: '/search/:key', component: SearchLabs },
-      { path: '/labs/renew', component: Homerenew },
-      { path: '/tell', component: Homeshare }
+      { path: '/recruit', name: 'Recruit', component: Homerenew },
+      { path: '/tell', name: 'Share', component: Homeshare }
     ]
   },
   { path: '/login', component: Login },

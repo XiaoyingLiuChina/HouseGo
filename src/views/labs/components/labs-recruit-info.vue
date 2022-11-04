@@ -32,6 +32,7 @@
 </template>
 <script>
 export default {
+  // 这个是实验室详情页面
   name: 'LabsRecruitInfo',
   data() {
     return {

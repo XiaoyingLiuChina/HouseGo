@@ -2,19 +2,8 @@
   <div class="home-hot">
     <HomePanel title="热门实验室" subTitle="加入实验室 动力满满">
       <template #right><AppMore path="/" /></template>
-      <!-- 面板内容 -->
-      <!-- <ul class="labs-list">
-          <li v-for="(item, index) in 4" :key="index">
-            <RouterLink to="/">
-              <img src="@/assets/images/ma.png" alt="" />
-              <p class="name ellipsis">12</p>
-              <p class="price">555</p>
-            </RouterLink>
-          </li>
-        </ul> -->
-
-      <ul class="labs-list row row-cols-1 row-cols-md-3 row-cols-xl-4">
-        <li v-for="(item, index) in 4" :key="index" class="col">
+      <ul v-if="true" class="labs-list row row-cols-1 row-cols-md-3 row-cols-xl-4">
+        <li v-for="item in 4" :key="item" class="col">
           <div class="card" style="width: 100%">
             <img src="@/assets/images/ma.png" class="card-img-top" alt="..." />
             <div class="card-body">
@@ -41,6 +30,11 @@ export default {
   .labs-list {
     display: flex;
     justify-content: space-between;
+    li {
+      .card {
+        .hoverShadow ();
+      }
+    }
   }
 }
 </style>
