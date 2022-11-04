@@ -1,4 +1,5 @@
 <template>
+  <!-- 实验室详情页：某一个实验室招新信息组件 -->
   <div class="labs-recruit-info">
     <h5 class="mb-3">实验室招新信息</h5>
     <div class="card">
@@ -74,5 +75,8 @@ export default {
 <style lang="less" scoped>
 .card {
   margin: 15px;
+}
+.labs-recruit-info {
+  background-color: @appColor;
 }
 </style>

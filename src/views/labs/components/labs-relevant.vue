@@ -1,5 +1,5 @@
 <template>
-  <div class="labs-all">
+  <div class="labs-relevant">
     <!-- 面包屑 -->
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -14,7 +14,7 @@
           <img v-else src="@/assets/images/logo.png" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">软件测试实验室</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text">潘娅老师带研究生很好哦</p>
             <RouterLink :to="`/labs/${index}`" class="btn btn-primary">查看详情</RouterLink>
           </div>
         </div>
@@ -24,7 +24,7 @@
 </template>
 <script>
 export default {
-  name: 'LabsAll'
+  name: 'LabsRelevant'
 }
 </script>
 <style lang="less" scoped>

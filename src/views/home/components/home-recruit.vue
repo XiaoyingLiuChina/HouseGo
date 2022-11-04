@@ -1,8 +1,9 @@
 <template>
   <div class="home-recruit row container">
-    <HomeFilterSticky></HomeFilterSticky>
+    <div class="choice"><h4>已选标签：</h4></div>
+
     <HomeFilter></HomeFilter>
-    <div class="col-10">
+    <div class="col-10 recruid-list">
       <RouterLink v-for="i in 5" class="card mb-2" :key="i" to="/labs/0">
         <div class="card-body">
           <h5 class="card-title">软件测试实验室</h5>
@@ -21,10 +22,9 @@
 <script>
 import HomeRecruitNav from './home-recruit-nav.vue'
 import HomeFilter from './home-filter.vue'
-import HomeFilterSticky from './home-filter-sticky.vue'
 export default {
   name: 'HomeRecruit',
-  components: { HomeRecruitNav, HomeFilter, HomeFilterSticky },
+  components: { HomeRecruitNav, HomeFilter },
   data() {
     return {}
   }
@@ -58,5 +58,11 @@ export default {
 .home-recruit {
   width: 100%;
   padding: 0;
+  .choice {
+    margin: 10px auto;
+  }
+  .recruid-list {
+    margin-top: 10px;
+  }
 }
 </style>

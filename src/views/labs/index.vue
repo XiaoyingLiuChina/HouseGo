@@ -7,22 +7,15 @@
         <li class="breadcrumb-item active" aria-current="page">某实验室名称</li>
       </ol>
     </nav>
-    <!-- 实验室信息 -->
-    <div class="labs-info">
-      <!-- 这里可以先展示简介 -->
-      <LabsIntroduction />
-      <!-- 再展示招新信息 -->
-      <LabsRecruitInfo />
-      <button class="btn btn-primary"><RouterLink to="/">加入他们</RouterLink></button>
-    </div>
+
+    <LabsItem />
   </div>
 </template>
 <script>
-import LabsIntroduction from './components/labs-introduction.vue'
-import LabsRecruitInfo from './components/labs-recruit-info.vue'
+import LabsItem from './components/labs-item.vue'
 export default {
   name: 'AppLabsPage',
-  components: { LabsIntroduction, LabsRecruitInfo }
+  components: { LabsItem }
 }
 </script>
 <style lang="less" scoped>

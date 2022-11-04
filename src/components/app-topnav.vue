@@ -1,18 +1,20 @@
 <template>
   <div class="app-topnav">
-    <ul class="nav justify-content-end" style="background-color: #e3f2fd">
-      <template v-if="user.token">
-        <li class="nav-item">
-          <RouterLink to="/user" class="nav-link"><i class="bi bi-person"></i>{{ user.account }}</RouterLink>
-        </li>
-        <li class="nav-item"><a to="/" class="nav-link" href="#" @click="logout">退出登录</a></li>
-      </template>
-      <template v-else>
-        <li class="nav-item"><RouterLink to="/login" class="nav-link">请先登录</RouterLink></li>
-        <li class="nav-item"><RouterLink to="/register" class="nav-link">马上注册</RouterLink></li>
-      </template>
-      <li class="nav-item"><a class="nav-link" href="#">关于我们</a></li>
-    </ul>
+    <div class="container">
+      <ul class="nav justify-content-end">
+        <template v-if="user.token">
+          <li class="nav-item">
+            <RouterLink to="/user" class="nav-link"><i class="bi bi-person"></i>{{ user.account }}</RouterLink>
+          </li>
+          <li class="nav-item"><a to="/" class="nav-link" href="#" @click="logout">退出登录</a></li>
+        </template>
+        <template v-else>
+          <li class="nav-item"><RouterLink to="/login" class="nav-link">请先登录</RouterLink></li>
+          <li class="nav-item"><RouterLink to="/register" class="nav-link">马上注册</RouterLink></li>
+        </template>
+        <li class="nav-item"><a class="nav-link" href="#">关于我们</a></li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -33,6 +35,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.app-topnav {
+  width: 100%;
+  background-color: @appColor;
+}
 .nav {
   width: 100%;
   .nav-item {

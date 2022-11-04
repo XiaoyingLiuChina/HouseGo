@@ -1,4 +1,5 @@
 <template>
+  <!-- 实验室简介组件 -->
   <div class="labs-introduction mb-3">
     <h5 class="mb-3">实验室简介</h5>
     <div class="container">
@@ -37,10 +38,13 @@ export default {
 img {
   width: 400px;
 }
-.container {
-  display: flex;
-  .introduction {
-    padding: 10px;
+.labs-introduction {
+  background-color: @appColor;
+  .container {
+    display: flex;
+    .introduction {
+      padding: 10px;
+    }
   }
 }
 </style>

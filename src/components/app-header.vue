@@ -1,7 +1,7 @@
 <template>
   <div class="app-header">
     <nav class="navbar navbar-expand-sm navbar-light">
-      <div class="container-fluid">
+      <div class="container-fluid container">
         <span class="logo"><RouterLink class="navbar-brand" to="/">实验室招新系统</RouterLink></span>
         <button
           class="navbar-toggler"
@@ -30,10 +30,10 @@
             </li>
           </ul>
           <slot />
-          <form class="d-flex" role="search" @submit="searchLabs">
-            <input class="form-control me-2" type="search" placeholder="搜索感兴趣的实验室" aria-label="Search" />
+          <Form class="d-flex" role="search" @submit="searchLabs" autocomplete="off">
+            <Field class="form-control me-2" type="search" placeholder="搜索感兴趣的实验室" aria-label="Search" id="kw" name="kw" />
             <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+          </Form>
         </div>
       </div>
     </nav>
@@ -41,10 +41,14 @@
 </template>
 
 <script>
+import { Form, Field } from 'vee-validate'
 export default {
   name: 'AppHeader',
+  components: { Form, Field },
   methods: {
-    searchLabs() {
+    searchLabs(values) {
+      console.log(this.$route)
+      console.log(values)
       this.$router.push('/search/2')
     }
   }
@@ -53,7 +57,6 @@ export default {
 <style lang="less" scoped>
 .app-header {
   background-color: @appColor;
-  // margin-top: 10px;
   .container-fluid {
     align-items: center;
     font-size: 18px;
@@ -78,10 +81,8 @@ export default {
   }
 }
 .router-link-exact-active {
-  // color: red;
-  font-style: italic;
-  // text-decoration: underline;
-  background-color: rgb(234, 161, 225);
+  color: #fff;
+  background-color: #6ec884;
   border-radius: 15px;
 }
 </style>

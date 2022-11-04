@@ -95,7 +95,7 @@ export default {
         {
           name: '实验室简介管理',
           id: 'modules5',
-          children: [{ name: '查看简介', topath: '/' }]
+          children: [{ name: '查看简介', topath: '/labs/0' }]
         }
       ]
 

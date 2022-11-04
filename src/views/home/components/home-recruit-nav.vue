@@ -4,7 +4,7 @@
     <p>比如放我的简历</p>
     <p>左边太长了</p>
 
-    <AppTime></AppTime>
+    <AppTime />
     <AppReturnTop />
   </div>
 </template>

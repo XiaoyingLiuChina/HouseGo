@@ -1,14 +1,14 @@
 <template>
+  <AppTopnav />
+  <AppHeader />
+  <!-- 吸顶头部 -->
+  <AppHeaderSticky />
   <div class="container">
-    <AppTopnav />
-    <AppHeader />
-    <!-- 吸顶头部 -->
-    <AppHeaderSticky />
     <main>
       <RouterView></RouterView>
     </main>
-    <AppFooter />
   </div>
+  <AppFooter />
 </template>
 
 <script>

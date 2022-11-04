@@ -20,7 +20,7 @@ const ManageIntroduce = () => import('@/views/user/components/student/manage-int
 
 const Register = () => import('@/views/register/index')
 // 实验室相关
-const SearchLabs = () => import('@/views/labs/components/labs-all.vue')
+const SearchLabs = () => import('@/views/labs/components/labs-relevant.vue')
 const routes = [
   {
     path: '/',

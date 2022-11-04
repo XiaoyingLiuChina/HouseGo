@@ -14,9 +14,12 @@ export default {
 <style lang="less" scoped>
 .app-return-top {
   position: sticky;
-  top: 400px;
+  top: 450px;
+  margin: 0 auto;
+  text-align: center;
   i {
     font-size: 80px;
+    color: #55b46c;
   }
 }
 </style>
