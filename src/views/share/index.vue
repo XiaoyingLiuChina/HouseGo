@@ -6,7 +6,10 @@
 </template>
 <script>
 export default {
-  name: 'ShareModules'
+  name: 'ShareModules',
+  mounted() {
+    document.documentElement.scrollTop = 0
+  }
 }
 </script>
 <style lang="less" scoped>

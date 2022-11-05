@@ -1,7 +1,7 @@
 <template>
   <div class="home-hot">
     <HomePanel title="热门实验室" subTitle="加入实验室 动力满满">
-      <template #right><AppMore path="/" /></template>
+      <template #right><AppMore path="/labs" /></template>
       <ul v-if="true" class="labs-list row row-cols-1 row-cols-md-3 row-cols-xl-4">
         <li v-for="item in 4" :key="item" class="col">
           <div class="card" style="width: 100%">

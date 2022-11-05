@@ -1,37 +1,32 @@
 <template>
   <div class="user-page">
-    <AppHeader>
-      <div class="info-header">
-        <span id="welcome">
-          欢迎
-          <img :src="user.avatar" alt="..." />
-          小傻逼宋洋
-          <span v-if="user.type === 'teacher'" style="font-size: 12px">老师</span>
-          <span v-else style="font-size: 12px">同学</span>
-        </span>
-        <a href="#" @click="logout">退出登录</a>
-      </div>
-    </AppHeader>
+    <AppTopnav />
+    <AppHeader />
+    <!-- <div class="info-header">
+      <span id="welcome">
+        欢迎
+        <img :src="user.avatar" alt="..." />
+        小傻逼宋洋
+        <span v-if="user.type === 'teacher'" style="font-size: 12px">老师</span>
+        <span v-else style="font-size: 12px">同学</span>
+      </span>
+      <a href="#" @click="logout">退出登录</a>
+    </div> -->
     <div class="container">
-      <div class="row">
-        <div class="col-2"><UserLeftnav :user="user" /></div>
-        <div class="col-10">
-          <div class="iframe">
-            <RouterView></RouterView>
-          </div>
-        </div>
-      </div>
+      <UserLeftnav :user="user" />
+      <div class="main"><RouterView></RouterView></div>
     </div>
     <AppFooter />
   </div>
 </template>
 <script>
+import AppTopnav from '@/components/app-topnav.vue'
 import AppHeader from '@/components/app-header.vue'
 import AppFooter from '@/components/app-footer.vue'
 import UserLeftnav from './components/user-leftnav.vue'
 export default {
   name: 'UserPage',
-  components: { AppHeader, AppFooter, UserLeftnav },
+  components: { AppHeader, AppFooter, UserLeftnav, AppTopnav },
   data() {
     return {
       user: this.$store.state.user.profile
@@ -65,9 +60,12 @@ export default {
   }
   .container {
     min-height: 470px;
-  }
-  .iframe {
-    margin-top: 10px;
+    display: flex;
+
+    .main {
+      flex: 1;
+      margin-left: 10px;
+    }
   }
 }
 </style>

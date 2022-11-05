@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import store from '@/store'
 import { h } from 'vue'
 const Layout = () => import('@/views/Layout.vue')
 const Home = () => import('@/views/home/index')
@@ -6,12 +7,15 @@ const Home = () => import('@/views/home/index')
 const SearchLabs = () => import('@/views/labs/components/labs-relevant.vue')
 // 分享区
 const Share = () => import('@/views/share/index')
+// 实验室
+const Labs = () => import('@/views/labs/components/labs-total.vue')
+const LabsItem = () => import('@/views/labs/index')
 // 招新消息
 const Recruit = () => import('@/views/recruit/index')
 const RecruitItem = () => import('@/views/recruit/components/recruit-item.vue')
 // 登录
 const Login = () => import('@/views/login/index')
-const Labs = () => import('@/views/labs/index')
+
 // 用户共有的
 const User = () => import('@/views/user/index')
 const UserInfo = () => import('@/views/user/components/user-info.vue')
@@ -33,7 +37,7 @@ const routes = [
     component: Layout,
     children: [
       { path: '/', component: Home },
-      { path: '/labs/:id', component: Labs },
+
       { path: '/search/:key', component: SearchLabs },
       {
         path: '/recruit',
@@ -46,6 +50,15 @@ const routes = [
         ]
       },
       // { path: '/recruit/:id', component: RecruitItem },
+
+      {
+        path: '/labs',
+        component: { render: () => h(<RouterView />) },
+        children: [
+          { path: '', component: Labs },
+          { path: ':id', component: LabsItem }
+        ]
+      },
       { path: '/share', component: Share }
     ]
   },
@@ -74,6 +87,15 @@ const router = createRouter({
   history: createWebHashHistory(),
   // 配置路由规则
   routes
+})
+// 前置导航守卫
+router.beforeEach((to, from, next) => {
+  // 需要登录的路由：地址是以 /member 开头
+  const { profile } = store.state.user
+  if (!profile.token && to.path.startsWith('/user')) {
+    return next('/login?redirectUrl=' + encodeURIComponent(to.fullPath))
+  }
+  next()
 })
 
 export default router

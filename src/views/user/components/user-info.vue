@@ -1,5 +1,6 @@
 <template>
   <div class="user-info">
+    <UserMine />
     <div class="card text-center">
       <div class="card-header"><h3>个人基本信息</h3></div>
       <div class="card-body">
@@ -20,13 +21,15 @@
   </div>
 </template>
 <script>
+import UserMine from './user-mine.vue'
 export default {
-  name: 'UserInfo'
+  name: 'UserInfo',
+  components: { UserMine }
 }
 </script>
 <style lang="less" scoped>
 .user-info {
-  margin-top: 20px;
+  margin-top: 10px;
   .list-group-item {
     &:last-child {
       display: flex;

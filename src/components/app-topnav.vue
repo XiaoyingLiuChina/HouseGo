@@ -6,12 +6,13 @@
           <li class="nav-item">
             <RouterLink to="/user" class="nav-link"><i class="bi bi-person"></i>{{ user.account }}</RouterLink>
           </li>
-          <li class="nav-item"><a to="/" class="nav-link" href="#" @click="logout">退出登录</a></li>
+          <li class="nav-item"><RouterLink to="/" class="nav-link" @click="logout">退出登录</RouterLink></li>
         </template>
         <template v-else>
           <li class="nav-item"><RouterLink to="/login" class="nav-link">请先登录</RouterLink></li>
           <li class="nav-item"><RouterLink to="/register" class="nav-link">马上注册</RouterLink></li>
         </template>
+        <li class="nav-item"><RouterLink class="nav-link" to="/user">个人中心</RouterLink></li>
         <li class="nav-item"><a class="nav-link" href="#">关于我们</a></li>
       </ul>
     </div>
@@ -37,7 +38,7 @@ export default {
 <style lang="less" scoped>
 .app-topnav {
   width: 100%;
-  background-color: #333;
+  background-color: #07889b;
 }
 .nav {
   width: 100%;
@@ -48,7 +49,7 @@ export default {
     .hoverShadow();
     a {
       margin: 10px;
-      color: rgb(129, 126, 126);
+      color: #fff;
     }
     i {
       margin-right: 8px;

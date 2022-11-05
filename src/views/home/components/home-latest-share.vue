@@ -1,7 +1,7 @@
 <template>
   <div class="latest-share">
     <HomePanel title="最新分享" subTitle="相互学习 天天进步一点点">
-      <template #right><AppMore path="/" /></template>
+      <template #right><AppMore path="/share" /></template>
       <ul v-if="true" class="labs-list row row-cols-1 row-cols-md-3 row-cols-xl-4">
         <li v-for="item in 4" :key="item" class="col">
           <div class="card" style="width: 100%">

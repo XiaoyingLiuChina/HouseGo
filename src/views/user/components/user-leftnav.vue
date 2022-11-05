@@ -61,13 +61,12 @@ export default {
 
       powerlist: [
         {
-          name: '个人中心',
+          name: '我的账户',
           id: 'modules1',
           children: [
+            { name: '个人中心', topath: '/user' },
             { name: '查看个人信息', topath: '/user' },
-            { name: '修改密码', topath: '/user/updatepw' },
-            { name: '修改头像', topath: '/user/avatar' },
-            { name: '个人简介', topath: '/manage/introduce' }
+            { name: '修改头像', topath: '/user/avatar' }
           ]
         },
         {
@@ -145,6 +144,8 @@ export default {
 <style lang="less" scoped>
 .user-leftnav {
   position: sticky;
-  top: 102px;
+  top: 112px;
+  margin-top: 10px;
+  width: 220px;
 }
 </style>

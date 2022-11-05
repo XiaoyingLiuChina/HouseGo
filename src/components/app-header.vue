@@ -46,7 +46,8 @@ export default {
     searchLabs(values) {
       console.log(this.$route)
       console.log(values)
-      this.$router.push('/search/2')
+      this.$router.push(`/search/kw=${values.kw}`)
+      // 这里就可以向后端请求查找到的数据列表，渲染在页面上
     }
   }
 }
