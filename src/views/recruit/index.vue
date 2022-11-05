@@ -4,13 +4,14 @@
 
     <recruitFilterVue />
     <div class="col-10 recruit-list">
-      <RouterLink v-for="i in 5" class="card mb-2" :key="i" to="/labs/0">
+      <RouterLink v-for="i in 5" class="card mb-2" :key="i" :to="`/recruit/${i}`">
         <div class="card-body">
           <h5 class="card-title">软件测试实验室</h5>
           <p class="card-text mb-2">招新：对软件测试有兴趣</p>
           <div class="card-bottom mb-2 text-muted">
             <div class="tag"><span v-for="item in 5" :key="item">软件测试</span></div>
-            <div class="time">2022-12-02</div>
+            <div class="time">发布日期：2022-12-02</div>
+            <div class="time">截止日期：2022-12-02</div>
           </div>
         </div>
         <img src="@/assets/images/ma.png" />

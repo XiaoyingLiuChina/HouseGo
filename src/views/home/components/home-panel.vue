@@ -29,9 +29,10 @@ export default {
 <style scoped lang="less">
 .home-panel {
   background-color: @appColor;
-  padding: 0 15px;
+  padding: 15px 15px;
+  border-radius: 10px;
   .head {
-    padding: 40px 0;
+    padding: 30px 0;
     display: flex;
     align-items: flex-end;
     h3 {

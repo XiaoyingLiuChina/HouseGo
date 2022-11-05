@@ -14,8 +14,8 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-// .recruit-rightnav {
-//   // position: sticky;
-//   // top: 62px;
-// }
+.recruit-rightnav {
+  margin: 10px auto;
+  background-color: #fff;
+}
 </style>

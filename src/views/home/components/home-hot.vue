@@ -8,7 +8,7 @@
             <img src="@/assets/images/ma.png" class="card-img-top" alt="..." />
             <div class="card-body">
               <h5 class="card-title">软件测试实验室</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <p class="card-text">软件测试实验室建立于2020年，现有20人，由潘娅老师带领</p>
               <RouterLink :to="`/labs/${item}`" class="btn btn-primary">查看详情</RouterLink>
             </div>
           </div>

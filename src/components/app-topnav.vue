@@ -37,18 +37,18 @@ export default {
 <style lang="less" scoped>
 .app-topnav {
   width: 100%;
-  background-color: @appColor;
+  background-color: #333;
 }
 .nav {
   width: 100%;
   .nav-item {
     display: flex;
-    height: 60px;
+    height: 50px;
     align-items: center;
     .hoverShadow();
     a {
       margin: 10px;
-      color: rgb(66, 66, 66);
+      color: rgb(129, 126, 126);
     }
     i {
       margin-right: 8px;

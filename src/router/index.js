@@ -1,12 +1,15 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { h } from 'vue'
 const Layout = () => import('@/views/Layout.vue')
 const Home = () => import('@/views/home/index')
-
+// 搜索出来的实验室相关
+const SearchLabs = () => import('@/views/labs/components/labs-relevant.vue')
 // 分享区
 const Share = () => import('@/views/share/index')
 // 招新消息
 const Recruit = () => import('@/views/recruit/index')
-
+const RecruitItem = () => import('@/views/recruit/components/recruit-item.vue')
+// 登录
 const Login = () => import('@/views/login/index')
 const Labs = () => import('@/views/labs/index')
 // 用户共有的
@@ -23,18 +26,27 @@ const Managelabtor = () => import('@/views/user/components/teacher/manage-labtor
 const ManageIntroduce = () => import('@/views/user/components/student/manage-introduce.vue')
 
 const Register = () => import('@/views/register/index')
-// 实验室相关
-const SearchLabs = () => import('@/views/labs/components/labs-relevant.vue')
+
 const routes = [
   {
     path: '/',
     component: Layout,
     children: [
-      { path: '/', name: 'Home', component: Home },
+      { path: '/', component: Home },
       { path: '/labs/:id', component: Labs },
       { path: '/search/:key', component: SearchLabs },
-      { path: '/recruit', name: 'Recruit', component: Recruit },
-      { path: '/tell', name: 'Share', component: Share }
+      {
+        path: '/recruit',
+        // component: Recruit,
+        // children: [{ path: '/recruit/:id', component: RecruitItem }]
+        component: { render: () => h(<RouterView />) },
+        children: [
+          { path: '', component: Recruit },
+          { path: ':id', component: RecruitItem }
+        ]
+      },
+      // { path: '/recruit/:id', component: RecruitItem },
+      { path: '/share', component: Share }
     ]
   },
   { path: '/login', component: Login },

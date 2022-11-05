@@ -17,16 +17,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <RouterLink class="nav-link" exact :to="{ name: 'Home' }">首页</RouterLink>
-            </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="#">公告信息</a>
-            </li> -->
-            <li class="nav-item">
-              <RouterLink class="nav-link" :to="{ name: 'Share' }">分享区</RouterLink>
+              <RouterLink class="nav-link" exact to="/">首页</RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" :to="{ name: 'Recruit' }">招新信息</RouterLink>
+              <RouterLink class="nav-link" to="/share">分享区</RouterLink>
+            </li>
+            <li class="nav-item">
+              <RouterLink class="nav-link" to="/recruit">招新信息</RouterLink>
             </li>
           </ul>
           <slot />
@@ -82,7 +79,7 @@ export default {
 }
 .router-link-exact-active {
   color: #fff;
-  background-color: #6ec884;
+  background-color: #07889b;
   border-radius: 15px;
 }
 </style>

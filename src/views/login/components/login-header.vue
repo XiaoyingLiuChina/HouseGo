@@ -52,7 +52,6 @@ export default {
     font-size: 16px;
     i {
       font-size: 14px;
-      color: @sucColor;
       letter-spacing: -5px;
     }
   }

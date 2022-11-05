@@ -23,7 +23,7 @@
             <td>{{ item.say }}</td>
             <td>{{ item.openTime }}</td>
             <td>{{ item.stopTime }}</td>
-            <td v-if="item.style != 'table-secondary'"><button class="btn btn-primary btn-sm">查看详情</button></td>
+            <td v-if="item.style != 'table-secondary'"><button class="btn btn-primary btn-sm" @click="this.$router.push(`/recruit/${item.id}`)">查看详情</button></td>
             <td v-else></td>
           </tr>
         </tbody>
@@ -48,10 +48,6 @@ export default {
     this.filterList()
   },
   methods: {
-    // convertToDate(str) {
-    // 2020-03-01
-    //   return new Date(str.replace(/-/g, '/'))
-    // }
     converToDate(str) {
       return new Date(str)
     },

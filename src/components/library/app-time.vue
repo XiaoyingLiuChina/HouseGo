@@ -65,6 +65,7 @@ export default {
   text-align: center;
   // padding: 10px;
   color: #55b46c;
+  padding-bottom: 15px;
   .title {
     color: #fff;
     // text-align: center;
