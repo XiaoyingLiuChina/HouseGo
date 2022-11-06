@@ -1,15 +1,15 @@
 <template>
   <div class="user-img">
-    <ul class="view col-8" v-if="list.length > 0">
+    <input type="file" class="form-control" id="img-file" multiple @change="upload" />
+    <div class="upload col-4 img-thumbnail" @click="getFile">
+      <i class="bi bi-plus"></i>
+    </div>
+    <ul class="view row">
       <li v-for="(item, index) in list" :key="index">
-        <img :src="item" />
+        <img :src="item" class="img-thumbnail" />
         <div class="delect" @click="delect(index)">×</div>
       </li>
     </ul>
-    <input type="file" class="form-control" id="img-file" multiple @change="upload" />
-    <div class="upload col-4" @click="getFile">
-      <i class="bi bi-plus-square"></i>
-    </div>
   </div>
 </template>
 <script>
@@ -54,13 +54,17 @@ export default {
 </script>
 <style lang="less" scoped>
 .user-img {
-  display: flex;
-  align-items: center;
   .upload {
-    width: 100px;
+    width: 180px;
+    height: 120px;
+    border-width: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     i {
-      font-size: 120px;
-      // color: gray;
+      margin: 0 auto;
+      font-size: 80px;
+      color: #9d9e9f;
     }
   }
 
@@ -70,12 +74,13 @@ export default {
   .view {
     display: flex;
     background-color: #f4f4f4;
+    margin: 14px 0;
   }
   .view > li {
     width: 180px;
     height: 120px;
     position: relative;
-    margin: 0 5px;
+    padding: 5px auto;
   }
   .view > li > img {
     width: 100%;

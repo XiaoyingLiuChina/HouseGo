@@ -1,6 +1,6 @@
 <template>
-  <div class="app-share">
-    <div class="card" v-for="item in shareList" :key="item.id">
+  <div class="app-share row">
+    <RouterLink class="card" v-for="item in shareList" :key="item.id" :to="`/share/${item.id}`">
       <div class="card-header">
         <div>
           <img src="@/assets/images/ma.png" />
@@ -11,21 +11,25 @@
       <div class="card-body">
         <h5 class="card-title">{{ item.title }}</h5>
         <p class="card-text">{{ item.context }}</p>
-        <p class="card-text">
-          <small class="text-muted">{{ item.publishTime }}</small>
-        </p>
 
-        <ul class="talk-images">
-          <li v-for="img in item.images" :key="img">
-            <img :src="img" alt="xx" />
-          </li>
-        </ul>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        <div class="card-last-row">
+          <ul class="talk-images">
+            <li v-for="img in item.images" :key="img">
+              <img :src="img" alt="xx" />
+            </li>
+          </ul>
+          <div class="publish-nice text-muted">
+            <small>发布时间：{{ item.publishTime }}</small>
+            <span><i class="bi bi-hand-thumbs-up" />{{ 520 }}</span>
+          </div>
+        </div>
       </div>
-    </div>
+    </RouterLink>
   </div>
 </template>
 <script>
+import { RouterLink } from 'vue-router'
+
 export default {
   name: 'AppShare',
   props: {
@@ -47,23 +51,40 @@ export default {
           context: '谢先博老师带飞，快来',
           publishTime: '2021-04-18',
           images: ['@/assets/images/ma.png', '@/assets/images/logo.png']
+        },
+        {
+          id: 3,
+          name: '宋洋',
+          title: '实验室的第一天',
+          context: '谢先博老师带飞，快来',
+          publishTime: '2021-04-18',
+          images: ['@/assets/images/ma.png', '@/assets/images/logo.png']
+        },
+        {
+          id: 4,
+          name: '王松',
+          title: '实验室的第一天',
+          context: '王松老师带飞，快来',
+          publishTime: '2020-04-18',
+          images: ['@/assets/images/ma.png', '@/assets/images/logo.png']
         }
       ]
     }
-  }
+  },
+  components: { RouterLink }
 }
 </script>
 <style lang="less" scoped>
 .app-share {
   padding: 12px;
   .card {
-    margin-bottom: 15px;
+    width: 49%;
+    margin: 5px;
+    .hoverShadow();
     .card-header {
       display: flex;
-      //   width: 500px;
       justify-content: space-between;
       align-items: center;
-
       img {
         width: 40px;
         height: 40px;
@@ -76,10 +97,35 @@ export default {
       .talk-images {
         display: flex;
         li {
-          width: 180px;
-          height: 180px;
+          width: 150px;
+          height: 150px;
           margin-right: 15px;
           border: 1px solid red;
+        }
+      }
+    }
+  }
+  .card-last-row {
+    display: flex;
+    justify-content: space-between;
+    .publish-nice {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+      span {
+        font-size: 12px;
+        i {
+          padding: 5px;
+          font-size: 18px;
+          margin-right: 3px;
+        }
+        &:hover {
+          color: @hoverColor;
+          i {
+            background-color: @appColor;
+            border-radius: 50%;
+          }
         }
       }
     }

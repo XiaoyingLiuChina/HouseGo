@@ -12,6 +12,9 @@ import LabsIntroduction from './labs-introduction.vue'
 import LabsRecruitInfo from './labs-recruit-lab.vue'
 export default {
   name: 'LabsItem',
+  mounted() {
+    document.documentElement.scrollTop = 0
+  },
   components: { LabsIntroduction, LabsRecruitInfo }
 }
 </script>

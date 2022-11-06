@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import store from '@/store'
+// import store from '@/store'
 import { h } from 'vue'
 const Layout = () => import('@/views/Layout.vue')
 const Home = () => import('@/views/home/index')
@@ -7,6 +7,7 @@ const Home = () => import('@/views/home/index')
 const SearchLabs = () => import('@/views/labs/components/labs-relevant.vue')
 // 分享区
 const Share = () => import('@/views/share/index')
+const ShareItem = () => import('@/views/share/components/share-item.vue')
 // 实验室
 const Labs = () => import('@/views/labs/components/labs-total.vue')
 const LabsItem = () => import('@/views/labs/index')
@@ -20,8 +21,8 @@ const Login = () => import('@/views/login/index')
 const User = () => import('@/views/user/index')
 const UserInfo = () => import('@/views/user/components/user-info.vue')
 const UserPassword = () => import('@/views/user/components/user-password.vue')
-const UserDiscuss = () => import('@/views/user/components/user-discuss.vue')
-const UserShareform = () => import('@/views/user/components/user-discussput.vue')
+const UserDiscuss = () => import('@/views/user/components/user-share.vue')
+const UserShareform = () => import('@/views/user/components/user-shareput.vue')
 const UserAvatar = () => import('@/views/user/components/user-avatar.vue')
 const Userlabs = () => import('@/views/user/components/user-labs.vue')
 // 角色特有的模块
@@ -59,7 +60,14 @@ const routes = [
           { path: ':id', component: LabsItem }
         ]
       },
-      { path: '/share', component: Share }
+      {
+        path: '/share',
+        component: { render: () => h(<RouterView />) },
+        children: [
+          { path: '', component: Share },
+          { path: ':id', component: ShareItem }
+        ]
+      }
     ]
   },
   { path: '/login', component: Login },
@@ -89,13 +97,13 @@ const router = createRouter({
   routes
 })
 // 前置导航守卫
-router.beforeEach((to, from, next) => {
-  // 需要登录的路由：地址是以 /member 开头
-  const { profile } = store.state.user
-  if (!profile.token && to.path.startsWith('/user')) {
-    return next('/login?redirectUrl=' + encodeURIComponent(to.fullPath))
-  }
-  next()
-})
+// router.beforeEach((to, from, next) => {
+//   // 需要登录的路由：地址是以 /user 开头
+//   const { profile } = store.state.user
+//   if (!profile.token && to.path.startsWith('/user')) {
+//     return next('/login?redirectUrl=' + encodeURIComponent(to.fullPath))
+//   }
+//   next()
+// })
 
 export default router

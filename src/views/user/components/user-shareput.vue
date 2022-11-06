@@ -9,13 +9,24 @@
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">分享文字内容</span>
-          <textarea class="form-control" aria-label="With textarea" placeholder="写下你想分享的内容吧" v-model="shareItem.content"></textarea>
+          <textarea class="form-control content-area" aria-label="With textarea" placeholder="写下你想分享的内容吧" v-model="shareItem.content"></textarea>
         </div>
         <div class="input-group mb-3">
           <UserShareImg @update-imgs="getShareImages" />
         </div>
         <button class="btn btn-primary" @click="putShare">发表分享</button>
       </div>
+    </div>
+
+    <div class="ce">
+      发布成功显示在这里：
+      <p>{{ shareItem.title }}</p>
+      <p>{{ shareItem.content }}</p>
+      <ul>
+        <li v-for="(item, index) in shareItem.imglist" :key="index">
+          <img :src="item" alt="..." />
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -45,6 +56,19 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.user-share-form {
+  margin-top: 10px;
+  .content-area {
+    height: 200px;
+  }
+  .ce {
+    white-space: pre-wrap; /* css3.0 */
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+  }
+}
 input {
   display: block;
   padding: 0.375rem 0.75rem;

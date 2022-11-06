@@ -34,6 +34,23 @@ export default {
     li {
       .card {
         .hoverShadow ();
+        .card-body {
+          width: 100%;
+          p {
+            width: 100%;
+            line-height: 24px;
+            text-indent: 28px; //控制缩进
+            // white-space: nowrap; // 强制限制在一行
+            display: -webkit-box; /*必须结合的属性,将对象作为弹性伸缩盒子模型显示*/
+            -webkit-line-clamp: 3; /*设置多少行*/
+            -webkit-box-orient: vertical; /*必须结合的属性,设置或检索伸缩盒对象的子元素的排列方式*/
+            overflow: hidden; /*文本会被修剪，并且剩余的部分不可见*/
+            text-overflow: ellipsis; /*显示省略号来代表被修剪的文本*/
+          }
+          .btn {
+            margin-top: 10px;
+          }
+        }
       }
     }
   }
