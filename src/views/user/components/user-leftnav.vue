@@ -73,8 +73,8 @@ export default {
           name: '分享区管理',
           id: 'modules2',
           children: [
-            { name: '查看分享', topath: '/user/discuss' },
-            { name: '发布分享', topath: '/user/discuss/put' }
+            { name: '查看分享', topath: '/user/share' },
+            { name: '发布分享', topath: '/user/share/put' }
           ]
         },
 
@@ -87,8 +87,8 @@ export default {
           name: '招新管理',
           id: 'modules4',
           children: [
-            { name: '发布招新信息', topath: '/manage/recruit' },
-            { name: '查看已申请人员', topath: '/manage/labtor' }
+            { name: '发布招新信息', topath: '/user/recruit' },
+            { name: '查看已申请人员', topath: '/user/labtor' }
           ]
         },
         {

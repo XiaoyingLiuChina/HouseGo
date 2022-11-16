@@ -69,7 +69,7 @@
 <script>
 import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
-// import { getStudentById } from '@/api/user'
+// import { userLogin } from '@/api/user'
 export default {
   name: 'LoginForm',
   components: {
@@ -95,27 +95,33 @@ export default {
     }
   },
   methods: {
-    login(values) {
-      console.log(values)
-      values.token = '6'
+    async login(values) {
       if (values) {
-        this.$store.dispatch('user/setUser', values)
-        this.$router.push({
-          path: '/user'
-        })
+        try {
+          // const { account, password } = this.userinfo
+          console.log('发起了登录请求')
+          this.$store.state.user.profile.token = '6'
+          this.$router.push({
+            path: '/user'
+          })
+        } catch (error) {
+          this.$message({ type: 'warn', text: '发生错误，登录失败！请重试' })
+        }
       }
-
-      // if (values.type === 'student') {
-      //   this.$router.push('/student')
-      // } else if (values.type === 'teacher') {
-      //   this.$router.push('/teacher')
-      // } else {
-      //   this.$message({ type: 'warn', text: '请选择登录类型' })
+      // console.log(values)
+      // values.token = '6'
+      // {
+      //   id, account, avatar, mobile, nickname, token
       // }
     },
-    ResetPassword() {
-      console.log('重置密码')
-      this.forgetClick = !this.forgetClick
+    async ResetPassword() {
+      console.log('即将重置密码')
+      try {
+        // const data=await
+        this.forgetClick = !this.forgetClick
+      } catch (error) {
+        this.$message({ type: 'warn', text: '重置密码出错，请重试' })
+      }
     }
   }
 }
@@ -150,6 +156,7 @@ export default {
         width: 60%;
         height: 30%;
         top: 50%;
+
         left: 50%;
         transform: translate(-50%, -50%);
         border-radius: 10px;

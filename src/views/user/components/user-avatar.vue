@@ -88,12 +88,11 @@ export default {
       file.click()
     },
     upload(e) {
-      // console.log(e.target.files)
       const item = e.target.files[0]
       // 判断是否为图片
       if (!/image\/\w+/.test(item.type)) {
         // 提示只能是图片，return
-        alert('只能选择图片')
+        this.$message({ type: 'warn', text: '只能选择图片！' })
         return
       }
       this.option.img = URL.createObjectURL(item)
@@ -103,6 +102,7 @@ export default {
     updateAvatar() {
       // 修改后端的头像
       // 修改store
+      console.log(this.userAvatar)
       this.$store.commit('user/updateAvatar', this.userAvatar)
     },
     // 获取 base64 截图数据并放置到预览

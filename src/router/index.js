@@ -78,13 +78,13 @@ const routes = [
     children: [
       { path: '', component: UserInfo },
       { path: '/user/updatepw', component: UserPassword },
-      { path: '/user/discuss', component: UserDiscuss },
-      { path: '/user/discuss/put', component: UserShareform },
+      { path: '/user/share', component: UserDiscuss },
+      { path: '/user/share/put', component: UserShareform },
       { path: '/user/avatar', component: UserAvatar },
       { path: '/user/labs', component: Userlabs },
-      { path: '/manage/labtor', component: Managelabtor },
-      { path: '/manage/introduce', component: ManageIntroduce },
-      { path: '/manage/recruit', component: PublishRecruit }
+      { path: '/user/labtor', component: Managelabtor },
+      { path: '/user/introduce', component: ManageIntroduce },
+      { path: '/user/recruit', component: PublishRecruit }
     ]
   }
 ]

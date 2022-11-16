@@ -16,7 +16,7 @@
         <i class="bi bi-shield-lock"></i>
         <p>修改密码</p>
       </RouterLink>
-      <RouterLink to="/manage/introduce">
+      <RouterLink to="/user/introduce">
         <i class="bi bi-journal"></i>
         <p>修改简介</p>
       </RouterLink>

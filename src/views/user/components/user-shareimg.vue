@@ -4,7 +4,7 @@
     <div class="upload col-4 img-thumbnail" @click="getFile">
       <i class="bi bi-plus"></i>
     </div>
-    <ul class="view row">
+    <ul class="view row" v-if="list.length > 0">
       <li v-for="(item, index) in list" :key="index">
         <img :src="item" class="img-thumbnail" />
         <div class="delect" @click="delect(index)">×</div>

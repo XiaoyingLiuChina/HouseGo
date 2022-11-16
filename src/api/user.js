@@ -1,8 +1,14 @@
 import request from '@/utils/request'
 /**
  * 根据学号获取学生
- * @param {String} id - id
+ * @param { account, password }
  */
-export const getStudentById = (id) => {
-  return request(`/student/student/${id}`, 'get')
+export const userLogin = ({ account, password }) => {
+  const user = {}
+  user.id = account
+  user.upassword = password
+  // console.log(user)
+  const userjson = JSON.stringify(user)
+  console.log(userjson)
+  return request(`/user/login`, 'post', userjson)
 }
