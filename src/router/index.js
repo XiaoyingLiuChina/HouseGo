@@ -28,6 +28,8 @@ const Userlabs = () => import('@/views/user/components/user-labs.vue')
 // 角色特有的模块
 const PublishRecruit = () => import('@/views/user/components/teacher/publish-recruit.vue')
 const Managelabtor = () => import('@/views/user/components/teacher/manage-labtor.vue')
+const LabEdit = () => import('@/views/user/components/teacher/lab-edit.vue')
+
 const ManageIntroduce = () => import('@/views/user/components/student/manage-introduce.vue')
 
 const Register = () => import('@/views/register/index')
@@ -83,6 +85,7 @@ const routes = [
       { path: '/user/avatar', component: UserAvatar },
       { path: '/user/labs', component: Userlabs },
       { path: '/user/labtor', component: Managelabtor },
+      { path: '/user/labedit', component: LabEdit },
       { path: '/user/introduce', component: ManageIntroduce },
       { path: '/user/recruit', component: PublishRecruit }
     ]
