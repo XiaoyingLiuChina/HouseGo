@@ -21,7 +21,7 @@ const Login = () => import('@/views/login/index')
 const User = () => import('@/views/user/index')
 const UserInfo = () => import('@/views/user/components/user-info.vue')
 const UserPassword = () => import('@/views/user/components/user-password.vue')
-const UserDiscuss = () => import('@/views/user/components/user-share.vue')
+const UserShare = () => import('@/views/user/components/user-share.vue')
 const UserShareform = () => import('@/views/user/components/user-shareput.vue')
 const UserAvatar = () => import('@/views/user/components/user-avatar.vue')
 const Userlabs = () => import('@/views/user/components/user-labs.vue')
@@ -78,7 +78,7 @@ const routes = [
     children: [
       { path: '', component: UserInfo },
       { path: '/user/updatepw', component: UserPassword },
-      { path: '/user/share', component: UserDiscuss },
+      { path: '/user/share', component: UserShare },
       { path: '/user/share/put', component: UserShareform },
       { path: '/user/avatar', component: UserAvatar },
       { path: '/user/labs', component: Userlabs },

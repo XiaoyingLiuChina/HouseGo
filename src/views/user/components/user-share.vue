@@ -10,7 +10,7 @@
 </template>
 <script>
 export default {
-  name: 'UserDiscuss',
+  name: 'UserShare',
   data() {
     return {
       shareList: [

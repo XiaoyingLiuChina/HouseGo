@@ -3,10 +3,10 @@
     <div class="card" v-for="item in shareList" :key="item.id" :style="`width:${cardwidth}`">
       <div class="card-header">
         <div>
-          <img :src="`${item.user.avatar}`" />
-          <span> {{ item.user.name }} </span>
+          <img src="@/assets/images/ma.png" />
+          <span> 黄禹倩 </span>
         </div>
-        <small class="text-muted">{{ item.user.lab }}</small>
+        <small class="text-muted">大数据实验室</small>
       </div>
       <div class="card-body">
         <h5 class="card-title">{{ item.title }}</h5>
@@ -22,15 +22,13 @@
         <div class="publish-nice text-muted">
           <small>发布时间：{{ item.publishTime }}</small>
           <span @click="hitLike(item.id)"><i class="bi bi-hand-thumbs-up"></i> {{ item.like }}</span>
-          <router-link :to="`/share/${item.id}`"><i class="bi bi-three-dots"></i></router-link>
+          <RouterLink :to="`/share/${item.id}`"><i class="bi bi-three-dots"></i></RouterLink>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { RouterLink } from 'vue-router'
-
 export default {
   name: 'AppShare',
   data() {
@@ -103,7 +101,6 @@ export default {
       default: '49%'
     }
   },
-  components: { RouterLink },
   methods: {
     hitLike(id) {
       console.log(id)
