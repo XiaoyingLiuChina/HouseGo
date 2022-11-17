@@ -55,19 +55,9 @@ export default {
     editBoxOpen() {
       this.editbox = true
       console.log(this.$store.state.user.myResume)
-      // this.$router.go(0)
     }
   },
-  watch: {
-    // myResume: {
-    //   handler(newVal, oldVal) {
-    //     console.log('监听到了')
-    //     console.log(newVal)
-    //     console.log(oldVal)
-    //   },
-    //   deep: true
-    // }
-  }
+  watch: {}
 }
 </script>
 <style lang="less" scoped>
