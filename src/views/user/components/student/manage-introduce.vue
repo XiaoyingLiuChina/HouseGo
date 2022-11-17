@@ -5,44 +5,75 @@
         <h3>个人简介</h3>
       </div>
       <div class="card-body">
-        <!-- <label for="exampleDataList" class="form-label">的热热热退热贴</label>
-        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." />
-        <datalist id="datalistOptions">
-          <option value="San Francisco"></option>
-          <option value="New York"></option>
-          <option value="Seattle"></option>
-          <option value="Los Angeles"></option>
-          <option value="Chicago"></option>
-        </datalist> -->
-        <div class="row">
-          <div class="mb-3 col-6">
-            <label for="first" class="form-label">第一志愿</label>
-            <input type="text" class="form-control" id="first" />
+        <div class="show-box" v-if="myResume" v-show="!editbox">
+          <div class="row">
+            <div class="mb-3 col-6">第一志愿： {{ myResume.volunteerone }}</div>
+            <div class="mb-3 col-6">第一志愿： {{ myResume.volunteertwo }}</div>
+            <div class="mb-3 col">绩点：{{ myResume.grades }}</div>
           </div>
-          <div class="mb-3 col-6">
-            <label for="second" class="form-label">第二志愿</label>
-            <input type="text" class="form-control" id="second" />
-          </div>
-          <div class="mb-3 col">
-            <label for="score" class="form-label">绩点</label>
-            <input type="number" class="form-control" id="score" />
-          </div>
+
+          <div class="mb-3">自我评价：{{ myResume.introduce }}</div>
+          <div class="mb-3">获奖情况：{{ myResume.reward }}</div>
+          <button class="btn btn-primary" @click="editBoxOpen">编辑简历</button>
         </div>
 
-        <div class="mb-3">
-          <label for="comment" class="form-label">自我评价</label>
-          <textarea class="form-control" id="comment" rows="3"></textarea>
+        <div class="noresume-box" id="noresume-box" v-else v-show="!editbox">
+          <p class="mb-3">暂时没有您的简历，开始编辑属于自己的简历吧</p>
+          <button class="btn btn-primary" @click="editBoxOpen">添加简历</button>
+        </div>
+        <div v-show="editbox">
+          <EditBox :key="myResume" />
+          <button class="btn btn-primary" @click="editbox = flase">返回</button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import EditBox from './edit-resume.vue'
+import { getResume } from '@/api/resume'
 export default {
-  name: 'UserIntroduce'
+  name: 'UserIntroduce',
+  components: { EditBox },
+  data() {
+    return {
+      myResume: null,
+      editbox: false,
+      addbox: false
+    }
+  },
+
+  mounted() {
+    this.getMyResume()
+  },
+  methods: {
+    async getMyResume() {
+      const data = await getResume(this.$store.state.user.profile.id)
+      this.myResume = data
+      this.$store.dispatch('user/setResume', data)
+    },
+    editBoxOpen() {
+      this.editbox = true
+      console.log(this.$store.state.user.myResume)
+      // this.$router.go(0)
+    }
+  },
+  watch: {
+    // myResume: {
+    //   handler(newVal, oldVal) {
+    //     console.log('监听到了')
+    //     console.log(newVal)
+    //     console.log(oldVal)
+    //   },
+    //   deep: true
+    // }
+  }
 }
 </script>
 <style lang="less" scoped>
+.add-box {
+  display: none;
+}
 input {
   display: block;
   padding: 5px 5px;

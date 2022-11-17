@@ -15,14 +15,13 @@ instance.interceptors.request.use(
     // 如果本地又token就在头部携带
 
     // 1. 获取用户信息对象
-    // const { profile } = store.state.user
+    const { profile } = store.state.user
     // // // const token = localStorage.getItem('token')
-    // // // 2. 判断是否有token
-    // if (profile.token) {
-    //   //   // 3. 设置token
-    //   config.headers.Authorization = `Bearer ${profile.token}`
-    //   //   // config.headers.Authorization = `Bearer ${token}`
-    // }
+    // 2. 判断是否有token
+    if (profile.token) {
+      // 3. 设置token
+      config.headers.Authorization = `Bearer ${profile.token}`
+    }
     config.headers['Content-Type'] = 'application/json'
     return config
   },
@@ -40,7 +39,8 @@ instance.interceptors.response.use(
       // 1. 清空无效用户信息
       // 2. 跳转到登录页
       // 3. 跳转需要传参（当前路由地址）给登录页码
-      store.commit('user/setUser', {})
+      this.$store.commit('user/deleteUser', {})
+      this.$store.commit('user/setResume', {})
       // 当前路由地址
       // 组件里头：`/user?a=10` $route.path === /user  $route.fullPath === /user?a=10
       // js模块中：router.currentRoute.value.fullPath 就是当前路由地址，router.currentRoute 是ref响应式数据

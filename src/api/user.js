@@ -24,6 +24,13 @@ export const getStudent = (id) => {
 }
 
 /**
+ * 根据id获取学院
+ * @param id
+ */
+export const getCollege = (id) => {
+  return request('/college', 'get', { id })
+}
+/**
  * 修改用户的各类信息
  * @param { id, collegeid,... }
  */

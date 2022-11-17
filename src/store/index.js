@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import createPersistedstate from 'vuex-persistedstate'
 import user from './modules/user'
 // 创建vuex仓库并导出
 export default createStore({
@@ -17,5 +18,11 @@ export default createStore({
   },
   getters: {
     // vuex的计算属性
-  }
+  },
+  plugins: [
+    createPersistedstate({
+      key: 'housego',
+      paths: ['user']
+    })
+  ]
 })

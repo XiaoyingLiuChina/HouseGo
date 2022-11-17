@@ -7,8 +7,9 @@
         <ul class="list-group">
           <li class="list-group-item">学号：{{ user.id }}</li>
           <li class="list-group-item">姓名：{{ user.name }}</li>
-          <li class="list-group-item">学院：{{ user.collegeid }}</li>
-          <li class="list-group-item">班级：{{ user.clas }}</li>
+          <li class="list-group-item">学院：{{ user.college }}</li>
+          <li class="list-group-item" v-if="user.clas">班级：{{ user.clas }}</li>
+          <li class="list-group-item" v-if="user.professionalTitle">职称：{{ user.professionalTitle }}</li>
           <li class="list-group-item">
             手机号码：<Form :validation-schema="mySchema" autocomplete="off" v-slot="{ errors }" @submit="updateTelephone" class="phone">
               <Field type="text" name="mobile" id="mobile" class="form-control" v-model="user.telephone" />

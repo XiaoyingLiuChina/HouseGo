@@ -20,7 +20,8 @@ export default {
         type: ''
       },
       // 登录后回跳路径
-      redirectUrl: '/'
+      redirectUrl: '/',
+      myResume: {}
     }
   },
   mutations: {
@@ -45,6 +46,9 @@ export default {
     },
     updatePassword(state, password) {
       state.profile.password = password
+    },
+    setResume(state, resume) {
+      state.myResume = resume
     }
   },
   actions: {
@@ -62,6 +66,9 @@ export default {
     },
     updatePassword(context, args) {
       context.commit('updatePassword', args)
+    },
+    setResume(context, args) {
+      context.commit('setResume', args)
     }
   }
 }
