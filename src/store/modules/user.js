@@ -30,9 +30,11 @@ export default {
       state.profile.type = payload.type
     },
     setUser(state, payload) {
-      // state.profile.name = payload.name
       Object.assign(state.profile, payload)
       // state.profile = ({}, state.profile, payload)
+    },
+    deleteUser(state, payload) {
+      state.profile = payload
     },
     // 修改回跳地址
     setRedirectUrl(state, url) {
@@ -51,6 +53,9 @@ export default {
     },
     setUser(context, args) {
       context.commit('setUser', args)
+    },
+    deleteUser(context) {
+      context.commit('delereUser')
     },
     updateAvatar(context, args) {
       context.commit('updateAvatar', args)

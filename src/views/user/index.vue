@@ -2,16 +2,7 @@
   <div class="user-page">
     <AppTopnav />
     <AppHeader />
-    <!-- <div class="info-header">
-      <span id="welcome">
-        欢迎
-        <img :src="user.avatar" alt="..." />
-        小傻逼宋洋
-        <span v-if="user.type === 'teacher'" style="font-size: 12px">老师</span>
-        <span v-else style="font-size: 12px">同学</span>
-      </span>
-      <a href="#" @click="logout">退出登录</a>
-    </div> -->
+
     <div class="container">
       <UserLeftnav :user="user" />
       <div class="main"><RouterView></RouterView></div>
@@ -40,17 +31,13 @@ export default {
 
   methods: {
     async getUser() {
+      let data = null
       if (this.user.type === '0') {
-        const data = await getTeacher(this.user.id)
-        console.log(data)
+        data = await getTeacher(this.user.id)
       } else {
-        const data = await getStudent(this.user.id)
-        this.$store.commit('user/setUser', data)
+        data = await getStudent(this.user.id)
       }
-    },
-    logout() {
-      this.$store.commit('user/setUser', {})
-      this.$router.push('/login')
+      this.$store.commit('user/setUser', data)
     }
   }
 }

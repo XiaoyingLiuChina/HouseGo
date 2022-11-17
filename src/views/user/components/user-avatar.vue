@@ -59,7 +59,7 @@
 <script>
 import 'vue-cropper/dist/index.css'
 import { VueCropper } from 'vue-cropper'
-import { updateAvatar } from '@/api/user'
+import { updateUser } from '@/api/user'
 export default {
   name: 'UserAvatar',
   components: { VueCropper },
@@ -103,9 +103,8 @@ export default {
     // 修改头像
     async updateAvatar() {
       // 修改后端的头像
-      const { id, collegeid, type } = this.$store.state.user.profile
       const image = this.previewAvatar
-      const data = await updateAvatar({ id, collegeid, image, type })
+      const data = await updateUser({ image })
       if (data === true) {
         this.$store.commit('user/updateAvatar', image)
         this.$message({ type: 'success', text: '修改头像成功' })

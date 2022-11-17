@@ -28,7 +28,7 @@
 import UserMine from './user-mine.vue'
 import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
-import { updatePhone } from '@/api/user'
+import { updateUser } from '@/api/user'
 export default {
   name: 'UserInfo',
   components: { UserMine, Field, Form },
@@ -43,9 +43,9 @@ export default {
   methods: {
     async updateTelephone(values) {
       console.log('发起修改密码请求')
-      const { id, collegeid, type } = this.user
+
       const telephone = values.mobile
-      const data = await updatePhone({ id, collegeid, telephone, type })
+      const data = await updateUser({ telephone })
       if (data === true) {
         this.$message({ type: 'success', text: '修改成功' })
       }

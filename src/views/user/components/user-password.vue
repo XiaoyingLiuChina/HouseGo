@@ -39,7 +39,7 @@
 <script>
 import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
-import { updatePassword } from '@/api/user'
+import { updateUser } from '@/api/user'
 export default {
   name: 'UserPassword',
   components: { Form, Field },
@@ -54,10 +54,8 @@ export default {
   },
   methods: {
     async updatePw(values) {
-      console.log(values)
-      const { id, collegeid, type } = this.$store.state.user.profile
       const password = values.rePassword
-      const data = await updatePassword({ id, collegeid, password, type })
+      const data = await updateUser({ password })
       if (data === true) {
         this.$store.commit('user/updatePassword', password)
         // 重置表单

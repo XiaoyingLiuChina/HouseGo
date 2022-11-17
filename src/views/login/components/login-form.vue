@@ -8,7 +8,7 @@
         <div class="col align-self-center">
           <div class="errorShow" v-if="errors.id"><i class="bi bi-exclamation-triangle" />{{ errors.id }}</div>
         </div>
-        <Field :class="{ error: errors.id }" class="form-control" name="id" type="text" placeholder="请输入学号" />
+        <Field :class="{ error: errors.id }" class="form-control" name="id" id="id" type="text" placeholder="请输入学号" />
       </div>
       <div class="row">
         <label for="pw" class="col-sm-2 col-form-label align-self-center">密码</label>
@@ -69,7 +69,7 @@
 <script>
 import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
-import { userLogin } from '@/api/user'
+import { userLogin, updateUser } from '@/api/user'
 export default {
   name: 'LoginForm',
   components: {
@@ -98,12 +98,10 @@ export default {
             // 存储用户信息
             const { id, type } = values
             this.$store.commit('user/setUserType', { id, type })
-            // store.dispatch('cart/mergeCart').then(() => {
             // 进行跳转
             this.$router.push({ path: '/user' })
             // 成功消息提示
             this.$message({ type: 'success', text: '登录成功！' })
-            // })
           } else if (data === '不存在该账号') {
             if (values.type === '1') {
               this.$message({ type: 'warn', text: '不存在该账号的学生' })
@@ -117,12 +115,24 @@ export default {
       }
     },
     async ResetPassword() {
-      console.log('即将重置密码')
-      try {
-        // const data=await
-        this.forgetClick = !this.forgetClick
-      } catch (error) {
-        this.$message({ type: 'warn', text: '重置密码出错，请重试' })
+      const account = document.getElementById('id')
+
+      if (/^5120(\d){6}$/.test(account.value)) {
+        console.log('即将重置密码')
+        try {
+          const password = {}
+          password.password = '000000'
+          console.log(password)
+          const data = await updateUser(password)
+          if (data === true) {
+            this.$message({ type: 'success', text: '重置密码成功' })
+          }
+          this.forgetClick = !this.forgetClick
+        } catch (error) {
+          this.$message({ type: 'warn', text: '重置密码出错，请重试' })
+        }
+      } else {
+        this.$message({ type: 'warn', text: '请检查学号是否正确' })
       }
     }
   }

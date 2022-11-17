@@ -6,7 +6,7 @@
           <li class="nav-item">
             <RouterLink to="/user" class="nav-link"><i class="bi bi-person"></i>{{ user.name }}</RouterLink>
           </li>
-          <li class="nav-item"><RouterLink to="/" class="nav-link" @click="logout">退出登录</RouterLink></li>
+          <li class="nav-item"><RouterLink to="/login" class="nav-link" @click="logout">退出登录</RouterLink></li>
         </template>
         <template v-else>
           <li class="nav-item"><RouterLink to="/login" class="nav-link">请先登录</RouterLink></li>
@@ -28,7 +28,8 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.commit('user/setUser', {})
+      this.$store.commit('user/deleteUser', {})
+      console.log(this.$store.state.user.profile)
       this.$router.push('/login')
     }
   }
