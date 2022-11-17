@@ -4,7 +4,7 @@
       <ul class="nav justify-content-end">
         <template v-if="user.token">
           <li class="nav-item">
-            <RouterLink to="/user" class="nav-link"><i class="bi bi-person"></i>{{ user.account }}</RouterLink>
+            <RouterLink to="/user" class="nav-link"><i class="bi bi-person"></i>{{ user.name }}</RouterLink>
           </li>
           <li class="nav-item"><RouterLink to="/" class="nav-link" @click="logout">退出登录</RouterLink></li>
         </template>

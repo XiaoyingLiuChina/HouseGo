@@ -16,12 +16,12 @@ instance.interceptors.request.use(
 
     // 1. 获取用户信息对象
     // const { profile } = store.state.user
-    // // const token = localStorage.getItem('token')
-    // // 2. 判断是否有token
+    // // // const token = localStorage.getItem('token')
+    // // // 2. 判断是否有token
     // if (profile.token) {
-    //   // 3. 设置token
+    //   //   // 3. 设置token
     //   config.headers.Authorization = `Bearer ${profile.token}`
-    //   // config.headers.Authorization = `Bearer ${token}`
+    //   //   // config.headers.Authorization = `Bearer ${token}`
     // }
     config.headers['Content-Type'] = 'application/json'
     return config

@@ -5,15 +5,19 @@
       <div class="card-header"><h3>个人基本信息</h3></div>
       <div class="card-body">
         <ul class="list-group">
-          <li class="list-group-item">学号：5120193378</li>
-          <li class="list-group-item">姓名：宋洋</li>
-          <li class="list-group-item">性别：男</li>
-          <li class="list-group-item">学院：计算机科学与技术学院</li>
-          <li class="list-group-item">专业：软件工程</li>
-          <li class="list-group-item">班级：软件1905</li>
+          <li class="list-group-item">学号：{{ user.id }}</li>
+          <li class="list-group-item">姓名：{{ user.name }}</li>
+          <li class="list-group-item">学院：{{ user.collegeid }}</li>
+          <li class="list-group-item">班级：{{ user.clas }}</li>
           <li class="list-group-item">
-            手机号码：<input type="text" name="phone" id="phone" class="form-control" />
-            <button class="btn btn-primary">修改手机</button>
+            手机号码：<Form :validation-schema="mySchema" autocomplete="off" v-slot="{ errors }" @submit="updateTelephone" class="phone">
+              <Field type="text" name="mobile" id="mobile" class="form-control" v-model="user.telephone" />
+              <button class="btn btn-primary" type="submit">修改手机</button>
+              <div class="errorShow" v-if="errors.mobile">
+                <i class="bi bi-exclamation-triangle" />
+                {{ errors.mobile }}
+              </div>
+            </Form>
           </li>
         </ul>
       </div>
@@ -22,9 +26,31 @@
 </template>
 <script>
 import UserMine from './user-mine.vue'
+import { Form, Field } from 'vee-validate'
+import veeSchema from '@/utils/vee-validate-schema'
+import { updatePhone } from '@/api/user'
 export default {
   name: 'UserInfo',
-  components: { UserMine }
+  components: { UserMine, Field, Form },
+  data() {
+    return {
+      user: this.$store.state.user.profile,
+      mySchema: {
+        mobile: veeSchema.mobile
+      }
+    }
+  },
+  methods: {
+    async updateTelephone(values) {
+      console.log('发起修改密码请求')
+      const { id, collegeid, type } = this.user
+      const telephone = values.mobile
+      const data = await updatePhone({ id, collegeid, telephone, type })
+      if (data === true) {
+        this.$message({ type: 'success', text: '修改成功' })
+      }
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -52,6 +78,15 @@ export default {
       -moz-appearance: none;
       appearance: none;
       border-radius: 0.375rem;
+    }
+  }
+  .phone {
+    display: flex;
+    align-items: center;
+    .errorShow {
+      color: red;
+      font-size: 8px;
+      text-align-last: end;
     }
   }
 }

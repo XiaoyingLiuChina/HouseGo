@@ -65,7 +65,6 @@ export default {
           id: 'modules1',
           children: [
             { name: '个人中心', topath: '/user' },
-            { name: '查看个人信息', topath: '/user' },
             { name: '修改头像', topath: '/user/avatar' }
           ]
         },

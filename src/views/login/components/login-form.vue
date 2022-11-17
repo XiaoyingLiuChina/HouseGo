@@ -6,27 +6,27 @@
       <div class="row">
         <label for="account" class="col-sm-2 col-form-label align-self-center">学号</label>
         <div class="col align-self-center">
-          <div class="errorShow" v-if="errors.account"><i class="bi bi-exclamation-triangle" />{{ errors.account }}</div>
+          <div class="errorShow" v-if="errors.id"><i class="bi bi-exclamation-triangle" />{{ errors.id }}</div>
         </div>
-        <Field :class="{ error: errors.account }" class="form-control" v-model.trim="userinfo.account" name="account" type="text" placeholder="请输入学号" />
+        <Field :class="{ error: errors.id }" class="form-control" name="id" type="text" placeholder="请输入学号" />
       </div>
       <div class="row">
         <label for="pw" class="col-sm-2 col-form-label align-self-center">密码</label>
         <div class="col align-self-center">
           <div class="errorShow" v-if="errors.password"><i class="bi bi-exclamation-triangle" />{{ errors.password }}</div>
         </div>
-        <Field :class="{ error: errors.password }" class="form-control" v-model.trim="userinfo.password" name="password" type="password" placeholder="请输入密码" />
+        <Field :class="{ error: errors.password }" class="form-control" name="password" type="password" placeholder="请输入密码" />
       </div>
       <div class="row" style="height: 30px; padding-left: calc(var(--bs-gutter-x) * 0.5)">
         <div class="col-6 align-self-center">
           <div class="errorShow" v-if="errors.type"><i class="bi bi-exclamation-triangle" />{{ errors.type }}</div>
         </div>
         <div class="form-check col-3 align-self-center">
-          <Field :class="{ error: errors.type }" class="form-check-input" type="radio" name="type" id="student" v-model="userinfo.type" value="student" />
+          <Field :class="{ error: errors.type }" class="form-check-input" type="radio" name="type" id="student" value="1" />
           <label class="form-check-label" for="student"> 学生 </label>
         </div>
         <div class="form-check col-3 align-self-center">
-          <Field :class="{ error: errors.type }" class="form-check-input" type="radio" name="type" id="teacher" v-model="userinfo.type" value="teacher" />
+          <Field :class="{ error: errors.type }" class="form-check-input" type="radio" name="type" id="teacher" value="0" />
           <label class="form-check-label" for="teacher"> 老师</label>
         </div>
       </div>
@@ -57,7 +57,7 @@
             {{ errors.isAgree }}
           </div>
           <div class="form-check">
-            <Field class="form-check-input" :class="{ error: errors.isAgree }" type="checkbox" name="isAgree" v-model="userinfo.isAgree" value="true" />
+            <Field class="form-check-input" :class="{ error: errors.isAgree }" type="checkbox" name="isAgree" value="true" />
             <label class="form-check-label" for="greeCheck"> 是否同意协议? </label>
           </div>
         </div>
@@ -69,7 +69,7 @@
 <script>
 import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
-// import { userLogin } from '@/api/user'
+import { userLogin } from '@/api/user'
 export default {
   name: 'LoginForm',
   components: {
@@ -78,16 +78,9 @@ export default {
   },
   data() {
     return {
-      userinfo: {
-        account: '',
-        password: '',
-        type: '',
-        isAgree: false
-      },
       mySchema: {
-        account: veeSchema.account,
+        id: veeSchema.id,
         password: veeSchema.password,
-        mobild: veeSchema.mobile,
         type: veeSchema.type,
         isAgree: veeSchema.isAgree
       },
@@ -98,21 +91,30 @@ export default {
     async login(values) {
       if (values) {
         try {
-          // const { account, password } = this.userinfo
           console.log('发起了登录请求')
-          this.$store.state.user.profile.token = '6'
-          this.$router.push({
-            path: '/user'
-          })
+          const data = await userLogin(values)
+          if (data === '登录成功') {
+            this.$store.state.user.profile.token = '6'
+            // 存储用户信息
+            const { id, type } = values
+            this.$store.commit('user/setUserType', { id, type })
+            // store.dispatch('cart/mergeCart').then(() => {
+            // 进行跳转
+            this.$router.push({ path: '/user' })
+            // 成功消息提示
+            this.$message({ type: 'success', text: '登录成功！' })
+            // })
+          } else if (data === '不存在该账号') {
+            if (values.type === '1') {
+              this.$message({ type: 'warn', text: '不存在该账号的学生' })
+            } else this.$message({ type: 'warn', text: '不存在该账号的老师' })
+          } else {
+            this.$message({ type: 'warn', text: '密码错误！请重新输入密码' })
+          }
         } catch (error) {
           this.$message({ type: 'warn', text: '发生错误，登录失败！请重试' })
         }
       }
-      // console.log(values)
-      // values.token = '6'
-      // {
-      //   id, account, avatar, mobile, nickname, token
-      // }
     },
     async ResetPassword() {
       console.log('即将重置密码')

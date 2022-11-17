@@ -24,15 +24,30 @@ import AppTopnav from '@/components/app-topnav.vue'
 import AppHeader from '@/components/app-header.vue'
 import AppFooter from '@/components/app-footer.vue'
 import UserLeftnav from './components/user-leftnav.vue'
+import { getTeacher, getStudent } from '@/api/user'
 export default {
   name: 'UserPage',
   components: { AppHeader, AppFooter, UserLeftnav, AppTopnav },
+
   data() {
     return {
       user: this.$store.state.user.profile
     }
   },
+  mounted() {
+    this.getUser()
+  },
+
   methods: {
+    async getUser() {
+      if (this.user.type === '0') {
+        const data = await getTeacher(this.user.id)
+        console.log(data)
+      } else {
+        const data = await getStudent(this.user.id)
+        this.$store.commit('user/setUser', data)
+      }
+    },
     logout() {
       this.$store.commit('user/setUser', {})
       this.$router.push('/login')

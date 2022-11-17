@@ -3,9 +3,9 @@
     <!-- 用户信息 -->
     <div class="user-meta">
       <div class="avatar">
-        <img src="@/assets/images/ma.png" />
+        <img :src="user.image" />
       </div>
-      <h4>sb宋洋</h4>
+      <h4>{{ user.name }}</h4>
     </div>
     <div class="item">
       <RouterLink to="/user">
@@ -25,7 +25,12 @@
 </template>
 <script>
 export default {
-  name: 'UserMine'
+  name: 'UserMine',
+  data() {
+    return {
+      user: this.$store.state.user.profile
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

@@ -5,7 +5,7 @@
       <div class="card-body">
         <div class="old-avatar">
           <label>原头像：</label>
-          <img src="@/assets/images/ma.png" class="img-thumbnail" alt="..." />
+          <img :src="this.userAvatar" class="img-thumbnail" alt="..." />
         </div>
 
         <div class="new-avatar">
@@ -43,7 +43,7 @@
             </div>
             <div>
               <label for="cutted">预览：</label>
-              <img :src="userAvatar" class="img-thumbnail cutted" alt="..." />
+              <img :src="previewAvatar" class="img-thumbnail cutted" alt="..." />
             </div>
             <button class="btn btn-primary" @click="handleCropperPhoto">裁剪</button>
           </div>
@@ -59,12 +59,14 @@
 <script>
 import 'vue-cropper/dist/index.css'
 import { VueCropper } from 'vue-cropper'
+import { updateAvatar } from '@/api/user'
 export default {
   name: 'UserAvatar',
   components: { VueCropper },
   data() {
     return {
-      userAvatar: '',
+      userAvatar: this.$store.state.user.profile.image,
+      previewAvatar: '',
       option: {
         img: '',
         outputSize: 1, // 剪切后的图片质量（0.1-1）
@@ -96,19 +98,25 @@ export default {
         return
       }
       this.option.img = URL.createObjectURL(item)
-      this.userAvatar = this.option.img
+      // this.userAvatar = this.option.img
     },
     // 修改头像
-    updateAvatar() {
+    async updateAvatar() {
       // 修改后端的头像
-      // 修改store
-      console.log(this.userAvatar)
-      this.$store.commit('user/updateAvatar', this.userAvatar)
+      const { id, collegeid, type } = this.$store.state.user.profile
+      const image = this.previewAvatar
+      const data = await updateAvatar({ id, collegeid, image, type })
+      if (data === true) {
+        this.$store.commit('user/updateAvatar', image)
+        this.$message({ type: 'success', text: '修改头像成功' })
+        // 进行跳转
+        this.$router.push({ path: '/user' })
+      }
     },
     // 获取 base64 截图数据并放置到预览
     handleCropperPhoto() {
       this.$refs.cropper.getCropData((data) => {
-        this.userAvatar = data
+        this.previewAvatar = data
       })
     }
   }

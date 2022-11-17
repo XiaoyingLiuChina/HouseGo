@@ -1,9 +1,9 @@
 // import { userAccountCheck } from '@/api/user'
-
+import store from '@/store/index'
 // 给vee-validate提供校验规则函数
 export default {
   // 用户名校验
-  account(value) {
+  id(value) {
     if (!value) return '请输入你的学号'
     // 规则：字母开头6-20字符之间
     if (!/^5120(\d){6}$/.test(value)) return '请输入正确的学号'
@@ -29,18 +29,34 @@ export default {
     if (!value) return '请选择用户类型'
     return true
   },
+  oldPassword(value) {
+    if (!value) return '请输入旧密码'
+    if (!/^\w{6,24}$/.test(value)) return '密码6-24个字符'
+    const rightPassword = store.state.user.profile.password
+    if (value !== rightPassword) return '请输入正确的旧密码'
+    return true
+  },
+  newPassword(value) {
+    if (!value) return '请输入密码'
+    // 规则：密码格式6-24个字符
+    if (!/^\w{6,24}$/.test(value)) return '密码6-24个字符'
+    const rightPassword = store.state.user.profile.password
+    if (value === rightPassword) return '请不要与旧密码相同'
+    return true
+  },
   // 密码校验
   rePassword(value, { form }) {
-    if (!value) return '请输入密码'
+    if (!value) return '请重新输入新密码'
     if (!/^\w{6,24}$/.test(value)) return '密码6-24个字符'
     // form表单数据对象
-    if (value !== form.password) return '需要和密码保持一致'
+    if (value !== form.newPassword) return '需要和新密码保持一致'
     return true
   },
   mobile(value) {
     if (!value) return '请输入手机号'
     // 规则：1开头 3-9 之间  9个数字
-    if (!/^1[3-9]\d{9}$/.test(value)) return '手机号格式不对'
+    if (!/^\d{11}$/.test(value)) return '手机号格式不对'
+    // if (!/^1[3-9]\d{9}$/.test(value)) return '手机号格式不对'
     return true
   },
 
