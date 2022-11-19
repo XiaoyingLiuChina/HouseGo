@@ -1,15 +1,4 @@
 // 用户模块
-// 学号（id,String）
-// 密码（password,String）
-// 班级（class,String）
-// 是否加入实验室(typel,boolean)
-// 姓名（name,String）
-// 头像（image,String）
-// 联系方式（telephone,String）
-// 学院id（collegeid,int）
-
-// 实验室id（laboratoryid,int）
-// 职称（professionalTitle,String）
 export default {
   namespaced: true,
   state() {
@@ -21,7 +10,8 @@ export default {
       },
       // 登录后回跳路径
       redirectUrl: '/',
-      myResume: {}
+      myResume: {},
+      myLab: {}
     }
   },
   mutations: {
@@ -36,6 +26,8 @@ export default {
     },
     deleteUser(state, payload) {
       state.profile = payload
+      state.myResume = payload
+      state.myLab = payload
     },
     // 修改回跳地址
     setRedirectUrl(state, url) {
@@ -49,6 +41,9 @@ export default {
     },
     setResume(state, resume) {
       state.myResume = resume
+    },
+    setLab(state, lab) {
+      state.myLab = lab
     }
   },
   actions: {
@@ -69,6 +64,9 @@ export default {
     },
     setResume(context, args) {
       context.commit('setResume', args)
+    },
+    setLab(context, args) {
+      context.commit('setLab', args)
     }
   }
 }

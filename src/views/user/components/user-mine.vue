@@ -16,9 +16,9 @@
         <i class="bi bi-shield-lock"></i>
         <p>修改密码</p>
       </RouterLink>
-      <RouterLink to="/user/introduce">
-        <i class="bi bi-journal"></i>
-        <p>修改简介</p>
+      <RouterLink to="/user/avatar">
+        <i class="bi bi-person-circle"></i>
+        <p>修改头像</p>
       </RouterLink>
     </div>
   </div>

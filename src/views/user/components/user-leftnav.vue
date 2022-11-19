@@ -25,120 +25,53 @@ export default {
     return {
       // powerlist: [
       //   {
-      //     name: '个人管理',
+      //     name: '我的账户',
       //     id: 'modules1',
       //     children: [
-      //       { name: '查看信息', topath: '/user' },
-      //       { name: '修改密码', topath: '/user/updatepw' },
-      //       { name: '修改头像', topath: '/user/avatar' },
-      //       { name: '个人简介', topath: '/manage/introduce' }
+      //       { name: '个人中心', topath: '/user' },
+      //       { name: '修改头像', topath: '/user/avatar' }
       //     ]
       //   },
       //   {
-      //     name: '分享管理',
+      //     name: '分享区管理',
       //     id: 'modules2',
       //     children: [
-      //       { name: '查看分享', topath: '/user/discuss' },
-      //       { name: '发布分享', topath: '/user/discuss/put' }
+      //       { name: '查看分享', topath: '/user/share' },
+      //       { name: '发布分享', topath: '/user/share/put' }
       //     ]
-      //   },
-      //   {
-      //     name: '申请管理',
-      //     id: 'modules3',
-      //     children: [{ name: '查看已申请', topath: '/user/labs' }]
-      //   },
-      //   {
-      //     name: '人员管理',
-      //     id: 'modules4',
-      //     children: [{ name: '查看已申请人员', topath: '/manage/labtor' }]
       //   },
       //   {
       //     name: '招新管理',
+      //     id: 'modules4',
+      //     children: [
+      //       { name: '发布招新信息', topath: '/user/recruit' },
+      //       { name: '查看已申请人员', topath: '/user/labtor' }
+      //     ]
+      //   },
+      //   {
+      //     name: '实验室管理',
       //     id: 'modules5',
-      //     children: [{ name: '发布招新', topath: '/manage/recruit' }]
+      //     children: [
+      //       { name: '查看简介', topath: '/labs/0' },
+      //       { name: '修改简介', topath: '/user/labedit' }
+      //     ]
       //   }
       // ]
-
-      powerlist: [
-        {
-          name: '我的账户',
-          id: 'modules1',
-          children: [
-            { name: '个人中心', topath: '/user' },
-            { name: '修改头像', topath: '/user/avatar' }
-          ]
-        },
-        {
-          name: '分享区管理',
-          id: 'modules2',
-          children: [
-            { name: '查看分享', topath: '/user/share' },
-            { name: '发布分享', topath: '/user/share/put' }
-          ]
-        },
-
-        // {
-        //   name: '实验室人员管理',
-        //   id: 'modules3',
-        //   children: [{ name: '查看已申请人员', topath: '/manage/labtor' }]
-        // },
-        {
-          name: '招新管理',
-          id: 'modules4',
-          children: [
-            { name: '发布招新信息', topath: '/user/recruit' },
-            { name: '查看已申请人员', topath: '/user/labtor' }
-          ]
-        },
-        {
-          name: '实验室管理',
-          id: 'modules5',
-          children: [
-            { name: '查看简介', topath: '/labs/0' },
-            { name: '修改简介', topath: '/user/labedit' }
-          ]
-        }
-      ]
-
-      // 学生
-      // powerlist: [
-      //   {
-      //     name: '个人中心',
-      //     id: 'modules1',
-      //     children: [
-      //       { name: '查看信息', topath: '/user' },
-      //       { name: '修改密码', topath: '/user/updatepw' },
-      //       { name: '修改头像', topath: '/user/avatar' },
-      //       { name: '个人简介', topath: '/manage/introduce' }
-      //     ]
-      //   },
-      //   {
-      //     name: '分享管理',
-      //     id: 'modules2',
-      //     children: [
-      //       { name: '查看分享', topath: '/user/discuss' },
-      //       { name: '发布分享', topath: '/user/discuss/put' }
-      //     ]
-      //   },
-      //   {
-      //     name: '申请管理',
-      //     id: 'modules3',
-      //     children: [{ name: '查看已申请', topath: '/user/labs' }]
-      //   },
-      // ]
+      powerlist: null
     }
   },
-  props: {
-    user: {
-      type: Object
-    }
-  },
+
   mounted() {
     this.getPowerList()
   },
   methods: {
     getPowerList() {
       // 向后端请求权限数据
+      if (this.$store.state.user.profile.type === '0') {
+        this.powerlist = this.$store.state.nav.powerlist0
+      } else {
+        this.powerlist = this.$store.state.nav.powerlist1
+      }
     }
   }
 }

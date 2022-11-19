@@ -4,7 +4,7 @@
     <AppHeader />
 
     <div class="container">
-      <UserLeftnav :user="user" />
+      <UserLeftnav />
       <div class="main"><RouterView></RouterView></div>
     </div>
     <AppFooter />

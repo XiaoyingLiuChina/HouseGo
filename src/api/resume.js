@@ -17,10 +17,20 @@ export const addResume = (data) => {
   const studentid = id
   Object.assign(data, { studentid })
   const datajson = JSON.stringify(data)
-  console.log(data)
   return request('/resume', 'post', datajson)
 }
+/**
+ * 编辑简历
+ * @param
+ */
 export const editResume = (data) => {
   const datajson = JSON.stringify(data)
   return request('/resume', 'put', datajson)
+}
+/**
+ * 删除简历
+ * @param
+ */
+export const deleteResume = (id) => {
+  return request(`/resume/${id}`, 'delete')
 }

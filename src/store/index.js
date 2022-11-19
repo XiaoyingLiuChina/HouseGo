@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import createPersistedstate from 'vuex-persistedstate'
 import user from './modules/user'
+import nav from './modules/nav'
 // 创建vuex仓库并导出
 export default createStore({
   state: {
@@ -14,7 +15,8 @@ export default createStore({
   },
   modules: {
     // 分模块
-    user
+    user,
+    nav
   },
   getters: {
     // vuex的计算属性

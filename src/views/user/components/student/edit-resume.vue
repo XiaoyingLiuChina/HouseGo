@@ -35,12 +35,17 @@ export default {
       resume: this.$store.state.user.myResume
     }
   },
-  computed: {
-    editResumes() {
-      return this.$store.state.user.myResume
+  mounted() {
+    if (!this.$store.state.user.myResume) {
+      this.resume = {
+        volunteerone: '',
+        volunteertwo: '',
+        introduce: '',
+        grades: null,
+        reward: ''
+      }
     }
   },
-
   methods: {
     async addMyResume() {
       if (this.resume.grades > 5) {
@@ -61,7 +66,6 @@ export default {
         this.resume.grades = 0
       } else {
         const data = await editResume(this.resume)
-
         if (data === true) {
           this.$store.commit('user/setResume', data)
           this.$message({ type: 'success', text: '修改成功' })
