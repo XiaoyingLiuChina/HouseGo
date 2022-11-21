@@ -5,7 +5,7 @@
         <h3>投递列表</h3>
       </div>
       <div class="card-body" style="overflow: scroll; width: 960px">
-        <table class="table table-hover table-bordered" v-if="list">
+        <table class="table table-hover table-bordered" v-if="list" :key="list">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -66,7 +66,6 @@ export default {
     async getList() {
       const data = await getStudentDeliver()
       this.list = data
-      console.log(data)
     },
     filterState(value) {
       let res = ''
@@ -105,7 +104,9 @@ export default {
       })
         .then(async () => {
           const data = await backDeliver(id)
+
           if (data === '撤销成功') {
+            this.getList()
             this.$message({
               type: 'success',
               message: '撤销成功!'
