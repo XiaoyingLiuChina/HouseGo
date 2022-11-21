@@ -29,7 +29,6 @@ export default {
   methods: {
     logout() {
       this.$store.commit('user/deleteUser', {})
-      this.$store.commit('user/setResume', {})
       this.$router.push('/login')
     }
   }

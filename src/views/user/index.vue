@@ -16,6 +16,7 @@ import AppHeader from '@/components/app-header.vue'
 import AppFooter from '@/components/app-footer.vue'
 import UserLeftnav from './components/user-leftnav.vue'
 import { getTeacher, getStudent, getCollege } from '@/api/user'
+import { getLabByTeacher, getLabByStudent } from '@/api/labs'
 export default {
   name: 'UserPage',
   components: { AppHeader, AppFooter, UserLeftnav, AppTopnav },
@@ -35,15 +36,20 @@ export default {
       let college = ''
       if (this.user.type === '0') {
         data = await getTeacher(this.user.id)
+        if (data.laboratoryid !== '') {
+          const lab = await getLabByTeacher(data.id)
+          Object.assign(data, { lab })
+        }
       } else {
         data = await getStudent(this.user.id)
+        // 加入了实验室
+        if (data.typel === 1) {
+          const lab = await getLabByStudent(data.id)
+          Object.assign(data, { lab })
+        }
       }
-      this.$store.commit('user/setUser', data)
-      college = await getCollege(this.user.collegeid)
-      // 取出学院名称
-      const { name } = college[0]
-      // 不能直接用name会覆盖用户的name
-      college = name
+      college = await getCollege(data.collegeid)
+      college = college[0]
       Object.assign(data, { college })
       // 再次更新
       this.$store.commit('user/setUser', data)

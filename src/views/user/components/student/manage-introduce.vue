@@ -11,7 +11,6 @@
             <div class="mb-3 col-6">第一志愿： {{ myResume.volunteertwo }}</div>
             <div class="mb-3 col">绩点：{{ myResume.grades }}</div>
           </div>
-
           <div class="mb-3">自我评价：{{ myResume.introduce }}</div>
           <div class="mb-3">获奖情况：{{ myResume.reward }}</div>
           <button class="btn btn-primary" @click="deleteMyResume">删除简历</button>
@@ -38,7 +37,7 @@ export default {
   components: { EditBox },
   data() {
     return {
-      myResume: null,
+      myResume: this.$store.state.user.profile.resume,
       editbox: false,
       addbox: false
     }
@@ -49,14 +48,15 @@ export default {
   },
   methods: {
     async getMyResume() {
-      const data = await getResume(this.$store.state.user.profile.id)
-      this.myResume = data
-      this.$store.dispatch('user/setResume', data)
+      const resume = await getResume(this.$store.state.user.profile.id)
+      this.$store.commit('user/setUser', { resume })
+      this.myResume = resume
     },
     async deleteMyResume() {
       const data = await deleteResume(this.myResume.id)
       if (data === true) {
         this.$message({ type: 'success', text: '删除简历成功' })
+        this.$router.go({ path: '/user/introduce' })
       } else this.$message({ type: 'error', text: '发生错误，删除失败' })
     }
   },

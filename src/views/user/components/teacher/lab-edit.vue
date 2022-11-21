@@ -45,7 +45,7 @@ export default {
   name: 'LabEdit',
   data() {
     return {
-      editMessage: this.$store.state.user.myLab
+      editMessage: this.$store.state.user.profile.lab
     }
   },
   mounted() {

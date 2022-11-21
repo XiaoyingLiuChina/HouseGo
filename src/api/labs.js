@@ -12,9 +12,16 @@ export const getLab = (id) => {
  * 根据老师查询实验室
  * @param
  */
-export const getLabByTeacher = (id) => {
-  const teacherid = id
+export const getLabByTeacher = (teacherid) => {
   return request('/laboratory/byteacher', 'get', { teacherid })
+}
+
+/**
+ * 根据学生获取实验室
+ * @param
+ */
+export const getLabByStudent = (studentid) => {
+  return request('/join/bystudent', 'get', { studentid })
 }
 /**
  * 添加实验室

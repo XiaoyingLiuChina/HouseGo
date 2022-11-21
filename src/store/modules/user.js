@@ -9,9 +9,7 @@ export default {
         type: ''
       },
       // 登录后回跳路径
-      redirectUrl: '/',
-      myResume: {},
-      myLab: {}
+      redirectUrl: '/'
     }
   },
   mutations: {
@@ -22,12 +20,9 @@ export default {
     },
     setUser(state, payload) {
       Object.assign(state.profile, payload)
-      // state.profile = ({}, state.profile, payload)
     },
     deleteUser(state, payload) {
       state.profile = payload
-      state.myResume = payload
-      state.myLab = payload
     },
     // 修改回跳地址
     setRedirectUrl(state, url) {
@@ -38,12 +33,6 @@ export default {
     },
     updatePassword(state, password) {
       state.profile.password = password
-    },
-    setResume(state, resume) {
-      state.myResume = resume
-    },
-    setLab(state, lab) {
-      state.myLab = lab
     }
   },
   actions: {
@@ -61,12 +50,6 @@ export default {
     },
     updatePassword(context, args) {
       context.commit('updatePassword', args)
-    },
-    setResume(context, args) {
-      context.commit('setResume', args)
-    },
-    setLab(context, args) {
-      context.commit('setLab', args)
     }
   }
 }

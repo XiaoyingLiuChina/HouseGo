@@ -7,9 +7,10 @@
         <ul class="list-group">
           <li class="list-group-item">学号：{{ user.id }}</li>
           <li class="list-group-item">姓名：{{ user.name }}</li>
-          <li class="list-group-item">学院：{{ user.college }}</li>
+          <li class="list-group-item" v-if="user.college">学院：{{ user.college.name }}</li>
           <li class="list-group-item" v-if="user.clas">班级：{{ user.clas }}</li>
           <li class="list-group-item" v-if="user.professionalTitle">职称：{{ user.professionalTitle }}</li>
+          <li class="list-group-item" v-if="user.lab">目前所在实验室：{{ user.lab.name }}</li>
           <li class="list-group-item">
             手机号码：<Form :validation-schema="mySchema" autocomplete="off" v-slot="{ errors }" @submit="updateTelephone" class="phone">
               <Field type="text" name="mobile" id="mobile" class="form-control" v-model="user.telephone" />
@@ -30,12 +31,13 @@ import UserMine from './user-mine.vue'
 import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
 import { updateUser } from '@/api/user'
+import store from '@/store/index'
 export default {
   name: 'UserInfo',
   components: { UserMine, Field, Form },
   data() {
     return {
-      user: this.$store.state.user.profile,
+      user: store.state.user.profile,
       mySchema: {
         mobile: veeSchema.mobile
       }

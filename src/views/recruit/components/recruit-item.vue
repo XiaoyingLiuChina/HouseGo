@@ -1,63 +1,135 @@
 <template>
-  <div class="recruit-item" style="margin-top: 20px; margin-bottom: 20px" id="box">
-    <h4 style="margin-left: 10px; margin-top: 10px">招新详细信息</h4>
-    <div class="info">
-      <div style="word-wrap: break-word; margin-left: 15px" class="left">
+  <div class="recruit-item" v-if="flag">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><RouterLink to="/">首页</RouterLink></li>
+        <li class="breadcrumb-item"><RouterLink to="/recruit">招新信息</RouterLink></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ recruitMes.laboratory.name }}</li>
+      </ol>
+    </nav>
+    <div class="mainbox">
+      <div class="box">
         <h5>招新描述：</h5>
-        <h5 style="text-indent: 2em">{{ describe }}</h5>
+        <h5 style="text-indent: 2em" class="introduce">
+          {{ recruitMes.recruit.introduce }}cdigviviergvervvre7vger78vybreyvertre bt7re7yt787b yt78rty8r7y78ri但是哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+        </h5>
         <table class="table table-secondary table-striped" style="margin-top: 15px">
           <tbody>
-            <tr v-for="(item, index) in infolist" :key="index">
-              <td style="border-right: 1px solid #c0c0c0">{{ item.name }}</td>
-              <td>{{ item.value }}</td>
+            <tr>
+              <td style="border-right: 1px solid #c0c0c0">招新对象</td>
+              <td>{{ recruitMes.recruit.people }}</td>
+            </tr>
+            <tr>
+              <td style="border-right: 1px solid #c0c0c0">招新方向</td>
+              <td>{{ recruitMes.recruit.direction }}</td>
+            </tr>
+            <tr>
+              <td style="border-right: 1px solid #c0c0c0">截止时间</td>
+              <td>{{ recruitMes.recruit.endtime }}</td>
+            </tr>
+            <tr>
+              <td style="border-right: 1px solid #c0c0c0">预计招新人数</td>
+              <td>{{ recruitMes.recruit.recruitenumber }}</td>
+            </tr>
+            <tr>
+              <td style="border-right: 1px solid #c0c0c0">已申请人数</td>
+              <td>{{ recruitMes.recruit.applypeople }}</td>
+            </tr>
+            <tr>
+              <td style="border-right: 1px solid #c0c0c0">已通过人数</td>
+              <td>{{ recruitMes.recruit.passpeople }}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="right">
-        <img src="@/assets/images/ma.png" alt="实验室图片" />
+      <div class="labbox">
+        <img :src="recruitMes.laboratory.image" class="img-thumbnail" alt="..." />
+        <div class="info">
+          <p>规模：{{ recruitMes.laboratory.scale }}</p>
+          <p>地址：{{ recruitMes.laboratory.site }}</p>
+          <p>负责人：{{ user.name }}</p>
+          <p>联系方式：{{ user.telephone }}</p>
+        </div>
+        <div class="mybtn" v-if="user"><button class="btn btn-primary" v-if="user.type === '1'" @click="joinMyLab">申请加入该实验室</button></div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { studentDeliver } from '@/api/deliver'
+import { getRecruit } from '@/api/recruit'
 export default {
   name: 'RecruitItem',
   data() {
     return {
-      describe: '12311111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111113',
-      infolist: [
-        { name: '发布老师', value: '潘娅' },
-        { name: '招新对象', value: '大二、大三学生' },
-        { name: '招新方向', value: '软件测试' },
-        { name: '招新人数', value: '5' },
-        { name: '已申请人数', value: '8' },
-        { name: '已通过人数', value: '2' }
-      ]
+      recruitMes: {},
+      flag: false,
+      user: {}
+    }
+  },
+
+  mounted() {
+    this.getMessage()
+  },
+
+  methods: {
+    async getMessage() {
+      const data = await getRecruit(this.$route.params.id)
+      this.recruitMes = data[0]
+      const { name, telephone, type } = this.$store.state.user.profile
+      this.user = { name, telephone, type }
+      this.flag = true
+    },
+    async joinMyLab() {
+      const data = await studentDeliver(this.$route.params.id)
+      if (data === '投递成功') {
+        this.$message({ type: 'success', text: data })
+      } else {
+        this.$message({ type: 'warn', text: data })
+      }
     }
   }
 }
 </script>
 
 <style scoped lang="less">
-.info {
-  display: flex;
-  align-items: flex-start;
-  margin-top: 20px;
+nav {
+  margin: 10px 0;
+  font-size: 18px;
 }
-.left {
-  /* background: blue; */
-  width: 750px;
-}
-.right {
-  width: 400px;
-  margin-left: 30px;
-}
+
 td {
   text-align: center;
   line-height: 30px;
 }
-#box {
+.mainbox {
   background-color: @appColor;
+  display: flex;
+  .box {
+    padding: 15px 15px 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 50%;
+    max-width: 60%;
+  }
+  .labbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px 15px 15px 0;
+    img {
+      min-width: 100%;
+      max-height: 60%;
+    }
+    .info {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .mybtn {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
 }
 </style>

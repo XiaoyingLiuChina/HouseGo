@@ -10,8 +10,11 @@ import 'bootstrap/dist/js/bootstrap.min'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import ui from './components/library'
 import '@/assets/styles/common.less'
+import ElementUI from 'element-plus'
+import 'element-plus/theme-chalk/index.css'
 const app = createApp(App)
 app.use(store)
 app.use(router)
 app.use(ui)
+app.use(ElementUI)
 app.mount('#app')

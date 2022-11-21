@@ -62,8 +62,8 @@ export default {
   },
   mounted() {
     Object.assign(this.needUpdate, this.oneRecruit)
-    this.needUpdate[0].endtime = this.needUpdate[0].endtime.replace(' ', 'T')
-    this.needUpdate = this.needUpdate[0]
+    this.needUpdate[0].recruit.endtime = this.needUpdate[0].recruit.endtime.replace(' ', 'T')
+    this.needUpdate = this.needUpdate[0].recruit
   },
 
   methods: {

@@ -32,6 +32,8 @@ const Managelabtor = () => import('@/views/user/components/teacher/manage-labtor
 const Managelab = () => import('@/views/user/components/teacher/manage-lab.vue')
 const ManageIntroduce = () => import('@/views/user/components/student/manage-introduce.vue')
 
+const DeliverList = () => import('@/views/user/components/student/deliver-list.vue')
+
 const Register = () => import('@/views/register/index')
 
 const routes = [
@@ -52,8 +54,6 @@ const routes = [
           { path: ':id', component: RecruitItem }
         ]
       },
-      // { path: '/recruit/:id', component: RecruitItem },
-
       {
         path: '/labs',
         component: { render: () => h(<RouterView />) },
@@ -88,7 +88,8 @@ const routes = [
       { path: '/user/lab', component: Managelab },
       { path: '/user/introduce', component: ManageIntroduce },
       { path: '/user/recruit', component: PublishRecruit },
-      { path: '/user/recruitlist', component: RecruitList }
+      { path: '/user/recruitlist', component: RecruitList },
+      { path: '/user/deliver', component: DeliverList }
     ]
   }
 ]

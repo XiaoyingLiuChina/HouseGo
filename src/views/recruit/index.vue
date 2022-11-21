@@ -1,20 +1,19 @@
 <template>
   <div class="recruit row container">
     <div class="choice"><h4>已选标签：</h4></div>
-
     <recruitFilterVue />
     <div class="col-10 recruit-list">
-      <RouterLink v-for="i in 5" class="card mb-2" :key="i" :to="`/recruit/${i}`">
+      <RouterLink v-for="item in list" class="card mb-2" :key="item.id" :to="`/recruit/${item.recruit.id}`">
         <div class="card-body">
-          <h5 class="card-title">软件测试实验室</h5>
-          <p class="card-text mb-2">招新：对软件测试有兴趣</p>
+          <h5 class="card-title">{{ item.laboratory.name }}</h5>
+          <p class="card-text mb-2">{{ item.recruit.introduce }}</p>
           <div class="card-bottom mb-2 text-muted">
-            <div class="tag"><span v-for="item in 5" :key="item">软件测试</span></div>
-            <div class="time">发布日期：2022-12-02</div>
-            <div class="time">截止日期：2022-12-02</div>
+            <div class="tag">{{ item.recruit.direction }}</div>
+            <div class="time">发布日期：{{ item.recruit.starttime }}</div>
+            <div class="time">截止日期：{{ item.recruit.endtime }}</div>
           </div>
         </div>
-        <img src="@/assets/images/ma.png" />
+        <img :src="item.laboratory.image" />
       </RouterLink>
     </div>
     <recruitRightnavVue class="col-2"></recruitRightnavVue>
@@ -23,11 +22,23 @@
 <script>
 import recruitFilterVue from './components/recruit-filter.vue'
 import recruitRightnavVue from './components/recruit-rightnav.vue'
+import { getRecruit } from '@/api/recruit'
 export default {
   name: 'HomeRecruit',
   components: { recruitFilterVue, recruitRightnavVue },
   data() {
-    return {}
+    return {
+      list: ''
+    }
+  },
+  mounted() {
+    this.getList()
+  },
+  methods: {
+    async getList() {
+      const data = await getRecruit(-1)
+      this.list = data
+    }
   }
 }
 </script>

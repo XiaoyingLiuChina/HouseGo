@@ -1,7 +1,6 @@
 // 自动批量注册组件
 // require.context() 是webpack提供的一个自动导入的API，但是vite不能
 // 参数：1. 目录  2. 是否加载子目录  3. 加载的正则匹配
-import Message from './Message'
 const importFn = require.context('./', false, /\.vue$/)
 export default {
   install(app) {
@@ -12,9 +11,5 @@ export default {
       // 注册组件
       app.component(component.name, component)
     })
-
-    // // 定义指令
-    // defineDirective(app)
-    app.config.globalProperties.$message = Message
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="edit-box">
+  <div class="edit-box" v-if="resume">
     <div class="row">
       <div class="mb-3 col-6">
         <label for="volunteerone" class="form-label">第一志愿</label>
@@ -32,11 +32,11 @@ export default {
   name: 'EditBox',
   data() {
     return {
-      resume: this.$store.state.user.myResume
+      resume: this.$store.state.user.profile.resume
     }
   },
   mounted() {
-    if (!this.$store.state.user.myResume) {
+    if (!this.$store.state.user.profile.resume) {
       this.resume = {
         volunteerone: '',
         volunteertwo: '',
@@ -55,6 +55,7 @@ export default {
         const data = await addResume(this.resume)
         if (data === true) {
           this.$message({ type: 'success', text: '您已经成功添加了自己的简历！' })
+          this.$router.go({ path: '/user/introduce' })
         } else {
           this.$message({ type: 'error', text: '出错，添加未成功' })
         }
@@ -67,8 +68,8 @@ export default {
       } else {
         const data = await editResume(this.resume)
         if (data === true) {
-          this.$store.commit('user/setResume', data)
-          this.$message({ type: 'success', text: '修改成功' })
+          this.$message({ type: 'success', text: '修改成功！' })
+          this.$router.go({ path: '/user/introduce' })
         } else {
           this.$message({ type: 'error', text: '出错，修改未成功' })
         }

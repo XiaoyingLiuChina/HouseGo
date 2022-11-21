@@ -25,7 +25,7 @@ export default {
         {
           name: '投递管理',
           id: 'modules3',
-          children: [{ name: '查看投递', topath: '/user/share' }]
+          children: [{ name: '查看投递', topath: '/user/deliver' }]
         }
       ],
       //   老师

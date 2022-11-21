@@ -8,9 +8,9 @@
         <div class="show-box" v-if="myLab" v-show="!editbox" :key="myLab">
           <h4>实验室信息</h4>
           <div class="mb-3">实验室名称：{{ myLab.name }}</div>
-          <div class="mb-3">所属学院：{{ myLab.college }}</div>
+          <div class="mb-3">所属学院：{{ myCollege.name }}</div>
           <div class="mb-3">实验室地址：{{ myLab.site }}</div>
-          <div class="mb-3">实验室规模：{{ myLab.scale }}</div>
+          <div class="mb-3">实验室规模：{{ myLab.scale }}(人)</div>
           <div class="mb-3">实验室简介：{{ myLab.introduce }}</div>
           <div class="mb-3">
             实验室图片：
@@ -34,49 +34,36 @@
 </template>
 <script>
 import LabEdit from './lab-edit.vue'
-import { getLabByTeacher, deleteLab } from '@/api/labs'
-import { getCollege } from '@/api/user'
+import { deleteLab, getLabByTeacher } from '@/api/labs'
+
 export default {
   name: 'ManageLab',
   components: { LabEdit },
   data() {
     return {
-      myLab: null,
+      myLab: this.$store.state.user.profile.lab,
+      myCollege: this.$store.state.user.profile.college,
       editbox: false
     }
   },
   mounted() {
-    this.getMyLab()
+    this.updateData()
   },
   methods: {
-    async getMyLab() {
-      let data = null
-      try {
-        data = await getLabByTeacher(this.$store.state.user.profile.id)
-        this.myLab = data
-        this.$store.commit('user/setLab', data)
-      } catch (error) {
-        // this.$message({ type: 'error', text: '删除实验室失败' })
-      }
-      let college = ''
-      college = await getCollege(data.collegeid)
-      // // 取出学院名称
-      const { name } = college[0]
-      // // 不能直接用name会覆盖用户的name
-      college = name
-      Object.assign(data, { college })
-      // 再次更新
-      this.$store.commit('user/setLab', data)
-    },
     async deleteLab() {
       try {
-        const data = await deleteLab(this.$store.state.user.myLab.id)
+        const data = await deleteLab(this.$store.state.user.profile.laboratoryid)
         if (data === true) {
           this.$message({ type: 'success', text: '删除实验室成功' })
         }
       } catch (error) {
         this.$message({ type: 'error', text: '删除实验室失败' })
       }
+    },
+    async updateData() {
+      const lab = await getLabByTeacher(this.$store.state.user.profile.id)
+      this.$store.commit('user/setUser', { lab })
+      this.myLab = lab
     }
   }
 }
