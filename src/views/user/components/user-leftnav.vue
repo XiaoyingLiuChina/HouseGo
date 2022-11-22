@@ -67,10 +67,14 @@ export default {
   methods: {
     getPowerList() {
       // 向后端请求权限数据
-      if (this.$store.state.user.profile.type === '0') {
+      // 老师
+      const user = this.$store.state.user.profile
+      if (user.type === '0') {
         this.powerlist = this.$store.state.nav.powerlist0
-      } else {
+      } else if (user.type === '1' && user.typel === 1) {
         this.powerlist = this.$store.state.nav.powerlist1
+      } else {
+        this.powerlist = this.$store.state.nav.powerlist2
       }
     }
   }

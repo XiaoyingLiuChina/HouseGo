@@ -77,19 +77,44 @@ export default {
     async getList() {
       const data = await getDeliverByTeacher()
       this.list = data
-      console.log(data)
     },
     async refuseMyDeliver(id) {
-      const data = await refuseDeliver(id)
-      if (data === 2) {
-        this.$message({ type: 'success', text: '拒绝成功' })
-      }
+      this.$confirm('确认拒绝该学生加入实验室？', '温馨提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const data = await refuseDeliver(id)
+          if (data === 2) {
+            this.$message({ type: 'success', message: '拒绝成功' })
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          // 捕获异常
+        })
     },
     async agreeMyDeliver(id) {
-      const data = await agreeDeliver(id)
-      if (data === 3) {
-        this.$message({ type: 'success', text: '同意成功，等待学生确认' })
-      }
+      this.$confirm('确认同意该学生加入实验室？', '温馨提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const data = await agreeDeliver(id)
+          if (data === 3) {
+            this.$message({ type: 'success', messge: '同意成功，等待学生确认' })
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          // 捕获异常
+        })
     },
     filterState(value) {
       let res = ''

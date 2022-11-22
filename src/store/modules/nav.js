@@ -28,6 +28,23 @@ export default {
           children: [{ name: '查看投递', topath: '/user/deliver' }]
         }
       ],
+      //   学生
+      powerlist2: [
+        {
+          name: '我的账户',
+          id: 'modules1',
+          children: [
+            { name: '个人中心', topath: '/user' },
+            { name: '修改头像', topath: '/user/avatar' },
+            { name: '我的简历', topath: '/user/introduce' }
+          ]
+        },
+        {
+          name: '投递管理',
+          id: 'modules3',
+          children: [{ name: '查看投递', topath: '/user/deliver' }]
+        }
+      ],
       //   老师
       powerlist0: [
         {

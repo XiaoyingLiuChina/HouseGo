@@ -45,20 +45,30 @@ export default {
   },
   methods: {
     async updateTelephone(values) {
-      console.log('发起修改密码请求')
-
-      const telephone = values.mobile
-      const data = await updateUser({ telephone })
-      if (data === true) {
-        this.$message({ type: 'success', text: '修改成功' })
-      }
+      this.$confirm('确认修改联系方式？', '温馨提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const telephone = values.mobile
+          const data = await updateUser({ telephone })
+          if (data === true) {
+            this.$message({ type: 'success', message: '修改联系方式成功' })
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          this.$message({ type: 'error', message: '修改失败' })
+        })
     }
   }
 }
 </script>
 <style lang="less" scoped>
 .user-info {
-  margin-top: 10px;
   .list-group-item {
     &:last-child {
       display: flex;

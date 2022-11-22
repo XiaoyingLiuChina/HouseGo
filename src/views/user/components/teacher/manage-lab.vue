@@ -51,14 +51,23 @@ export default {
   },
   methods: {
     async deleteLab() {
-      try {
-        const data = await deleteLab(this.$store.state.user.profile.laboratoryid)
-        if (data === true) {
-          this.$message({ type: 'success', text: '删除实验室成功' })
-        }
-      } catch (error) {
-        this.$message({ type: 'error', text: '删除实验室失败' })
-      }
+      this.$confirm('确认删除该实验室？', '温馨提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const data = await deleteLab(this.$store.state.user.profile.laboratoryid)
+          if (data === true) {
+            this.$message({ type: 'success', message: '删除实验室成功' })
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          this.$message({ type: 'error', message: '删除实验室失败' })
+        })
     },
     async updateData() {
       const lab = await getLabByTeacher(this.$store.state.user.profile.id)

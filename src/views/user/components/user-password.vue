@@ -54,17 +54,29 @@ export default {
   },
   methods: {
     async updatePw(values) {
-      const password = values.rePassword
-      const data = await updateUser({ password })
-      if (data === true) {
-        this.$store.commit('user/updatePassword', password)
-        // 重置表单
-        const reset = document.getElementById('btn-reset')
-        reset.click()
-        this.$message({ type: 'success', text: '修改密码成功' })
-      } else {
-        this.$message({ type: 'error', text: '修改密码失败' })
-      }
+      this.$confirm('确认修改密码？', '提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const password = values.rePassword
+          const data = await updateUser({ password })
+          if (data === true) {
+            this.$store.commit('user/updatePassword', password)
+            // 重置表单
+            const reset = document.getElementById('btn-reset')
+            reset.click()
+            this.$message({ type: 'success', message: '修改密码成功' })
+          } else {
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          this.$message({ type: 'error', message: '修改密码失败' })
+        })
     }
   }
 }

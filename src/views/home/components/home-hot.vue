@@ -1,15 +1,15 @@
 <template>
   <div class="home-hot">
-    <HomePanel title="热门实验室" subTitle="加入实验室 动力满满">
+    <HomePanel title="最新实验室" subTitle="加入实验室 动力满满">
       <template #right><AppMore path="/labs" /></template>
-      <ul v-if="true" class="labs-list row row-cols-1 row-cols-md-3 row-cols-xl-4">
-        <li v-for="item in 4" :key="item" class="col">
+      <ul v-if="hotlist.length >= 4" class="labs-list row row-cols-1 row-cols-md-3 row-cols-xl-4">
+        <li v-for="item in hotlist" :key="item.id" class="col">
           <div class="card" style="width: 100%">
-            <img src="@/assets/images/ma.png" class="card-img-top" alt="..." />
+            <img :src="item.image" class="card-img-top" alt="实验室图片" />
             <div class="card-body">
-              <h5 class="card-title">软件测试实验室</h5>
-              <p class="card-text">软件测试实验室建立于2020年，现有20人，由潘娅老师带领</p>
-              <RouterLink :to="`/labs/${item}`" class="btn btn-primary">查看详情</RouterLink>
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text">{{ item.introduce }}</p>
+              <RouterLink :to="`/labs/${item}`" class="btn btn-primary mybtn">查看详情</RouterLink>
             </div>
           </div>
         </li>
@@ -20,9 +20,24 @@
 <script>
 import HomePanel from './home-panel.vue'
 import AppMore from '@/components/library/app-more.vue'
+import { getLab } from '@/api/labs'
 export default {
   name: 'HomeHot',
-  components: { HomePanel, AppMore }
+  components: { HomePanel, AppMore },
+  data() {
+    return {
+      hotlist: []
+    }
+  },
+  mounted() {
+    this.getHotList()
+  },
+  methods: {
+    async getHotList() {
+      const data = await getLab(-1)
+      this.hotlist = data.slice(-4)
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -34,8 +49,15 @@ export default {
     li {
       .card {
         .hoverShadow ();
+        img {
+          min-height: 180px;
+        }
         .card-body {
           width: 100%;
+          min-height: 170px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
           p {
             width: 100%;
             line-height: 24px;
@@ -48,7 +70,7 @@ export default {
             text-overflow: ellipsis; /*显示省略号来代表被修剪的文本*/
           }
           .btn {
-            margin-top: 10px;
+            max-width: 80px;
           }
         }
       }

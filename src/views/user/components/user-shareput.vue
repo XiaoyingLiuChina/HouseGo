@@ -25,7 +25,7 @@
         <div class="input-group mb-3">
           <UserShareImg @update-imgs="getShareImages" />
         </div>
-        <button class="btn btn-primary" @click="putShare">发表分享</button>
+        <button class="btn btn-primary" @click="putMyShare">发表分享</button>
       </div>
     </div>
   </div>
@@ -33,6 +33,7 @@
 <script>
 import UserShareImg from './user-shareimg.vue'
 import Emotion from './Emotion'
+import { putShare } from '@/api/share'
 export default {
   name: 'UserShareform',
   components: { UserShareImg, Emotion },
@@ -41,7 +42,7 @@ export default {
       shareItem: {
         title: '',
         content: '',
-        imglist: []
+        image: []
       },
       emotionDialog: false
     }
@@ -49,18 +50,43 @@ export default {
   computed: {},
   methods: {
     getShareImages(imgs) {
-      this.shareItem.imglist = imgs
+      this.shareItem.image = imgs
     },
-    putShare() {
-      console.log(this.shareItem)
-      // 可以发布到后端了
+    async putMyShare() {
+      this.$confirm('确认发布当前内容？', '提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const data = await putShare(this.shareItem)
+          if (data === true) {
+            // this.getList()
+            this.$message({
+              type: 'success',
+              message: '发布成功!'
+            })
+            // 重置表单
+            this.shareItem = {
+              title: '',
+              content: '',
+              image: []
+            }
+            this.$router.push({ path: '/user/share' })
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          // 捕获异常
+        })
     },
     handleEmotion(emo) {
       this.shareItem.content += emo
     },
     // 将匹配结果替换表情图片
     emotion(res) {
-      console.log(res)
       const word = res.replace(/#|;/gi, '')
       const list = [
         '微笑',
@@ -170,8 +196,6 @@ export default {
         '右太极'
       ]
       const index = list.indexOf(word)
-      // https://face.t.sinajs.cn/t4/appstyle/expression/ext/normal/28/2018new_han_org
-      // https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif
       return `<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif" align="middle">`
     }
   }
@@ -180,7 +204,6 @@ export default {
 <style lang="less" scoped>
 .user-share-form {
   margin-top: 10px;
-
   .content-area {
     height: 200px;
   }
@@ -194,6 +217,7 @@ export default {
 
   .input-group {
     width: 60%;
+    max-width: 500px;
   }
   .textarea-emo {
     display: flex;

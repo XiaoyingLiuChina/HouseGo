@@ -31,26 +31,7 @@
         </div>
       </div>
       <div class="row last-row" style="height: 30px">
-        <div class="forget col"><span @click="forgetClick = !forgetClick">忘记密码？</span></div>
-        <div v-if="forgetClick" class="dialog-forget">
-          <!-- <div class="modal dialog-forget" tabindex="-1" v-if="forgetClick"> -->
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">重置密码</h5>
-                <button type="button" class="btn-close" aria-label="Close" @click="forgetClick = !forgetClick"></button>
-              </div>
-              <div class="modal-body">
-                <p>是否重置密码？重置后密码为：</p>
-                <p>000000</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" @click="forgetClick = !forgetClick">取消</button>
-                <button type="button" class="btn btn-primary btn-sm" @click="ResetPassword">确认重置</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="forget col"><span @click="ResetPassword">忘记密码？</span></div>
         <div class="gree col-9">
           <div class="errorShow" v-if="errors.isAgree">
             <i class="bi bi-exclamation-triangle" />
@@ -83,8 +64,7 @@ export default {
         password: veeSchema.password,
         type: veeSchema.type,
         isAgree: veeSchema.isAgree
-      },
-      forgetClick: false
+      }
     }
   },
   methods: {
@@ -101,16 +81,16 @@ export default {
             // 进行跳转
             this.$router.push({ path: '/user' })
             // 成功消息提示
-            this.$message({ type: 'success', text: '登录成功！' })
+            this.$message({ type: 'success', message: '登录成功！' })
           } else if (data === '不存在该账号') {
             if (values.type === '1') {
-              this.$message({ type: 'warn', text: '不存在该账号的学生' })
-            } else this.$message({ type: 'warn', text: '不存在该账号的老师' })
+              this.$message({ type: 'warning', message: '不存在该账号的学生' })
+            } else this.$message({ type: 'warning', message: '不存在该账号的老师' })
           } else {
-            this.$message({ type: 'warn', text: '密码错误！请重新输入密码' })
+            this.$message({ type: 'warning', message: '密码错误！请重新输入密码' })
           }
         } catch (error) {
-          this.$message({ type: 'warn', text: '发生错误，登录失败！请重试' })
+          this.$message({ type: 'warning', message: '发生错误，登录失败！请重试' })
         }
       }
     },
@@ -125,14 +105,13 @@ export default {
           console.log(password)
           const data = await updateUser(password)
           if (data === true) {
-            this.$message({ type: 'success', text: '重置密码成功' })
+            this.$message({ type: 'success', message: '重置密码成功' })
           }
-          this.forgetClick = !this.forgetClick
         } catch (error) {
-          this.$message({ type: 'warn', text: '重置密码出错，请重试' })
+          this.$message({ type: 'warning', message: '重置密码出错，请重试' })
         }
       } else {
-        this.$message({ type: 'warn', text: '请检查学号是否正确' })
+        this.$message({ type: 'warning', message: '请检查学号是否正确' })
       }
     }
   }
@@ -163,18 +142,6 @@ export default {
       height: 80px;
       margin: 15px 20px;
 
-      .dialog-forget {
-        position: absolute;
-        width: 60%;
-        height: 30%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        background-color: rgb(196, 193, 193);
-      }
       .form-control {
         line-height: 2;
         padding: 0px 8px;

@@ -1,11 +1,11 @@
 <template>
-  <div class="deliver-list card">
+  <div class="deliver-list">
     <div class="card">
       <div class="card-header">
         <h3>投递列表</h3>
       </div>
       <div class="card-body" style="overflow: scroll; width: 960px">
-        <table class="table table-hover table-bordered" v-if="list" :key="list">
+        <table class="table table-hover table-bordered" v-if="list.length > 0" :key="list">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -43,10 +43,11 @@
             </tr>
           </tbody>
         </table>
+        <div v-else>
+          <p>还没有投递任何实验室，快去寻找感兴趣的实验室吧</p>
+        </div>
       </div>
     </div>
-
-    <!-- <AppDialog /> -->
   </div>
 </template>
 
@@ -95,7 +96,7 @@ export default {
       return res
     },
     async backMyDeliver(id) {
-      this.$confirm('是否确认该操作', '提示', {
+      this.$confirm('是否撤销投递？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -123,22 +124,61 @@ export default {
         })
     },
     async deleteMyDeliver(id) {
-      const data = await deleteDeliver(id)
-      if (data === '删除成功') {
-        this.$message({ type: 'success', message: '删除成功！' })
-      }
+      this.$confirm('删除该条投递记录？', '温馨提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const data = await deleteDeliver(id)
+          if (data === '删除成功') {
+            this.$message({ type: 'success', message: '删除成功！' })
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          // 捕获异常
+        })
     },
     async refuseMyDeliver(id) {
-      const data = await refuseDeliver(id)
-      if (data === 4) {
-        this.$message({ type: 'success', message: '拒绝成功' })
-      }
+      this.$confirm('放弃加入该实验室？', '温馨提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const data = await refuseDeliver(id)
+          if (data === 4) {
+            this.$message({ type: 'success', message: '拒绝成功' })
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          // 捕获异常
+        })
     },
     async agreeMyDeliver(id) {
-      const data = await agreeDeliver(id)
-      if (data === 5) {
-        this.$message({ type: 'success', message: '恭喜你成功加入该实验室' })
-      }
+      this.$confirm('确认加入该实验室？', '温馨提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const data = await agreeDeliver(id)
+          if (data === 5) {
+            this.$message({ type: 'success', message: '恭喜你成功加入该实验室，重新登录就可以发布分享了' })
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          // 捕获异常
+        })
     }
   }
 }

@@ -107,7 +107,7 @@ export default {
       const data = await updateUser({ image })
       if (data === true) {
         this.$store.commit('user/updateAvatar', image)
-        this.$message({ type: 'success', text: '修改头像成功' })
+        this.$message({ type: 'success', message: '修改头像成功' })
         // 进行跳转
         this.$router.push({ path: '/user' })
       }

@@ -83,9 +83,9 @@ export default {
     async joinMyLab() {
       const data = await studentDeliver(this.$route.params.id)
       if (data === '投递成功') {
-        this.$message({ type: 'success', text: data })
+        this.$message({ type: 'success', message: data })
       } else {
-        this.$message({ type: 'warn', text: data })
+        this.$message({ type: 'warning', message: data })
       }
     }
   }
