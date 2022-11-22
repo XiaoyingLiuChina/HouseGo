@@ -61,26 +61,43 @@ export default {
   },
   methods: {
     async editMyLab() {
-      console.log(this.editMessage)
-      try {
-        const data = await editLab(this.editMessage)
-        if (data === true) {
-          this.$message({ type: 'success', text: '修改实验室简介成功' })
-          this.$router.go({ path: '/user/lab' })
-        }
-      } catch (error) {
-        this.$message({ type: 'error', text: '修改失败' })
-      }
+      this.$confirm('确认修改实验室简介？', '温馨提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const data = await editLab(this.editMessage)
+          if (data === true) {
+            this.$message({ type: 'success', text: '修改实验室简介成功' })
+            this.$router.go({ path: '/user/lab' })
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          this.$message({ type: 'error', text: '修改失败' })
+        })
     },
     async addMyLab() {
-      try {
-        const data = await addLab(this.editMessage)
-        if (data === true) {
-          this.$message({ type: 'success', text: '添加实验室成功' })
-        }
-      } catch (error) {
-        this.$message({ type: 'error', text: '添加失败' })
-      }
+      this.$confirm('确认修改实验室简介？', '温馨提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const data = await addLab(this.editMessage)
+          if (data === true) {
+            this.$message({ type: 'success', text: '创建实验室成功' })
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          this.$message({ type: 'error', text: '创建失败' })
+        })
     },
     getFile() {
       const file = document.getElementById('input-avatar')

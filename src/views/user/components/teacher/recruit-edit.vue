@@ -38,7 +38,7 @@
         </div>
       </div>
       <button class="btn btn-primary" @click="closeEvent">取消</button>
-      <button class="btn btn-primary" type="submit">确认更新</button>
+      <button class="btn btn-primary" type="submit" @click="editMyRecruit">确认更新</button>
     </form>
 
     <div class="close"><button type="button" class="btn-close" aria-label="Close" @click="closeEvent"></button></div>
@@ -68,20 +68,29 @@ export default {
 
   methods: {
     async editMyRecruit() {
-      try {
-        const endtime = this.needUpdate.endtime.replace('T', ' ')
-        const putRecruit = {}
-        Object.assign(putRecruit, this.needUpdate, { endtime })
-        const data = await editRecruit(putRecruit)
-        console.log(data === true)
-        if (data === true) {
-          this.$message({ type: 'success', text: '更新成功' })
-          this.closeEvent()
-          this.$emit('updateList')
-        }
-      } catch (error) {
-        this.$message({ type: 'error', text: '更新失败' })
-      }
+      this.$confirm('确认更新招新信息？', '温馨提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const endtime = this.needUpdate.endtime.replace('T', ' ')
+          const putRecruit = {}
+          Object.assign(putRecruit, this.needUpdate, { endtime })
+          const data = await editRecruit(putRecruit)
+          console.log(data === true)
+          if (data === true) {
+            this.$message({ type: 'success', message: '更新成功' })
+            this.closeEvent()
+            this.$emit('updateList')
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          this.$message({ type: 'error', message: '更新失败' })
+        })
     },
     closeEvent() {
       this.$emit('updateDialog')
@@ -95,7 +104,7 @@ export default {
       const nowTime = new Date()
       // 小于当前时间，不符合
       if (putDate < nowTime) {
-        this.$message({ type: 'warn', text: '请选择合适的截止日期！' })
+        this.$message({ type: 'warn', message: '请选择合适的截止日期！' })
         this.needUpdate.endtime = ''
       } else {
         // 设置成功

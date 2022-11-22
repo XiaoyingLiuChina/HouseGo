@@ -67,11 +67,24 @@ export default {
       this.list = data
     },
     async deleteMyRecruit(id) {
-      const data = await deleteRecruit(id)
-      if (data === true) {
-        this.$message({ type: 'success', text: '删除成功' })
-        this.getList()
-      }
+      this.$confirm('确认删除该招新信息？', '温馨提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const data = await deleteRecruit(id)
+          if (data === true) {
+            this.$message({ type: 'success', message: '删除成功' })
+            this.getList()
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          this.$message({ type: 'error', message: '删除失败' })
+        })
     },
     async showRecruit(id) {
       const data = await getRecruit(id)
