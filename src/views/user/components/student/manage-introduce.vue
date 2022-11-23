@@ -23,7 +23,7 @@
         </div>
         <div v-show="editbox">
           <EditBox :key="myResume" />
-          <button class="btn btn-primary" @click="editbox = false">返回</button>
+          <button class="btn btn-primary" @click="backResume">返回</button>
         </div>
       </div>
     </div>
@@ -51,6 +51,10 @@ export default {
       const resume = await getResume(this.$store.state.user.profile.id)
       this.$store.commit('user/setUser', { resume })
       this.myResume = resume
+    },
+    backResume() {
+      this.editbox = false
+      this.getMyResume()
     }
     // async deleteMyResume() {
 

@@ -6,13 +6,14 @@
       </div>
       <div class="card-body">
         <div class="card-title">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="人员关键词" />
-            <button class="btn btn-primary" type="button" id="button-addon2">搜索</button>
+          <div class="input-group mb-3 searchbtn">
+            <input type="text" class="form-control" placeholder="人员学号或姓名" v-model="search" />
+            <button class="btn btn-primary" type="button" id="button-addon2" @click="searchPerson">搜索</button>
           </div>
+          <button class="btn btn-primary" type="button" id="button-addon2" @click="searchlist = list">全部</button>
         </div>
         <div style="overflow: scroll; width: 960px">
-          <table class="table table-hover table-bordered text-nowrap" v-if="list">
+          <table class="table table-hover table-bordered text-nowrap" v-if="searchlist" :key="searchlist">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -32,7 +33,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in list" :key="item">
+              <tr v-for="(item, index) in searchlist" :key="item">
                 <th scope="row">{{ index }}</th>
                 <td v-if="item.recruit">{{ item.recruit.direction }}</td>
                 <td v-if="item.recruit">{{ item.recruit.people }}</td>
@@ -99,9 +100,11 @@ export default {
   name: 'ManageLabtor',
   data() {
     return {
-      list: {},
+      list: [],
       lookMes: {},
-      dialogTableVisible: false
+      dialogTableVisible: false,
+      search: '',
+      searchlist: []
     }
   },
   mounted() {
@@ -111,6 +114,13 @@ export default {
     async getList() {
       const data = await getDeliverByTeacher()
       this.list = data
+      this.searchlist = data
+    },
+    searchPerson() {
+      const data = this.list.filter((item) => {
+        return item.student.id === this.search.trim() || item.student.name === this.search.trim()
+      })
+      this.searchlist = data
     },
     async lookStudent(item) {
       this.lookMes = item
@@ -208,7 +218,14 @@ button {
   margin-right: 5px;
 }
 .card-title {
-  width: 40%;
+  .searchbtn {
+    width: 80%;
+  }
+  > button {
+    height: 70%;
+  }
+  width: 50%;
+  display: flex;
 }
 input {
   display: block;

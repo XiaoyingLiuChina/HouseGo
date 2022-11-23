@@ -15,7 +15,14 @@
     <div class="row mb-2">
       <div class="input-group">
         <span class="input-group-text">实验室规模</span>
-        <input type="text" class="form-control" id="scale" name="scale" v-model="editMessage.scale" />
+        <!-- <input type="text" class="form-control" id="scale" name="scale" v-model="editMessage.scale" /> -->
+        <select class="form-select" id="inputGroupSelect01" v-model="editMessage.scale">
+          <option value=""></option>
+          <option value="0~20">0~20</option>
+          <option value="20~40">20~40</option>
+          <option value="40~60">40~60</option>
+          <option value="60+">60+</option>
+        </select>
       </div>
     </div>
     <div class="row mb-2">

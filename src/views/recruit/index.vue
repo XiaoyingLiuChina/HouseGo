@@ -1,7 +1,7 @@
 <template>
   <div class="recruit row container">
     <div class="choice"><h4>已选标签：</h4></div>
-    <recruitFilterVue />
+    <recruitFilterVue :list="mylist" :key="mylist" @updatelist="filterList" />
     <div ref="target" class="col-10 recruit-list">
       <RouterLink v-for="item in list" class="card mb-2" :key="item.id" :to="`/recruit/${item.recruit.id}`">
         <div class="card-body">
@@ -20,6 +20,7 @@
         </div>
       </RouterLink>
     </div>
+    <div v-if="list.length <= 0" class="col-10 recruit-list nolist">没有搜索到相关招新信息!</div>
     <recruitRightnavVue class="col-2"></recruitRightnavVue>
   </div>
 </template>
@@ -33,22 +34,25 @@ export default {
   components: { recruitFilterVue, recruitRightnavVue },
   data() {
     return {
-      // list: ''
+      mylist: ''
     }
   },
   setup() {
     const { target, result } = useLazyData(getRecruit)
     return { list: result, target }
+  },
+  mounted() {
+    this.getList()
+  },
+  methods: {
+    async getList() {
+      const data = await getRecruit(-1)
+      this.mylist = data.reverse()
+    },
+    filterList(newlist) {
+      this.list = newlist
+    }
   }
-  // mounted() {
-  //   this.getList()
-  // },
-  // methods: {
-  //   async getList() {
-  //     const data = await getRecruit(-1)
-  //     this.list = data
-  //   }
-  // }
 }
 </script>
 <style lang="less" scoped>
@@ -100,6 +104,11 @@ export default {
   }
   .recruit-list {
     margin-top: 10px;
+  }
+  .nolist {
+    text-align: center;
+    color: gray;
+    font-size: 28px;
   }
 }
 </style>

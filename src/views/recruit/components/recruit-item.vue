@@ -51,7 +51,7 @@
           <p>职称：{{ user.professionalTitle }}</p>
           <p>联系方式：{{ user.telephone }}</p>
         </div>
-        <div class="mybtn" v-if="user"><button class="btn btn-primary" v-if="user.type === '1'" @click="joinMyLab">申请加入该实验室</button></div>
+        <div class="mybtn" v-if="myuser"><button class="btn btn-primary" v-if="myuser.type === '1'" @click="joinMyLab">申请加入该实验室</button></div>
       </div>
     </div>
   </div>
@@ -67,19 +67,20 @@ export default {
     return {
       recruitMes: {},
       flag: false,
-      user: {}
+      user: {},
+      myuser: {}
     }
   },
 
   mounted() {
     this.getMessage()
+    this.myuser = this.$store.state.user.profile
   },
 
   methods: {
     async getMessage() {
       const data = await getRecruit(this.$route.params.id)
       this.recruitMes = data[0]
-      console.log(data[0].recruit.teacherid)
       const datauser = await getTeacher(data[0].recruit.teacherid)
       const { name, telephone, professionalTitle } = datauser
       this.user = { name, telephone, professionalTitle }
@@ -87,7 +88,7 @@ export default {
     },
     async joinMyLab() {
       const flag = this.$store.state.user.profile
-      if (flag.resume != null) {
+      if (flag.resume === null) {
         ElMessage({ type: 'warning', message: '你还没有添加简历哦，先去添加简历吧' })
       } else {
         ElMessageBox.confirm('确认投递该实验室？', '温馨提示', {

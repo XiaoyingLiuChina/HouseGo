@@ -14,7 +14,7 @@
           <div class="mb-3">实验室简介：{{ myLab.introduce }}</div>
           <div class="mb-3">
             实验室图片：
-            <div><img :src="myLab.image" alt="..." /></div>
+            <div><img :src="myLab.image" alt="实验室图片" /></div>
           </div>
 
           <button class="btn btn-primary" @click="deleteLab">删除实验室</button>
@@ -26,7 +26,7 @@
         </div>
         <div class="editbox" v-show="editbox">
           <LabEdit :key="myLab" />
-          <button class="btn btn-primary" @click="editbox = false">返回</button>
+          <button class="btn btn-primary" @click="backLab">返回</button>
         </div>
       </div>
     </div>
@@ -73,6 +73,10 @@ export default {
       const lab = await getLabByTeacher(this.$store.state.user.profile.id)
       this.$store.commit('user/setUser', { lab })
       this.myLab = lab
+    },
+    backLab() {
+      this.editbox = false
+      this.updateData()
     }
   }
 }
