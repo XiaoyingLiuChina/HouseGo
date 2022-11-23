@@ -2,7 +2,7 @@
   <div class="latest-share">
     <HomePanel title="最热分享" subTitle="相互学习 天天进步一点点">
       <template #right><AppMore path="/share" /></template>
-      <ul v-if="list.length >= 4" class="labs-list row row-cols-1 row-cols-md-3 row-cols-xl-4">
+      <ul v-if="list.length > 0" class="labs-list row row-cols-1 row-cols-md-3 row-cols-xl-4">
         <li v-for="item in list" :key="item.share.id" class="col">
           <div class="card" style="width: 100%">
             <img :src="item.image[0]" class="card-img-top" alt="分享图片" />
@@ -11,7 +11,7 @@
               <p class="card-text" v-html="item.share.content.replace(/#[\u4E00-\u9FA5]{1,3}\;/gi, emotion)"></p>
               <!-- // 进入实验室的第一天，潘娅老师带着我们了解软件测试，给我们叙述了软件测试的发展前景，每个人都很有冲劲儿，希望老师不是给我们画大饼 -->
               <div class="btn-nice">
-                <RouterLink :to="`/share/${item}`" class="btn btn-primary">查看详情</RouterLink>
+                <RouterLink :to="`/share/${item.share.id}`" class="btn btn-primary">查看详情</RouterLink>
                 <span>赞数：{{ item.share.like }}</span>
               </div>
             </div>

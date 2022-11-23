@@ -20,6 +20,14 @@ export const getRecruit = (id) => {
   return request('recruit', 'get', { id })
 }
 /**
+ * 实验室获取招新信息列表
+ * @param
+ */
+
+export const getRecruitList = (laboratoryid) => {
+  return request('/recruit/bylaboratory', 'get', { laboratoryid })
+}
+/**
  * 根据老师获取招新信息列表
  * @param
  */

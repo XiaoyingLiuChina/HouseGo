@@ -18,7 +18,9 @@
               </span>
             </div>
           </div>
-          <small class="text-muted">{{ item.laboratory.name }}</small>
+          <RouterLink :to="`/labs/${item.laboratory.id}`">
+            <small class="text-muted lab">{{ item.laboratory.name }}</small>
+          </RouterLink>
         </div>
         <div class="card-body">
           <h5 class="card-title">{{ item.share.title }}</h5>
@@ -43,6 +45,7 @@
 <script>
 import { getShare, hitLikeShare } from '@/api/share'
 import { useLazyData } from '@/hooks'
+import { ElMessage } from 'element-plus'
 export default {
   name: 'ShareModules',
   data() {
@@ -59,13 +62,17 @@ export default {
   },
   methods: {
     async hitLike(id) {
-      const data = await hitLikeShare(id)
-      if (data === true) {
-        const newList = await getShare(-1)
-        this.hetop = document.documentElement.scrollTop
-        newList.reverse()
-        this.list = newList
-        this.$message({ type: 'success', message: '点赞成功' })
+      if (this.$store.state.user.profile.id === '') {
+        ElMessage({ type: 'warning', message: '请先登录' })
+      } else {
+        const data = await hitLikeShare(id)
+        if (data === true) {
+          const newList = await getShare(-1)
+          this.hetop = document.documentElement.scrollTop
+          newList.reverse()
+          this.list = newList
+          ElMessage({ type: 'success', message: '点赞成功' })
+        }
       }
     },
     // 将匹配结果替换表情图片
@@ -194,6 +201,13 @@ export default {
     padding: 12px;
     .card {
       margin: 5px;
+      .lab {
+        transition: all 0.5s;
+        &:hover {
+          color: @hoverColor;
+          font-size: 20px;
+        }
+      }
       .hoverShadow();
       .card-header {
         display: flex;

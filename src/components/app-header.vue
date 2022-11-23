@@ -28,7 +28,7 @@
           </ul>
           <slot />
           <Form class="d-flex" role="search" @submit="searchLabs" autocomplete="off">
-            <Field class="form-control me-2" type="search" placeholder="搜索感兴趣的实验室" aria-label="Search" id="kw" name="kw" />
+            <Field class="form-control me-2" type="search" placeholder="搜索感兴趣的实验室" aria-label="Search" id="search" name="search" v-model="search" />
             <button class="btn btn-outline-success" type="submit">Search</button>
           </Form>
         </div>
@@ -39,15 +39,20 @@
 
 <script>
 import { Form, Field } from 'vee-validate'
+import { getLabList } from '@/api/labs'
 export default {
   name: 'AppHeader',
   components: { Form, Field },
+  data() {
+    return {
+      search: ''
+    }
+  },
   methods: {
-    searchLabs(values) {
-      console.log(this.$route)
-      console.log(values)
-      this.$router.push(`/search/kw=${values.kw}`)
-      // 这里就可以向后端请求查找到的数据列表，渲染在页面上
+    async searchLabs(values) {
+      const data = await getLabList(values)
+      this.$store.dispatch('lab/updateSearchList', data)
+      this.$router.push(`/search/kw=${values.search}`)
     }
   }
 }

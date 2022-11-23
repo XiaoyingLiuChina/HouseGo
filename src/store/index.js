@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import createPersistedstate from 'vuex-persistedstate'
 import user from './modules/user'
 import nav from './modules/nav'
+import lab from './modules/lab'
 // 创建vuex仓库并导出
 export default createStore({
   state: {
@@ -16,7 +17,8 @@ export default createStore({
   modules: {
     // 分模块
     user,
-    nav
+    nav,
+    lab
   },
   getters: {
     // vuex的计算属性
@@ -24,7 +26,7 @@ export default createStore({
   plugins: [
     createPersistedstate({
       key: 'housego',
-      paths: ['user']
+      paths: ['user', 'lab']
     })
   ]
 })

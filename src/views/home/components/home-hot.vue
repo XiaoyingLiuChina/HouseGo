@@ -2,14 +2,14 @@
   <div class="home-hot">
     <HomePanel title="最新实验室" subTitle="加入实验室 动力满满">
       <template #right><AppMore path="/labs" /></template>
-      <ul v-if="hotlist.length >= 4" class="labs-list row row-cols-1 row-cols-md-3 row-cols-xl-4">
+      <ul v-if="hotlist.length > 0" class="labs-list row row-cols-1 row-cols-md-3 row-cols-xl-4">
         <li v-for="item in hotlist" :key="item.id" class="col">
           <div class="card" style="width: 100%">
             <img :src="item.image" class="card-img-top" alt="实验室图片" />
             <div class="card-body">
               <h5 class="card-title">{{ item.name }}</h5>
               <p class="card-text">{{ item.introduce }}</p>
-              <RouterLink :to="`/labs/${item}`" class="btn btn-primary mybtn">查看详情</RouterLink>
+              <RouterLink :to="`/labs/${item.id}`" class="btn btn-primary mybtn">查看详情</RouterLink>
             </div>
           </div>
         </li>
@@ -50,11 +50,11 @@ export default {
       .card {
         .hoverShadow ();
         img {
-          min-height: 180px;
+          height: 180px;
         }
         .card-body {
           width: 100%;
-          min-height: 170px;
+          height: 170px;
           display: flex;
           flex-direction: column;
           justify-content: space-around;

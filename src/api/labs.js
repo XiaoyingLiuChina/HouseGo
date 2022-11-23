@@ -9,6 +9,13 @@ export const getLab = (id) => {
 }
 
 /**
+ * 查询实验室
+ * @param
+ */
+export const getLabList = (search) => {
+  return request('/laboratory/search', 'get', search)
+}
+/**
  * 根据老师查询实验室
  * @param
  */
@@ -48,4 +55,12 @@ export const editLab = (data) => {
  */
 export const deleteLab = (id) => {
   return request(`/laboratory/${id}`, 'delete')
+}
+/**
+ * 退出实验室
+ * @param
+ */
+export const exitLab = () => {
+  const { lab, id } = store.state.user.profile
+  return request(`/join/${lab.id}/${id}`, 'delete')
 }

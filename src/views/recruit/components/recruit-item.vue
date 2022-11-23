@@ -11,7 +11,7 @@
       <div class="box">
         <h5>招新描述：</h5>
         <h5 style="text-indent: 2em" class="introduce">
-          {{ recruitMes.recruit.introduce }}cdigviviergvervvre7vger78vybreyvertre bt7re7yt787b yt78rty8r7y78ri但是哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+          {{ recruitMes.recruit.introduce }}
         </h5>
         <table class="table table-secondary table-striped" style="margin-top: 15px">
           <tbody>
@@ -47,7 +47,8 @@
         <div class="info">
           <p>规模：{{ recruitMes.laboratory.scale }}</p>
           <p>地址：{{ recruitMes.laboratory.site }}</p>
-          <p>负责人：{{ user.name }}</p>
+          <p>实验室老师：{{ user.name }}</p>
+          <p>职称：{{ user.professionalTitle }}</p>
           <p>联系方式：{{ user.telephone }}</p>
         </div>
         <div class="mybtn" v-if="user"><button class="btn btn-primary" v-if="user.type === '1'" @click="joinMyLab">申请加入该实验室</button></div>
@@ -57,8 +58,9 @@
 </template>
 <script>
 import { studentDeliver } from '@/api/deliver'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { getRecruit } from '@/api/recruit'
+import { getTeacher } from '@/api/user'
 export default {
   name: 'RecruitItem',
   data() {
@@ -77,8 +79,10 @@ export default {
     async getMessage() {
       const data = await getRecruit(this.$route.params.id)
       this.recruitMes = data[0]
-      const { name, telephone, type } = this.$store.state.user.profile
-      this.user = { name, telephone, type }
+      console.log(data[0].recruit.teacherid)
+      const datauser = await getTeacher(data[0].recruit.teacherid)
+      const { name, telephone, professionalTitle } = datauser
+      this.user = { name, telephone, professionalTitle }
       this.flag = true
     },
     async joinMyLab() {
@@ -86,7 +90,7 @@ export default {
       if (flag.resume != null) {
         ElMessage({ type: 'warning', message: '你还没有添加简历哦，先去添加简历吧' })
       } else {
-        this.$confirm('确认投递该实验室？', '温馨提示', {
+        ElMessageBox.confirm('确认投递该实验室？', '温馨提示', {
           iconClass: 'el-icon-question', // 自定义图标样式
           confirmButtonText: '确认', // 确认按钮文字更换
           cancelButtonText: '取消', // 取消按钮文字更换
