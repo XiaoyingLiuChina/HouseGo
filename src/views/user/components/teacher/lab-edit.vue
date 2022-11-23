@@ -41,6 +41,7 @@
 </template>
 <script>
 import { editLab, addLab } from '@/api/labs'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'LabEdit',
   data() {
@@ -61,7 +62,7 @@ export default {
   },
   methods: {
     async editMyLab() {
-      this.$confirm('确认修改实验室简介？', '温馨提示', {
+      ElMessageBox.confirm('确认修改实验室简介？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -71,17 +72,17 @@ export default {
         .then(async () => {
           const data = await editLab(this.editMessage)
           if (data === true) {
-            this.$message({ type: 'success', message: '修改实验室简介成功' })
+            ElMessage({ type: 'success', message: '修改实验室简介成功' })
             this.$router.go({ path: '/user/lab' })
           }
         })
         .catch(function (err) {
           console.log(err)
-          this.$message({ type: 'error', message: '修改失败' })
+          ElMessage({ type: 'error', message: '修改失败' })
         })
     },
     async addMyLab() {
-      this.$confirm('确认修改实验室简介？', '温馨提示', {
+      ElMessageBox.confirm('确认修改实验室简介？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -91,12 +92,12 @@ export default {
         .then(async () => {
           const data = await addLab(this.editMessage)
           if (data === true) {
-            this.$message({ type: 'success', message: '创建实验室成功' })
+            ElMessage({ type: 'success', message: '创建实验室成功' })
           }
         })
         .catch(function (err) {
           console.log(err)
-          this.$message({ type: 'error', message: '创建失败' })
+          ElMessage({ type: 'error', message: '创建失败' })
         })
     },
     getFile() {
@@ -108,7 +109,7 @@ export default {
       // 判断是否为图片
       if (!/image\/\w+/.test(item.type)) {
         // 提示只能是图片，return
-        this.$message({ type: 'warning', message: '只能选择图片！' })
+        ElMessage({ type: 'warning', message: '只能选择图片！' })
       }
       // this.labImg = URL.createObjectURL(item)
       // 这里使用 FileReader来获取图片的base64编码

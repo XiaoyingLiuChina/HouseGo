@@ -1,6 +1,5 @@
 <template>
   <div class="recruit-show">
-    <!-- {{ oneRecruit }} -->
     <h4 style="margin-top: 15px; margin-left: 15px; font-weight: bold">招新详细信息</h4>
     <table class="table table-light table-striped" style="margin-top: 12px; margin-left: 15px; margin-right: 15px">
       <tbody>

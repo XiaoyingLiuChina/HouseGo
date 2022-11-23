@@ -94,6 +94,7 @@
 </template>
 <script>
 import { getDeliverByTeacher, refuseDeliver, agreeDeliver } from '@/api/deliver'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'ManageLabtor',
   data() {
@@ -116,7 +117,7 @@ export default {
       this.dialogTableVisible = true
     },
     async refuseMyDeliver(id) {
-      this.$confirm('确认拒绝该学生加入实验室？', '温馨提示', {
+      ElMessageBox.confirm('确认拒绝该学生加入实验室？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -126,7 +127,7 @@ export default {
         .then(async () => {
           const data = await refuseDeliver(id)
           if (data === 2) {
-            this.$message({ type: 'success', message: '拒绝成功' })
+            ElMessage({ type: 'success', message: '拒绝成功' })
           }
         })
         .catch(function (err) {
@@ -135,7 +136,7 @@ export default {
         })
     },
     async agreeMyDeliver(id) {
-      this.$confirm('确认同意该学生加入实验室？', '温馨提示', {
+      ElMessageBox.confirm('确认同意该学生加入实验室？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -145,7 +146,7 @@ export default {
         .then(async () => {
           const data = await agreeDeliver(id)
           if (data === 3) {
-            this.$message({ type: 'success', messge: '同意成功，等待学生确认' })
+            ElMessage({ type: 'success', messge: '同意成功，等待学生确认' })
           }
         })
         .catch(function (err) {
