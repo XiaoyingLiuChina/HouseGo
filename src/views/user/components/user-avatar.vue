@@ -60,6 +60,7 @@
 import 'vue-cropper/dist/index.css'
 import { VueCropper } from 'vue-cropper'
 import { updateUser } from '@/api/user'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'UserAvatar',
   components: { VueCropper },
@@ -94,7 +95,7 @@ export default {
       // 判断是否为图片
       if (!/image\/\w+/.test(item.type)) {
         // 提示只能是图片，return
-        this.$message({ type: 'warn', text: '只能选择图片！' })
+        ElMessage({ type: 'warn', text: '只能选择图片！' })
         return
       }
       this.option.img = URL.createObjectURL(item)
@@ -102,15 +103,27 @@ export default {
     },
     // 修改头像
     async updateAvatar() {
-      // 修改后端的头像
-      const image = this.previewAvatar
-      const data = await updateUser({ image })
-      if (data === true) {
-        this.$store.commit('user/updateAvatar', image)
-        this.$message({ type: 'success', message: '修改头像成功' })
-        // 进行跳转
-        this.$router.push({ path: '/user' })
-      }
+      ElMessageBox.confirm('确认修改头像？', '温馨提示', {
+        iconClass: 'el-icon-question', // 自定义图标样式
+        confirmButtonText: '确认', // 确认按钮文字更换
+        cancelButtonText: '取消', // 取消按钮文字更换
+        showClose: true, // 是否显示右上角关闭按钮
+        type: 'warning' // 提示类型  success/info/warning/error
+      })
+        .then(async () => {
+          const image = this.previewAvatar
+          const data = await updateUser({ image })
+          if (data === true) {
+            this.$store.commit('user/updateAvatar', image)
+            ElMessage({ type: 'success', message: '修改头像成功' })
+            // 进行跳转
+            this.$router.push({ path: '/user' })
+          }
+        })
+        .catch(function (err) {
+          console.log(err)
+          ElMessage({ type: 'error', message: '修改失败' })
+        })
     },
     // 获取 base64 截图数据并放置到预览
     handleCropperPhoto() {

@@ -49,6 +49,7 @@
 </template>
 <script>
 import { getShareList, deleteShare } from '@/api/share'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'UserShare',
   data() {
@@ -66,7 +67,7 @@ export default {
       this.list.reverse()
     },
     async deleteMyShare(id) {
-      this.$confirm('确认删除该条分享？', '提示', {
+      ElMessageBox.confirm('确认删除该条分享？', '提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -77,7 +78,7 @@ export default {
           const data = await deleteShare(id)
           if (data === true) {
             this.getList()
-            this.$message({
+            ElMessage({
               type: 'success',
               message: '删除成功!'
             })

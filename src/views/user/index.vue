@@ -17,6 +17,7 @@ import AppFooter from '@/components/app-footer.vue'
 import UserLeftnav from './components/user-leftnav.vue'
 import { getTeacher, getStudent, getCollege } from '@/api/user'
 import { getLabByTeacher, getLabByStudent } from '@/api/labs'
+import { getResume } from '@/api/resume'
 export default {
   name: 'UserPage',
   components: { AppHeader, AppFooter, UserLeftnav, AppTopnav },
@@ -34,6 +35,7 @@ export default {
     async getUser() {
       let data = null
       let college = ''
+      let resume = ''
       if (this.user.type === '0') {
         data = await getTeacher(this.user.id)
         if (data.laboratoryid !== '') {
@@ -42,6 +44,7 @@ export default {
         }
       } else {
         data = await getStudent(this.user.id)
+        resume = await getResume(this.user.id)
         // 加入了实验室
         if (data.typel === 1) {
           const lab = await getLabByStudent(data.id)
@@ -50,7 +53,7 @@ export default {
       }
       college = await getCollege(data.collegeid)
       college = college[0]
-      Object.assign(data, { college })
+      Object.assign(data, { college, resume })
       // 再次更新
       this.$store.commit('user/setUser', data)
     }

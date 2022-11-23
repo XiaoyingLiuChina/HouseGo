@@ -35,7 +35,7 @@
 <script>
 import LabEdit from './lab-edit.vue'
 import { deleteLab, getLabByTeacher } from '@/api/labs'
-
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'ManageLab',
   components: { LabEdit },
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     async deleteLab() {
-      this.$confirm('确认删除该实验室？', '温馨提示', {
+      ElMessageBox.confirm('确认删除该实验室？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -61,12 +61,12 @@ export default {
         .then(async () => {
           const data = await deleteLab(this.$store.state.user.profile.laboratoryid)
           if (data === true) {
-            this.$message({ type: 'success', message: '删除实验室成功' })
+            ElMessage({ type: 'success', message: '删除实验室成功' })
           }
         })
         .catch(function (err) {
           console.log(err)
-          this.$message({ type: 'error', message: '删除实验室失败' })
+          ElMessage({ type: 'error', message: '删除实验室失败' })
         })
     },
     async updateData() {

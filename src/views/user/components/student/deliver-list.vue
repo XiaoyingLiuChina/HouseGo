@@ -38,7 +38,7 @@
                 <button class="btn btn-secondary btn-sm" v-if="item.deliver.state == 3" @click="refuseMyDeliver(item.deliver.id)">拒绝</button>
                 <button class="btn btn btn-success btn-sm" v-if="item.deliver.state == 3" @click="agreeMyDeliver(item.deliver.id)">同意</button>
                 <button class="btn btn btn-danger btn-sm" v-if="item.deliver.state != 1 && item.deliver.state != 3" @click="deleteMyDeliver(item.deliver.id)">删除</button>
-                <button class="btn btn-primary btn-sm">查看</button>
+                <button class="btn btn-primary btn-sm" @click="lookMyMes(item)">查看</button>
               </td>
             </tr>
           </tbody>
@@ -47,17 +47,47 @@
           <p>还没有投递任何实验室，快去寻找感兴趣的实验室吧</p>
         </div>
       </div>
+      <el-dialog v-model="dialogTableVisible" title="详情信息">
+        <div>实验室信息</div>
+        <div class="info">
+          <div class="mes">
+            <p>名称：{{ lookMes.laboratory.name }}</p>
+            <p>实验室介绍:{{ lookMes.laboratory.introduce }}</p>
+            <p>所属学院：{{ lookMesCollege }}</p>
+            <p>规模:{{ lookMes.laboratory.scale }}</p>
+            <p>地址：{{ lookMes.laboratory.site }}</p>
+            <p>负责人：{{ lookMes.teacher.name }}</p>
+            <p>联系方式：{{ lookMes.teacher.telephone }}</p>
+          </div>
+          <img :src="lookMes.laboratory.image" alt="实验室图片" />
+        </div>
+        <div>招新信息</div>
+        <div class="info">
+          <div class="mes">
+            <p>招新介绍：{{ lookMes.recruit.introduce }}</p>
+            <p>招新方向：{{ lookMes.recruit.direction }}</p>
+            <p>预计招新人数：{{ lookMes.recruit.recruitenumber }}</p>
+            <p>对象：{{ lookMes.recruit.people }}</p>
+            <p>截止时间：{{ lookMes.recruit.endtime }}</p>
+          </div>
+        </div>
+      </el-dialog>
     </div>
   </div>
 </template>
 
 <script>
 import { getStudentDeliver, backDeliver, deleteDeliver, refuseDeliver, agreeDeliver } from '@/api/deliver'
+import { getCollege } from '@/api/user'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'DeliverList',
   data() {
     return {
-      list: {}
+      list: {},
+      dialogTableVisible: false,
+      lookMes: null,
+      lookMesCollege: ''
     }
   },
   mounted() {
@@ -67,6 +97,12 @@ export default {
     async getList() {
       const data = await getStudentDeliver()
       this.list = data
+    },
+    async lookMyMes(item) {
+      this.lookMes = item
+      this.dialogTableVisible = true
+      const data = await getCollege(item.laboratory.collegeid)
+      this.lookMesCollege = data[0].name
     },
     filterState(value) {
       let res = ''
@@ -96,7 +132,7 @@ export default {
       return res
     },
     async backMyDeliver(id) {
-      this.$confirm('是否撤销投递？', '温馨提示', {
+      ElMessageBox.confirm('是否撤销投递？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -108,7 +144,7 @@ export default {
 
           if (data === '撤销成功') {
             this.getList()
-            this.$message({
+            ElMessage({
               type: 'success',
               message: '撤销成功!'
             })
@@ -124,7 +160,7 @@ export default {
         })
     },
     async deleteMyDeliver(id) {
-      this.$confirm('删除该条投递记录？', '温馨提示', {
+      ElMessageBox.confirm('删除该条投递记录？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -134,7 +170,7 @@ export default {
         .then(async () => {
           const data = await deleteDeliver(id)
           if (data === '删除成功') {
-            this.$message({ type: 'success', message: '删除成功！' })
+            ElMessage({ type: 'success', message: '删除成功！' })
           }
         })
         .catch(function (err) {
@@ -143,7 +179,7 @@ export default {
         })
     },
     async refuseMyDeliver(id) {
-      this.$confirm('放弃加入该实验室？', '温馨提示', {
+      ElMessageBox.confirm('放弃加入该实验室？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -153,7 +189,7 @@ export default {
         .then(async () => {
           const data = await refuseDeliver(id)
           if (data === 4) {
-            this.$message({ type: 'success', message: '拒绝成功' })
+            ElMessage({ type: 'success', message: '拒绝成功' })
           }
         })
         .catch(function (err) {
@@ -162,7 +198,7 @@ export default {
         })
     },
     async agreeMyDeliver(id) {
-      this.$confirm('确认加入该实验室？', '温馨提示', {
+      ElMessageBox.confirm('确认加入该实验室？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -172,7 +208,7 @@ export default {
         .then(async () => {
           const data = await agreeDeliver(id)
           if (data === 5) {
-            this.$message({ type: 'success', message: '恭喜你成功加入该实验室，重新登录就可以发布分享了' })
+            ElMessage({ type: 'success', message: '恭喜你成功加入该实验室，重新登录就可以发布分享了' })
           }
         })
         .catch(function (err) {
@@ -196,6 +232,17 @@ table {
     td {
       vertical-align: middle;
     }
+  }
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+  .mes {
+    max-width: 60%;
+  }
+  img {
+    height: 150px;
+    width: 150px;
   }
 }
 </style>

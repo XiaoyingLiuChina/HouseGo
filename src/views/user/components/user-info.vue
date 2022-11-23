@@ -32,6 +32,7 @@ import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
 import { updateUser } from '@/api/user'
 import store from '@/store/index'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'UserInfo',
   components: { UserMine, Field, Form },
@@ -45,7 +46,7 @@ export default {
   },
   methods: {
     async updateTelephone(values) {
-      this.$confirm('确认修改联系方式？', '温馨提示', {
+      ElMessageBox.confirm('确认修改联系方式？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -56,12 +57,12 @@ export default {
           const telephone = values.mobile
           const data = await updateUser({ telephone })
           if (data === true) {
-            this.$message({ type: 'success', message: '修改联系方式成功' })
+            ElMessage({ type: 'success', message: '修改联系方式成功' })
           }
         })
         .catch(function (err) {
           console.log(err)
-          this.$message({ type: 'error', message: '修改失败' })
+          ElMessage({ type: 'error', message: '修改失败' })
         })
     }
   }

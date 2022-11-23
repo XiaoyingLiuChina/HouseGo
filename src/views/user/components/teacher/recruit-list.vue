@@ -47,6 +47,7 @@
 import { getRecruitByTeacher, deleteRecruit, getRecruit } from '@/api/recruit'
 import RecruitShow from './recruit-show.vue'
 import RecruitEdit from './recruit-edit.vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'RecruitList',
   components: { RecruitShow, RecruitEdit },
@@ -67,7 +68,7 @@ export default {
       this.list = data
     },
     async deleteMyRecruit(id) {
-      this.$confirm('确认删除该招新信息？', '温馨提示', {
+      ElMessageBox.confirm('确认删除该招新信息？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -77,13 +78,13 @@ export default {
         .then(async () => {
           const data = await deleteRecruit(id)
           if (data === true) {
-            this.$message({ type: 'success', message: '删除成功' })
+            ElMessage({ type: 'success', message: '删除成功' })
             this.getList()
           }
         })
         .catch(function (err) {
           console.log(err)
-          this.$message({ type: 'error', message: '删除失败' })
+          ElMessage({ type: 'error', message: '删除失败' })
         })
     },
     async showRecruit(id) {

@@ -57,6 +57,7 @@
 </template>
 <script>
 import { studentDeliver } from '@/api/deliver'
+import { ElMessage } from 'element-plus'
 import { getRecruit } from '@/api/recruit'
 export default {
   name: 'RecruitItem',
@@ -81,23 +82,28 @@ export default {
       this.flag = true
     },
     async joinMyLab() {
-      this.$confirm('确认投递该实验室？', '温馨提示', {
-        iconClass: 'el-icon-question', // 自定义图标样式
-        confirmButtonText: '确认', // 确认按钮文字更换
-        cancelButtonText: '取消', // 取消按钮文字更换
-        showClose: true, // 是否显示右上角关闭按钮
-        type: 'warning' // 提示类型  success/info/warning/error
-      })
-        .then(async () => {
-          const data = await studentDeliver(this.$route.params.id)
-          if (data === '投递成功') {
-            this.$message({ type: 'success', message: data })
-          }
+      const flag = this.$store.state.user.profile
+      if (flag.resume != null) {
+        ElMessage({ type: 'warning', message: '你还没有添加简历哦，先去添加简历吧' })
+      } else {
+        this.$confirm('确认投递该实验室？', '温馨提示', {
+          iconClass: 'el-icon-question', // 自定义图标样式
+          confirmButtonText: '确认', // 确认按钮文字更换
+          cancelButtonText: '取消', // 取消按钮文字更换
+          showClose: true, // 是否显示右上角关闭按钮
+          type: 'warning' // 提示类型  success/info/warning/error
         })
-        .catch(function (err) {
-          console.log(err)
-          this.$message({ type: 'warning', message: '投递失败' })
-        })
+          .then(async () => {
+            const data = await studentDeliver(this.$route.params.id)
+            if (data === '投递成功') {
+              ElMessage({ type: 'success', message: data })
+            }
+          })
+          .catch(function (err) {
+            console.log(err)
+            ElMessage({ type: 'warning', message: '投递失败' })
+          })
+      }
     }
   }
 }

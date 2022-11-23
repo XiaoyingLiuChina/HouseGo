@@ -71,13 +71,13 @@ export default {
         .then(async () => {
           const data = await editLab(this.editMessage)
           if (data === true) {
-            this.$message({ type: 'success', text: '修改实验室简介成功' })
+            this.$message({ type: 'success', message: '修改实验室简介成功' })
             this.$router.go({ path: '/user/lab' })
           }
         })
         .catch(function (err) {
           console.log(err)
-          this.$message({ type: 'error', text: '修改失败' })
+          this.$message({ type: 'error', message: '修改失败' })
         })
     },
     async addMyLab() {
@@ -91,12 +91,12 @@ export default {
         .then(async () => {
           const data = await addLab(this.editMessage)
           if (data === true) {
-            this.$message({ type: 'success', text: '创建实验室成功' })
+            this.$message({ type: 'success', message: '创建实验室成功' })
           }
         })
         .catch(function (err) {
           console.log(err)
-          this.$message({ type: 'error', text: '创建失败' })
+          this.$message({ type: 'error', message: '创建失败' })
         })
     },
     getFile() {
@@ -108,7 +108,7 @@ export default {
       // 判断是否为图片
       if (!/image\/\w+/.test(item.type)) {
         // 提示只能是图片，return
-        this.$message({ type: 'warn', text: '只能选择图片！' })
+        this.$message({ type: 'warning', message: '只能选择图片！' })
       }
       // this.labImg = URL.createObjectURL(item)
       // 这里使用 FileReader来获取图片的base64编码

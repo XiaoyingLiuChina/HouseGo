@@ -46,6 +46,7 @@
 </template>
 <script>
 import { publishRecruit } from '@/api/recruit'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'PublishRecruit',
   data() {
@@ -86,7 +87,7 @@ export default {
       const nowTime = new Date()
       // 小于当前时间，不符合
       if (putDate < nowTime) {
-        this.$message({ type: 'warn', text: '请选择合适的截止日期！' })
+        ElMessage({ type: 'warn', text: '请选择合适的截止日期！' })
         this.recruitMessage.endtime = ''
       } else {
         // 设置成功
@@ -94,7 +95,7 @@ export default {
       }
     },
     async publishMyRecruit() {
-      this.$confirm('确认发布该招新信息？', '温馨提示', {
+      ElMessageBox.confirm('确认发布该招新信息？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -107,12 +108,12 @@ export default {
           Object.assign(putRecruit, this.recruitMessage, { endtime })
           const data = await publishRecruit(putRecruit)
           if (data === true) {
-            this.$message({ type: 'success', message: '招新信息发布成功' })
+            ElMessage({ type: 'success', message: '招新信息发布成功' })
           }
         })
         .catch(function (err) {
           console.log(err)
-          this.$message({ type: 'error', message: '发布失败' })
+          ElMessage({ type: 'error', message: '发布失败' })
         })
     },
     fillZero(t) {

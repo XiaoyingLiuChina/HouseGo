@@ -50,7 +50,8 @@
 <script>
 import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
-import { userLogin, updateUser } from '@/api/user'
+import { userLogin } from '@/api/user'
+import { ElMessage } from 'element-plus'
 export default {
   name: 'LoginForm',
   components: {
@@ -81,38 +82,37 @@ export default {
             // 进行跳转
             this.$router.push({ path: '/user' })
             // 成功消息提示
-            this.$message({ type: 'success', message: '登录成功！' })
+            ElMessage({ type: 'success', message: '登录成功！' })
           } else if (data === '不存在该账号') {
             if (values.type === '1') {
-              this.$message({ type: 'warning', message: '不存在该账号的学生' })
-            } else this.$message({ type: 'warning', message: '不存在该账号的老师' })
+              ElMessage({ type: 'warning', message: '不存在该账号的学生' })
+            } else ElMessage({ type: 'warning', message: '不存在该账号的老师' })
           } else {
-            this.$message({ type: 'warning', message: '密码错误！请重新输入密码' })
+            ElMessage({ type: 'warning', message: '密码错误！请重新输入密码' })
           }
         } catch (error) {
-          this.$message({ type: 'warning', message: '发生错误，登录失败！请重试' })
+          ElMessage({ type: 'warning', message: '发生错误，登录失败！请重试' })
         }
       }
     },
     async ResetPassword() {
-      const account = document.getElementById('id')
-
-      if (/^5120(\d){6}$/.test(account.value)) {
-        console.log('即将重置密码')
-        try {
-          const password = {}
-          password.password = '000000'
-          console.log(password)
-          const data = await updateUser(password)
-          if (data === true) {
-            this.$message({ type: 'success', message: '重置密码成功' })
-          }
-        } catch (error) {
-          this.$message({ type: 'warning', message: '重置密码出错，请重试' })
-        }
-      } else {
-        this.$message({ type: 'warning', message: '请检查学号是否正确' })
-      }
+      // const account = document.getElementById('id')
+      // if (/^5120(\d){6}$/.test(account.value)) {
+      //   console.log('即将重置密码')
+      //   try {
+      //     const password = {}
+      //     password.password = '000000'
+      //     const data = await updatePassword(password)
+      //     console.log(data)
+      //     if (data === true) {
+      //       ElMessage({ type: 'success', message: '重置密码成功' })
+      //     }
+      //   } catch (error) {
+      //     ElMessage({ type: 'warning', message: '重置密码出错，请重试' })
+      //   }
+      // } else {
+      //   ElMessage({ type: 'warning', message: '请检查学号是否正确' })
+      // }
     }
   }
 }

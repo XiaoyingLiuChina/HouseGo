@@ -34,6 +34,7 @@
 import UserShareImg from './user-shareimg.vue'
 import Emotion from './Emotion'
 import { putShare } from '@/api/share'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'UserShareform',
   components: { UserShareImg, Emotion },
@@ -53,7 +54,7 @@ export default {
       this.shareItem.image = imgs
     },
     async putMyShare() {
-      this.$confirm('确认发布当前内容？', '提示', {
+      ElMessageBox.confirm('确认发布当前内容？', '提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -64,7 +65,7 @@ export default {
           const data = await putShare(this.shareItem)
           if (data === true) {
             // this.getList()
-            this.$message({
+            ElMessage({
               type: 'success',
               message: '发布成功!'
             })

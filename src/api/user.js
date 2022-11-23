@@ -67,12 +67,20 @@ export const updateUser = (needUpdate) => {
 //   if (type === '0') return request('user/updateteacher', 'post', jsondata)
 //   else return request('user/updatestudent', 'post', jsondata)
 // }
-// /**
-//  * 修改密码
-//  * @param { id, collegeid,... }
-//  */
-// export const updatePassword = ({ id, collegeid, password, type }) => {
-//   const jsondata = JSON.stringify({ id, collegeid, password })
-//   if (type === '0') return request('user/updateteacher', 'post', jsondata)
-//   else return request('user/updatestudent', 'post', jsondata)
-// }
+/**
+ * 修改密码
+ * @param
+ */
+export const updatePassword = ({ password }) => {
+  const user = store.state.user.profile
+  const { id, type } = user
+  const data = {}
+  Object.assign(data, password, { id, type })
+  console.log(data)
+  const jsondata = JSON.stringify(data)
+  if (user.type === '0') {
+    return request('user/updateteacher', 'post', jsondata)
+  } else {
+    return request('user/updatestudent', 'post', jsondata)
+  }
+}

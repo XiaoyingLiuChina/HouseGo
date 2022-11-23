@@ -68,8 +68,8 @@ export default {
           id: 'modules3',
           children: [
             { name: '发布招新信息', topath: '/user/recruit' },
-            { name: '招新列表', topath: '/user/recruitlist' },
-            { name: '查看已申请人员', topath: '/user/labtor' }
+            { name: '招新信息', topath: '/user/recruitlist' },
+            { name: '管理投递', topath: '/user/labtor' }
           ]
         },
         // {

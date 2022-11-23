@@ -51,12 +51,43 @@
                 <td v-if="item.deliver">
                   <button class="btn btn-secondary btn-sm" v-if="item.deliver.state == 1" @click="refuseMyDeliver(item.deliver.id)">拒绝</button>
                   <button class="btn btn btn-success btn-sm" v-if="item.deliver.state == 1" @click="agreeMyDeliver(item.deliver.id)">同意</button>
-                  <button class="btn btn-primary btn-sm">查看</button>
+                  <button class="btn btn-primary btn-sm" @click="lookStudent(item)">查看</button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
+
+        <el-dialog v-model="dialogTableVisible" title="详情信息">
+          <div>
+            <h5>学生信息</h5>
+            <div class="info">
+              <div class="mes">
+                <p>学号：{{ lookMes.student.id }}</p>
+                <p>姓名：{{ lookMes.student.name }}</p>
+                <p>班级：{{ lookMes.student.clas }}</p>
+                <p>联系方式：{{ lookMes.student.telephone }}</p>
+                <p>志愿一：{{ lookMes.resume.volunteerone }}</p>
+                <p>志愿二：{{ lookMes.resume.volunteertwo }}</p>
+                <p>获奖情况：{{ lookMes.resume.reward }}</p>
+                <p>自我评价：{{ lookMes.resume.introduce }}</p>
+              </div>
+              <img :src="lookMes.student.image" alt="学生照片" />
+            </div>
+          </div>
+          <div>
+            <h5>招新信息</h5>
+            <div class="info">
+              <div class="mes">
+                <p>招新对象：{{ lookMes.recruit.people }}</p>
+                <p>招新方向：{{ lookMes.recruit.direction }}</p>
+                <p>招新描述：{{ lookMes.recruit.introduce }}</p>
+                <p>招新人数：{{ lookMes.recruit.recruitenumber }}</p>
+                <p>已同意人数：{{ lookMes.recruit.applypeople }}</p>
+              </div>
+            </div>
+          </div>
+        </el-dialog>
       </div>
     </div>
   </div>
@@ -67,7 +98,9 @@ export default {
   name: 'ManageLabtor',
   data() {
     return {
-      list: {}
+      list: {},
+      lookMes: {},
+      dialogTableVisible: false
     }
   },
   mounted() {
@@ -77,6 +110,10 @@ export default {
     async getList() {
       const data = await getDeliverByTeacher()
       this.list = data
+    },
+    async lookStudent(item) {
+      this.lookMes = item
+      this.dialogTableVisible = true
     },
     async refuseMyDeliver(id) {
       this.$confirm('确认拒绝该学生加入实验室？', '温馨提示', {
@@ -161,6 +198,10 @@ table {
       vertical-align: middle;
     }
   }
+  img {
+    width: 50px;
+    height: 50px;
+  }
 }
 button {
   margin-right: 5px;
@@ -182,8 +223,15 @@ input {
   appearance: none;
   border-radius: 0.375rem;
 }
-img {
-  width: 50px;
-  height: 50px;
+.info {
+  display: flex;
+  justify-content: space-between;
+  .mes {
+    max-width: 60%;
+  }
+  img {
+    height: 150px;
+    width: 150px;
+  }
 }
 </style>

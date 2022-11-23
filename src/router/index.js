@@ -24,7 +24,7 @@ const UserPassword = () => import('@/views/user/components/user-password.vue')
 const UserShare = () => import('@/views/user/components/user-share.vue')
 const UserShareform = () => import('@/views/user/components/user-shareput.vue')
 const UserAvatar = () => import('@/views/user/components/user-avatar.vue')
-const Userlabs = () => import('@/views/user/components/user-labs.vue')
+// const Userlabs = () => import('@/views/user/components/user-labs.vue')
 // 角色特有的模块
 const PublishRecruit = () => import('@/views/user/components/teacher/publish-recruit.vue')
 const RecruitList = () => import('@/views/user/components/teacher/recruit-list.vue')
@@ -34,7 +34,7 @@ const ManageIntroduce = () => import('@/views/user/components/student/manage-int
 
 const DeliverList = () => import('@/views/user/components/student/deliver-list.vue')
 
-const Register = () => import('@/views/register/index')
+// const Register = () => import('@/views/register/index')s
 
 const routes = [
   {
@@ -73,7 +73,7 @@ const routes = [
     ]
   },
   { path: '/login', component: Login },
-  { path: '/register', component: Register },
+  // { path: '/register', component: Register },
   {
     path: '/user',
     component: User,
@@ -83,7 +83,7 @@ const routes = [
       { path: '/user/share', component: UserShare },
       { path: '/user/share/put', component: UserShareform },
       { path: '/user/avatar', component: UserAvatar },
-      { path: '/user/labs', component: Userlabs },
+      // { path: '/user/labs', component: Userlabs },
       { path: '/user/labtor', component: Managelabtor },
       { path: '/user/lab', component: Managelab },
       { path: '/user/introduce', component: ManageIntroduce },

@@ -40,6 +40,7 @@
 import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
 import { updateUser } from '@/api/user'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'UserPassword',
   components: { Form, Field },
@@ -54,7 +55,7 @@ export default {
   },
   methods: {
     async updatePw(values) {
-      this.$confirm('确认修改密码？', '提示', {
+      ElMessageBox.confirm('确认修改密码？', '提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
@@ -69,13 +70,13 @@ export default {
             // 重置表单
             const reset = document.getElementById('btn-reset')
             reset.click()
-            this.$message({ type: 'success', message: '修改密码成功' })
+            ElMessage({ type: 'success', message: '修改密码成功' })
           } else {
           }
         })
         .catch(function (err) {
           console.log(err)
-          this.$message({ type: 'error', message: '修改密码失败' })
+          ElMessage({ type: 'error', message: '修改密码失败' })
         })
     }
   }

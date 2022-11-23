@@ -13,7 +13,7 @@
           </div>
           <div class="mb-3">自我评价：{{ myResume.introduce }}</div>
           <div class="mb-3">获奖情况：{{ myResume.reward }}</div>
-          <button class="btn btn-primary" @click="deleteMyResume">删除简历</button>
+          <!-- <button class="btn btn-primary" @click="deleteMyResume">删除简历</button> -->
           <button class="btn btn-primary" @click="editbox = true">编辑简历</button>
         </div>
 
@@ -31,7 +31,7 @@
 </template>
 <script>
 import EditBox from './edit-resume.vue'
-import { getResume, deleteResume } from '@/api/resume'
+import { getResume } from '@/api/resume'
 export default {
   name: 'UserIntroduce',
   components: { EditBox },
@@ -51,14 +51,15 @@ export default {
       const resume = await getResume(this.$store.state.user.profile.id)
       this.$store.commit('user/setUser', { resume })
       this.myResume = resume
-    },
-    async deleteMyResume() {
-      const data = await deleteResume(this.myResume.id)
-      if (data === true) {
-        this.$message({ type: 'success', text: '删除简历成功' })
-        this.$router.go({ path: '/user/introduce' })
-      } else this.$message({ type: 'error', text: '发生错误，删除失败' })
     }
+    // async deleteMyResume() {
+
+    //   const data = await deleteResume(this.myResume.id)
+    //   if (data === true) {
+    //     this.$message({ type: 'success', text: '删除简历成功' })
+    //     this.$router.go({ path: '/user/introduce' })
+    //   } else this.$message({ type: 'error', text: '发生错误，删除失败' })
+    // }
   },
   watch: {}
 }
