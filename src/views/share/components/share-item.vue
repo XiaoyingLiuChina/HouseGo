@@ -47,7 +47,8 @@
   </div>
 </template>
 <script>
-import { getShare } from '@/api/share'
+import { getShare, hitLikeShare } from '@/api/share'
+import { ElMessage } from 'element-plus'
 export default {
   name: 'ShareItem',
   data() {
@@ -62,7 +63,6 @@ export default {
     async getMes() {
       const data = await getShare(this.$route.params.id)
       this.shareMes = data[0]
-      console.log(this.shareMes)
     },
     // 将匹配结果替换表情图片
     emotion(res) {
@@ -178,6 +178,21 @@ export default {
       // https://face.t.sinajs.cn/t4/appstyle/expression/ext/normal/28/2018new_han_org
       // https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif
       return `<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif" align="middle">`
+    },
+    async hitLike(id) {
+      if (this.$store.state.user.profile.id === '') {
+        ElMessage({ type: 'warning', message: '请先登录' })
+      } else {
+        const data = await hitLikeShare(id)
+        if (data === true) {
+          const newList = await getShare(-1)
+          this.hetop = document.documentElement.scrollTop
+          newList.reverse()
+          this.list = newList
+          ElMessage({ type: 'success', message: '点赞成功' })
+          this.getMes()
+        }
+      }
     }
   }
 }
