@@ -43,7 +43,6 @@ export default {
         return x.share.like - y.share.like
       })
       this.list = newdata.slice(-4).reverse()
-      console.log(this.list)
     },
     // 将匹配结果替换表情图片
     emotion(res) {

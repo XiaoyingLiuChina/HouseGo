@@ -17,6 +17,9 @@ export default {
     setUserType(state, payload) {
       state.profile.id = payload.id
       state.profile.type = payload.type
+      if (payload.type === '1') {
+        state.profile.typel = payload.typel
+      }
     },
     setUser(state, payload) {
       Object.assign(state.profile, payload)

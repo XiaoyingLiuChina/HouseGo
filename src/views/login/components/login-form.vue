@@ -50,7 +50,7 @@
 <script>
 import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
-import { userLogin } from '@/api/user'
+import { getStudent, userLogin } from '@/api/user'
 import { ElMessage } from 'element-plus'
 export default {
   name: 'LoginForm',
@@ -75,10 +75,19 @@ export default {
           console.log('发起了登录请求')
           const data = await userLogin(values)
           if (data === '登录成功') {
-            this.$store.state.user.profile.token = '6'
-            // 存储用户信息
+            this.$store.state.user.profile.token = 'dengluchenggong'
+            // // 存储用户信息
             const { id, type } = values
-            this.$store.commit('user/setUserType', { id, type })
+            // this.$store.commit('user/setUserType', { id, type })
+
+            // 存储用户信息
+            if (values.type === '0') {
+              this.$store.commit('user/setUserType', { id, type })
+            } else {
+              const { typel } = await getStudent(values.id)
+              this.$store.commit('user/setUserType', { id, type, typel })
+            }
+
             // 进行跳转
             this.$router.push({ path: '/user' })
             // 成功消息提示

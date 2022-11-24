@@ -18,6 +18,7 @@ import UserLeftnav from './components/user-leftnav.vue'
 import { getTeacher, getStudent, getCollege } from '@/api/user'
 import { getLabByTeacher, getLabByStudent } from '@/api/labs'
 import { getResume } from '@/api/resume'
+// import router from '@/router'
 export default {
   name: 'UserPage',
   components: { AppHeader, AppFooter, UserLeftnav, AppTopnav },
@@ -29,6 +30,7 @@ export default {
   },
   mounted() {
     this.getUser()
+    // this.getRouteList()
   },
 
   methods: {
@@ -57,6 +59,15 @@ export default {
       // 再次更新
       this.$store.commit('user/setUser', data)
     }
+    // // 动态添加路由
+    // getRouteList() {
+    //   const thisuser = this.$store.state.user.profile
+    //   const list = this.$store.getters['power/getUserRoute'](thisuser.type, thisuser.typel)
+    //   for (let i = 0; i < list.length; i++) {
+    //     router.addRoute('User', list[i])
+    //   }
+    //   // console.log(router.getRoutes())
+    // }
   }
 }
 </script>
