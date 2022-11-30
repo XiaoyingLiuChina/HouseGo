@@ -48,15 +48,14 @@ export const updateUser = (needUpdate) => {
     return request('user/updatestudent', 'post', jsondata)
   }
 }
-// /**
-//  * 修改联系方式
-//  * @param { id, collegeid,... }
-//  */
-// export const updatePhone = ({ id, collegeid, telephone, type }) => {
-//   const jsondata = JSON.stringify({ id, collegeid, telephone })
-//   if (type === '0') return request('user/updateteacher', 'post', jsondata)
-//   else return request('user/updatestudent', 'post', jsondata)
-// }
+
+/**
+ * 查看用户类型
+ * @param
+ */
+export const getUserType = (id) => {
+  return request(`user/${id}`, 'post')
+}
 
 // /**
 //  * 修改头像
@@ -68,19 +67,28 @@ export const updateUser = (needUpdate) => {
 //   else return request('user/updatestudent', 'post', jsondata)
 // }
 /**
- * 修改密码
+ * 修改密码(重置密码专用)
  * @param
  */
-export const updatePassword = ({ password }) => {
-  const user = store.state.user.profile
-  const { id, type } = user
+export const updatePassword = ({ id, type, password }) => {
   const data = {}
-  Object.assign(data, password, { id, type })
+  Object.assign(data, { id, password })
   console.log(data)
   const jsondata = JSON.stringify(data)
-  if (user.type === '0') {
+  console.log(jsondata)
+  if (type === 0) {
     return request('user/updateteacher', 'post', jsondata)
   } else {
     return request('user/updatestudent', 'post', jsondata)
   }
+}
+
+/**
+ * 老师管理获取实验室学生
+ * @param
+ */
+export const getLabStudentList = () => {
+  const user = store.state.user.profile
+  const teacherid = user.id
+  return request('/join/byteacher', 'get', { teacherid })
 }

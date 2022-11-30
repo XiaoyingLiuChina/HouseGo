@@ -7,13 +7,13 @@
         <div class="card-body">
           <div class="firstrow">
             <div>
-              <h5 class="card-title">{{ item.laboratory.name }}</h5>
-              <p class="card-text mb-2">{{ item.recruit.introduce }}</p>
+              <h5 class="card-title">实验室名称：{{ item.laboratory.name }}</h5>
+              <p class="card-text mb-2">招新介绍：{{ item.recruit.introduce }}</p>
             </div>
             <img :src="item.laboratory.image" class="img-thumbnail" />
           </div>
           <div class="card-bottom mb-2 text-muted">
-            <div class="tag">{{ item.recruit.direction }}</div>
+            <div class="tag">招新方向：{{ item.recruit.direction }}</div>
             <div class="time">发布日期：{{ item.recruit.starttime }}</div>
             <div class="time">截止日期：{{ item.recruit.endtime }}</div>
           </div>

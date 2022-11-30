@@ -121,10 +121,12 @@ export default {
 <style lang="less" scoped>
 .recruit-edit {
   position: fixed;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: @appColor;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: calc(0.375rem - 1px);
   width: 400px;
   height: 320px;
   padding: 15px;

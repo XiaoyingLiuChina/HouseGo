@@ -140,7 +140,6 @@ const routes = [
     component: Layout,
     children: [
       { path: '/', component: Home },
-
       { path: '/search/:key', component: SearchLabs },
       {
         path: '/recruit',
@@ -193,9 +192,9 @@ const router = createRouter({
 // 前置导航守卫
 let registerRouteFresh = true
 router.beforeEach((to, from, next) => {
-  // 需要登录的路由：地址是以 /user 开头
+  // 需要登录的路由：地是以 /user 开头
   const user = store.state.user.profile
-  console.log(user)
+  // console.log(user)
   if (!user.token && to.path.startsWith('/user')) {
     return next('/login?redirectUrl=' + encodeURIComponent(to.fullPath))
   }
@@ -213,6 +212,7 @@ router.beforeEach((to, from, next) => {
     next({ ...to, replace: true })
     registerRouteFresh = false
   }
+  // console.log(registerRouteFresh)
   next()
 })
 

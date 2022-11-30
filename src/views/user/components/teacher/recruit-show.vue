@@ -37,13 +37,14 @@
         </tr>
       </tbody>
     </table>
-    <div style="text-align: center; margin-top: 10px">
-      <button type="button" class="btn btn-primary">查看当前招新信息的申请的学生</button>
+    <div style="text-align: center; margin: 10px auto">
+      <button type="button" class="btn btn-primary" @click="lookRecruitStudent(recruitinfo.recruit.id)">查看当前招新信息的申请的学生</button>
     </div>
     <div class="close"><button type="button" class="btn-close" aria-label="Close" @click="closeEvent"></button></div>
   </div>
 </template>
 <script>
+import { getDeliverStudentList } from '@/api/deliver'
 export default {
   name: 'RecruitShow',
   data() {
@@ -59,10 +60,21 @@ export default {
   mounted() {
     this.recruitinfo = this.oneRecruit[0]
   },
-  emits: ['updateDialog'],
+  emits: ['updateDialog', 'showStudent'],
   methods: {
     closeEvent() {
       this.$emit('updateDialog')
+    },
+    async lookRecruitStudent(id) {
+      const data = await getDeliverStudentList(id)
+
+      this.$emit('showStudent', this.filterList(data))
+      this.closeEvent()
+    },
+    filterList(data) {
+      return data.filter((item) => {
+        return item.deliver.state === 1 || item.deliver.state === 3
+      })
     }
   }
 }
@@ -70,12 +82,14 @@ export default {
 <style lang="less" scoped>
 .recruit-show {
   position: fixed;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: @appColor;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: calc(0.375rem - 1px);
   width: 400px;
-  height: 385px;
+  // height: 385px;
   .close {
     position: absolute;
     top: 0;

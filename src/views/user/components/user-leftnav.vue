@@ -82,9 +82,12 @@ export default {
 </script>
 <style lang="less" scoped>
 .user-leftnav {
-  position: sticky;
-  top: 112px;
-  margin-top: 10px;
-  width: 220px;
+  position: relative;
+  .accordion {
+    position: sticky;
+    top: 112px;
+    margin-top: 10px;
+    width: 220px;
+  }
 }
 </style>

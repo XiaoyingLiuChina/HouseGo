@@ -1,20 +1,10 @@
 <template>
-  <div class="manage-labtor">
+  <div class="recruit-student-list">
     <div class="card">
       <div class="card-header">
-        <h3>管理投递信息</h3>
+        <h5>招新信息编号：{{ index + 1 }}</h5>
       </div>
       <div class="card-body">
-        <div class="card-title">
-          <div class="input-group mb-3 searchbtn">
-            <input type="text" class="form-control" placeholder="人员学号或姓名" v-model="search" />
-            <button class="btn btn-primary" type="button" id="button-addon2" @click="searchPerson">搜索</button>
-          </div>
-          <div>
-            <button class="btn btn-primary" type="button" id="button-addon2" @click="searchlist = list">全部</button>
-            <button class="btn btn-primary" type="button" id="button-addon2" @click="cleanList">筛除已完成</button>
-          </div>
-        </div>
         <div style="overflow: scroll; width: 960px">
           <table class="table table-hover table-bordered text-nowrap" v-if="searchlist" :key="searchlist">
             <thead>
@@ -49,8 +39,6 @@
                 <td v-if="item.resume">{{ item.resume.volunteerone }}</td>
                 <td v-if="item.resume">{{ item.resume.volunteertwo }}</td>
                 <td v-if="item.recruit">{{ item.recruit.endtime }}</td>
-                <!-- vue 3.0废除了 -->
-                <!-- <td v-if="item.deliver">{{ item.deliver.state | filterState }}</td> -->
                 <td v-if="item.deliver" style="color: red">{{ filterState(item.deliver.state) }}</td>
                 <td v-if="item.deliver">
                   <button class="btn btn-secondary btn-sm" v-if="item.deliver.state == 1" @click="refuseMyDeliver(item.deliver.id)">拒绝</button>
@@ -97,13 +85,21 @@
   </div>
 </template>
 <script>
-import { getDeliverByTeacher, refuseDeliver, agreeDeliver } from '@/api/deliver'
+import { getDeliverStudentList, refuseDeliver, agreeDeliver } from '@/api/deliver'
 import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
-  name: 'ManageLabtor',
+  name: 'RecruitStudentList',
+  props: {
+    studentlist: {
+      type: Array
+    },
+    index: {
+      type: Number
+    }
+  },
   data() {
     return {
-      list: [],
+      //   list: [],
       lookMes: {},
       dialogTableVisible: false,
       search: '',
@@ -111,26 +107,13 @@ export default {
     }
   },
   mounted() {
-    this.getList()
+    this.searchlist = this.studentlist
   },
+
   methods: {
     async getList() {
-      const data = await getDeliverByTeacher()
-      this.list = data
-      this.searchlist = data
-    },
-    cleanList() {
-      this.searchlist = this.filterList(this.list)
-    },
-    filterList(data) {
-      return data.filter((item) => {
-        return item.deliver.state === 1 || item.deliver.state === 3
-      })
-    },
-    searchPerson() {
-      const data = this.list.filter((item) => {
-        return item.student.id === this.search.trim() || item.student.name === this.search.trim()
-      })
+      const id = this.searchlist[0].recruit.id
+      const data = await getDeliverStudentList(id)
       this.searchlist = data
     },
     async lookStudent(item) {
@@ -149,7 +132,6 @@ export default {
           const data = await refuseDeliver(id)
           if (data === 2) {
             ElMessage({ type: 'success', message: '拒绝成功' })
-            this.getList()
           }
         })
         .catch(function (err) {
@@ -169,7 +151,6 @@ export default {
           const data = await agreeDeliver(id)
           if (data === 3) {
             ElMessage({ type: 'success', message: '同意成功，等待学生确认' })
-            this.getList()
           }
         })
         .catch(function (err) {
@@ -231,12 +212,14 @@ button {
   margin-right: 5px;
 }
 .card-title {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
   .searchbtn {
-    width: 30%;
+    width: 80%;
   }
+  > button {
+    height: 70%;
+  }
+  width: 50%;
+  display: flex;
 }
 input {
   display: block;

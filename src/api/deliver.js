@@ -52,3 +52,10 @@ export const refuseDeliver = (id) => {
 export const agreeDeliver = (id) => {
   return request(`/deliver/${id}/yes`, 'put')
 }
+/**
+ * 根据招新信息id获取学生列表（包括投递状态）
+ * @param
+ */
+export const getDeliverStudentList = (id) => {
+  return request(`/deliver/getstudent`, 'get', { id })
+}

@@ -33,13 +33,17 @@
             <td>
               <button class="btn btn-secondary btn-sm" @click="deleteMyRecruit(item.id)">删除</button>
               <button class="btn btn-primary btn-sm" @click="editRecruit(item.id)">更新</button>
-              <button class="btn btn-primary btn-sm" @click="showRecruit(item.id)">查看</button>
+              <button class="btn btn-primary btn-sm" @click="showRecruit(item.id, index)">查看</button>
             </td>
           </tr>
         </tbody>
       </table>
+      <div v-if="studentlist.length > 0">
+        <RecruitStudentlist :studentlist="studentlist" :index="index" />
+      </div>
+      <div v-else></div>
     </div>
-    <RecruitShow v-if="showflag" :oneRecruit="oneRecruit" @updateDialog="parentClose" />
+    <RecruitShow v-if="showflag" :oneRecruit="oneRecruit" @updateDialog="parentClose" @showStudent="getStudentList" />
     <RecruitEdit v-if="editflag" :oneRecruit="oneRecruit" @updateDialog="parentClose" @updateList="getList" />
   </div>
 </template>
@@ -48,15 +52,18 @@ import { getRecruitByTeacher, deleteRecruit, getRecruit } from '@/api/recruit'
 import RecruitShow from './recruit-show.vue'
 import RecruitEdit from './recruit-edit.vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import RecruitStudentlist from './recruit-studentlist.vue'
 export default {
   name: 'RecruitList',
-  components: { RecruitShow, RecruitEdit },
+  components: { RecruitShow, RecruitEdit, RecruitStudentlist },
   data() {
     return {
       list: null,
       showflag: false,
       editflag: false,
-      oneRecruit: null
+      oneRecruit: null,
+      studentlist: [],
+      index: 0
     }
   },
   mounted() {
@@ -66,6 +73,33 @@ export default {
     async getList() {
       const data = await getRecruitByTeacher()
       this.list = data
+    },
+    filterState(value) {
+      let res = ''
+      switch (value) {
+        case 1:
+          res = '待审核'
+          break
+        case 2:
+          res = '不通过'
+          break
+        case 3:
+          res = '待确认'
+          break
+        case 4:
+          res = '已拒绝'
+          break
+        case 5:
+          res = '已加入'
+          break
+        case 6:
+          res = '已结束'
+          break
+        default:
+          res = '已删除'
+          break
+      }
+      return res
     },
     async deleteMyRecruit(id) {
       ElMessageBox.confirm('确认删除该招新信息？', '温馨提示', {
@@ -87,15 +121,19 @@ export default {
           ElMessage({ type: 'error', message: '删除失败' })
         })
     },
-    async showRecruit(id) {
+    async showRecruit(id, index) {
       const data = await getRecruit(id)
       this.oneRecruit = data
       this.showflag = true
+      this.index = index
     },
     async editRecruit(id) {
       const data = await getRecruit(id)
       this.oneRecruit = data
       this.editflag = true
+    },
+    getStudentList(data) {
+      this.studentlist = data
     },
     parentClose() {
       this.showflag = false

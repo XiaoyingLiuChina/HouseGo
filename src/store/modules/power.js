@@ -9,6 +9,7 @@ const RecruitList = () => import('@/views/user/components/teacher/recruit-list.v
 const Managelabtor = () => import('@/views/user/components/teacher/manage-labtor.vue')
 const Managelab = () => import('@/views/user/components/teacher/manage-lab.vue')
 const ManageIntroduce = () => import('@/views/user/components/student/manage-introduce.vue')
+const ManageSubtor = () => import('@/views/user/components/teacher/manage-subtor.vue')
 
 const DeliverList = () => import('@/views/user/components/student/deliver-list.vue')
 export default {
@@ -30,6 +31,7 @@ export default {
         { path: '/user/share', component: UserShare, name: 'UserShare' },
         { path: '/user/share/put', component: UserShareform, name: 'UserShareform' },
         { path: '/user/labtor', component: Managelabtor, name: 'Managelabtor' },
+        { path: '/user/subtor', component: ManageSubtor, name: 'ManageSubtor' },
         { path: '/user/lab', component: Managelab, name: 'Managelab' },
         { path: '/user/recruit', component: PublishRecruit, name: 'PublishRecruit' },
         { path: '/user/recruitlist', component: RecruitList, name: 'RecruitList' }

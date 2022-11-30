@@ -42,7 +42,7 @@ export const addLab = (data) => {
   return request('/laboratory', 'post', datajson)
 }
 /**
- * 编辑实验室
+ * 编辑实验室简历
  * @param
  */
 export const editLab = (data) => {
@@ -62,5 +62,13 @@ export const deleteLab = (id) => {
  */
 export const exitLab = () => {
   const { lab, id } = store.state.user.profile
+  return request(`/join/${lab.id}/${id}`, 'delete')
+}
+/**
+ * 删除学生
+ * @param
+ */
+export const exitLabStudent = (id) => {
+  const { lab } = store.state.user.profile
   return request(`/join/${lab.id}/${id}`, 'delete')
 }

@@ -67,9 +67,9 @@ export default {
           name: '招新管理',
           id: 'modules3',
           children: [
-            { name: '发布招新信息', topath: '/user/recruit' },
+            { name: '发布招新', topath: '/user/recruit' },
             { name: '招新信息', topath: '/user/recruitlist' },
-            { name: '管理投递', topath: '/user/labtor' }
+            { name: '审批投递', topath: '/user/labtor' }
           ]
         },
         // {
@@ -83,7 +83,10 @@ export default {
         {
           name: '实验室管理',
           id: 'modules4',
-          children: [{ name: '我的实验室', topath: '/user/lab' }]
+          children: [
+            { name: '实验室简介', topath: '/user/lab' },
+            { name: '人员管理', topath: '/user/subtor' }
+          ]
         }
       ]
     }

@@ -92,7 +92,7 @@ export default {
   .container {
     min-height: 470px;
     display: flex;
-
+    position: relative;
     .main {
       flex: 1;
       margin-left: 10px;

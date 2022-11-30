@@ -50,8 +50,8 @@
 <script>
 import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
-import { getStudent, userLogin } from '@/api/user'
-import { ElMessage } from 'element-plus'
+import { getStudent, userLogin, getUserType, updatePassword } from '@/api/user'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'LoginForm',
   components: {
@@ -105,23 +105,34 @@ export default {
       }
     },
     async ResetPassword() {
-      // const account = document.getElementById('id')
-      // if (/^5120(\d){6}$/.test(account.value)) {
-      //   console.log('即将重置密码')
-      //   try {
-      //     const password = {}
-      //     password.password = '000000'
-      //     const data = await updatePassword(password)
-      //     console.log(data)
-      //     if (data === true) {
-      //       ElMessage({ type: 'success', message: '重置密码成功' })
-      //     }
-      //   } catch (error) {
-      //     ElMessage({ type: 'warning', message: '重置密码出错，请重试' })
-      //   }
-      // } else {
-      //   ElMessage({ type: 'warning', message: '请检查学号是否正确' })
-      // }
+      const account = document.getElementById('id')
+      const id = account.value
+      if (/^(\d){10}$/.test(id)) {
+        const data = await getUserType(id)
+        if (data === 2) {
+          ElMessage({ type: 'warning', message: '没有查找到该账号的用户' })
+        } else {
+          ElMessageBox.confirm('确认重置密码为000000？', '温馨提示', {
+            iconClass: 'el-icon-question', // 自定义图标样式
+            confirmButtonText: '确认', // 确认按钮文字更换
+            cancelButtonText: '取消', // 取消按钮文字更换
+            showClose: true, // 是否显示右上角关闭按钮
+            type: 'warning' // 提示类型  success/info/warning/error
+          })
+            .then(async () => {
+              const password = '000000'
+              const type = data
+              const res = await updatePassword({ id, type, password })
+              if (res === true) {
+                ElMessage({ type: 'success', message: '重置密码成功' })
+              }
+            })
+            .catch(function (err) {
+              console.log(err)
+              // ElMessage({ type: 'error', message: '发生错误，重置失败' })
+            })
+        }
+      }
     }
   }
 }

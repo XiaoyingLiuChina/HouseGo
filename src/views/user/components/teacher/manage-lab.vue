@@ -2,7 +2,7 @@
   <div class="manage-lab">
     <div class="card">
       <div class="card-header">
-        <h3>实验室管理</h3>
+        <h3>实验室简介</h3>
       </div>
       <div class="card-body">
         <div class="show-box" v-if="myLab" v-show="!editbox" :key="myLab">
@@ -17,7 +17,7 @@
             <div><img :src="myLab.image" alt="实验室图片" /></div>
           </div>
 
-          <button class="btn btn-primary" @click="deleteLab">删除实验室</button>
+          <!-- <button class="btn btn-primary" @click="deleteLab">删除实验室</button> -->
           <button class="btn btn-primary" @click="editbox = true">编辑实验室信息</button>
         </div>
         <div class="nobox" v-else v-show="!editbox">
@@ -66,7 +66,7 @@ export default {
         })
         .catch(function (err) {
           console.log(err)
-          ElMessage({ type: 'error', message: '删除实验室失败' })
+          // ElMessage({ type: 'error', message: '删除实验室失败' })
         })
     },
     async updateData() {
