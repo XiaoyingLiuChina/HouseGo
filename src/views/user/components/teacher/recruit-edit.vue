@@ -38,7 +38,7 @@
         </div>
       </div>
       <button class="btn btn-primary" @click="closeEvent">取消</button>
-      <button class="btn btn-primary" type="submit" @click="editMyRecruit">确认更新</button>
+      <button class="btn btn-primary" type="submit">确认更新</button>
     </form>
 
     <div class="close"><button type="button" class="btn-close" aria-label="Close" @click="closeEvent"></button></div>
@@ -81,7 +81,6 @@ export default {
           const putRecruit = {}
           Object.assign(putRecruit, this.needUpdate, { endtime })
           const data = await editRecruit(putRecruit)
-          console.log(data === true)
           if (data === true) {
             ElMessage({ type: 'success', message: '更新成功' })
             this.closeEvent()

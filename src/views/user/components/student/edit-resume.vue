@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-import { addResume, editResume, getResume } from '@/api/resume'
+import { addResume, editResume } from '@/api/resume'
 import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'EditBox',
@@ -55,12 +55,10 @@ export default {
       } else {
         const data = await addResume(this.resume)
         if (data === true) {
-          ElMessageBox({ type: 'success', text: '您已经成功添加了自己的简历！' })
-          const resume = await getResume(this.$store.state.user.profile.id)
-          this.$store.commit('user/setUser', { resume })
+          ElMessage({ type: 'success', message: '您已经成功添加了自己的简历！' })
           this.$router.go({ path: '/user/introduce' })
         } else {
-          ElMessageBox({ type: 'error', text: '出错，添加未成功' })
+          ElMessage({ type: 'error', message: '出错，添加未成功' })
         }
       }
     },
@@ -80,14 +78,11 @@ export default {
             const data = await editResume(this.resume)
             if (data === true) {
               ElMessage({ type: 'success', message: '修改成功！' })
-              const resume = await getResume(this.$store.state.user.profile.id)
-              this.$store.commit('user/setUser', { resume })
               this.$router.go({ path: '/user/introduce' })
             }
           })
           .catch(function (err) {
             console.log(err)
-            ElMessage({ type: 'error', message: '出错，修改未成功' })
           })
       }
     }

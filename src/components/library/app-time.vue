@@ -59,17 +59,17 @@ export default {
 <style lang="less" scoped>
 .calendar {
   position: sticky;
-  top: 300px;
+  top: 116px;
   border-radius: 10px;
-  background-color: #f8fffa;
+  background-color: @appColor;
   text-align: center;
   // padding: 10px;
-  color: #55b46c;
+  color: #5579b4;
   padding-bottom: 15px;
   .title {
     color: #fff;
     // text-align: center;
-    background: #6ec884;
+    background: #07889b;
     padding: 10px;
     font-size: 15px;
   }

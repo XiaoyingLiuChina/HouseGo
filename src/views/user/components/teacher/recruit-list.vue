@@ -41,7 +41,15 @@
       <div v-if="studentlist.length > 0">
         <RecruitStudentlist :studentlist="studentlist" :index="index" />
       </div>
-      <div v-else></div>
+      <div v-else-if="studentlist.length === 0">
+        <div class="card">
+          <div class="card-header">
+            <h5 v-if="index === -1">请选择一条招新信息</h5>
+            <h5 v-else>招新信息编号：{{ index + 1 }}</h5>
+          </div>
+          <div class="card-body">您已经处理完毕，没有待审批的学生</div>
+        </div>
+      </div>
     </div>
     <RecruitShow v-if="showflag" :oneRecruit="oneRecruit" @updateDialog="parentClose" @showStudent="getStudentList" />
     <RecruitEdit v-if="editflag" :oneRecruit="oneRecruit" @updateDialog="parentClose" @updateList="getList" />
@@ -63,7 +71,8 @@ export default {
       editflag: false,
       oneRecruit: null,
       studentlist: [],
-      index: 0
+      index: -1,
+      mindex: -1
     }
   },
   mounted() {
@@ -125,7 +134,7 @@ export default {
       const data = await getRecruit(id)
       this.oneRecruit = data
       this.showflag = true
-      this.index = index
+      this.mindex = index
     },
     async editRecruit(id) {
       const data = await getRecruit(id)
@@ -134,6 +143,7 @@ export default {
     },
     getStudentList(data) {
       this.studentlist = data
+      this.index = this.mindex
     },
     parentClose() {
       this.showflag = false

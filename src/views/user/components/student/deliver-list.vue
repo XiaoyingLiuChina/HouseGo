@@ -148,6 +148,7 @@ export default {
               type: 'success',
               message: '撤销成功!'
             })
+            this.getList()
           }
         })
         // .then((data) => {
@@ -171,6 +172,7 @@ export default {
           const data = await deleteDeliver(id)
           if (data === '删除成功') {
             ElMessage({ type: 'success', message: '删除成功！' })
+            this.getList()
           }
         })
         .catch(function (err) {
@@ -190,6 +192,7 @@ export default {
           const data = await refuseDeliver(id)
           if (data === 4) {
             ElMessage({ type: 'success', message: '拒绝成功' })
+            this.getList()
           }
         })
         .catch(function (err) {
@@ -209,6 +212,7 @@ export default {
           const data = await agreeDeliver(id)
           if (data === 5) {
             ElMessage({ type: 'success', message: '恭喜你成功加入该实验室，重新登录就可以发布分享了' })
+            this.getList()
           }
         })
         .catch(function (err) {

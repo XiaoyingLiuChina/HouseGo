@@ -2,7 +2,7 @@
   <div class="recruit-student-list">
     <div class="card">
       <div class="card-header">
-        <h5>招新信息编号：{{ index + 1 }}</h5>
+        <h5>招新信息编号：{{ index + 2 }}</h5>
       </div>
       <div class="card-body">
         <div style="overflow: scroll; width: 960px">
@@ -99,7 +99,6 @@ export default {
   },
   data() {
     return {
-      //   list: [],
       lookMes: {},
       dialogTableVisible: false,
       search: '',
@@ -108,6 +107,7 @@ export default {
   },
   mounted() {
     this.searchlist = this.studentlist
+    console.log(this.searchlist)
   },
 
   methods: {

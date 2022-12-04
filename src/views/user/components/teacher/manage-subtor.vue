@@ -10,6 +10,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">学生学号</th>
+              <th scope="col">班级</th>
               <th scope="col">学生姓名</th>
               <th scope="col">学生头像</th>
               <th scope="col">联系方式</th>
@@ -20,10 +21,13 @@
             <tr v-for="(item, index) in list" :key="index">
               <th scope="row">{{ index }}</th>
               <td>{{ item.id }}</td>
+              <td>{{ item.clas }}</td>
               <td>{{ item.name }}</td>
               <td><img :src="item.image" alt="学生照片" /></td>
               <td>{{ item.telephone }}</td>
-              <td><button class="btn btn-primary" @click="deleteStudent(item.id)">删除</button></td>
+              <td>
+                <button class="btn btn-danger" @click="deleteStudent(item.id)">删除</button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -82,6 +86,9 @@ tbody {
   th,
   td {
     vertical-align: middle;
+  }
+  button {
+    margin-right: 5px;
   }
 }
 </style>

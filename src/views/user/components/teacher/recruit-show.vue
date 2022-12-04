@@ -38,7 +38,7 @@
       </tbody>
     </table>
     <div style="text-align: center; margin: 10px auto">
-      <button type="button" class="btn btn-primary" @click="lookRecruitStudent(recruitinfo.recruit.id)">查看当前招新信息的申请的学生</button>
+      <button type="button" class="btn btn-primary" @click="lookRecruitStudent(recruitinfo.recruit.id, index)">查看当前招新信息的申请的学生</button>
     </div>
     <div class="close"><button type="button" class="btn-close" aria-label="Close" @click="closeEvent"></button></div>
   </div>
@@ -65,9 +65,8 @@ export default {
     closeEvent() {
       this.$emit('updateDialog')
     },
-    async lookRecruitStudent(id) {
+    async lookRecruitStudent(id, index) {
       const data = await getDeliverStudentList(id)
-
       this.$emit('showStudent', this.filterList(data))
       this.closeEvent()
     },

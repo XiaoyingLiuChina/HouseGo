@@ -13,7 +13,7 @@
           <!-- <li class="nav-item"><RouterLink to="/register" class="nav-link">马上注册</RouterLink></li> -->
         </template>
         <li class="nav-item"><RouterLink class="nav-link" to="/user">个人中心</RouterLink></li>
-        <li class="nav-item"><a class="nav-link" href="#">关于我们</a></li>
+        <li class="nav-item"><RouterLink class="nav-link" to="/our">关于我们</RouterLink></li>
       </ul>
     </div>
   </div>

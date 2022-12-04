@@ -15,7 +15,7 @@ export default {
           ]
         },
         {
-          name: '分享区管理',
+          name: '分享管理',
           id: 'modules2',
           children: [
             { name: '查看分享', topath: '/user/share' },
@@ -56,7 +56,7 @@ export default {
           ]
         },
         {
-          name: '分享区管理',
+          name: '分享管理',
           id: 'modules2',
           children: [
             { name: '查看分享', topath: '/user/share' },
@@ -68,7 +68,7 @@ export default {
           id: 'modules3',
           children: [
             { name: '发布招新', topath: '/user/recruit' },
-            { name: '招新信息', topath: '/user/recruitlist' },
+            { name: '招新列表', topath: '/user/recruitlist' },
             { name: '审批投递', topath: '/user/labtor' }
           ]
         },

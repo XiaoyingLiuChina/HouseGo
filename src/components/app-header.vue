@@ -86,6 +86,6 @@ export default {
 .router-link-exact-active {
   color: #fff;
   background-color: #07889b;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 </style>

@@ -2,13 +2,13 @@
   <footer class="app-footer">
     <!-- 版权信息 -->
     <div class="copyright">
-      <p>
+      <!-- <p>
         <a href="javascript:;">关于我们</a>
         <a href="javascript:;">帮助中心</a>
         <a href="javascript:;">商务合作</a>
         <a href="javascript:;">搜索推荐</a>
         <a href="javascript:;">友情链接</a>
-      </p>
+      </p> -->
       <p>CopyRight © 软件开发实践2小分队</p>
     </div>
   </footer>
@@ -23,13 +23,13 @@ export default {
   background-color: @appColor;
   .copyright {
     height: 140px;
-    padding-top: 40px;
+    // padding-top: 40px;
     text-align: center;
     color: #999;
     font-size: 15px;
     p {
-      line-height: 1;
-      margin-bottom: 20px;
+      line-height: 140px;
+      // margin-bottom: 20px;
     }
     a {
       text-decoration: none;

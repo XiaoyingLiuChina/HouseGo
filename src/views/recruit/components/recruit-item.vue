@@ -88,7 +88,7 @@ export default {
     },
     async joinMyLab() {
       const flag = this.$store.state.user.profile
-      if (flag.resume === null) {
+      if (flag.resume === null || flag.resume === '') {
         ElMessage({ type: 'warning', message: '你还没有添加简历哦，先去添加简历吧' })
       } else {
         ElMessageBox.confirm('确认投递该实验室？', '温馨提示', {
@@ -102,6 +102,10 @@ export default {
             const data = await studentDeliver(this.$route.params.id)
             if (data === '投递成功') {
               ElMessage({ type: 'success', message: data })
+            } else if (data === '你已加入实验室，无法投递') {
+              ElMessage({ type: 'warning', message: data })
+            } else if (data === '你已投递且处于处理状态,勿重复投递') {
+              ElMessage({ type: 'warning', message: data })
             }
           })
           .catch(function (err) {

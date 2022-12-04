@@ -117,6 +117,7 @@ import store from '@/store'
 import { h } from 'vue'
 const Layout = () => import('@/views/Layout.vue')
 const Home = () => import('@/views/home/index')
+const HomeOur = () => import('@/views/home/components/home-our.vue')
 // 搜索出来的实验室相关
 const SearchLabs = () => import('@/views/labs/components/labs-relevant.vue')
 // 分享区
@@ -151,6 +152,7 @@ const routes = [
           { path: ':id', component: RecruitItem }
         ]
       },
+
       {
         path: '/labs',
         component: { render: () => h(<RouterView />) },
@@ -170,6 +172,10 @@ const routes = [
     ]
   },
   { path: '/login', component: Login },
+  {
+    path: '/our',
+    component: HomeOur
+  },
   {
     path: '/user',
     component: User,
