@@ -4,7 +4,7 @@
     <!-- <form @submit.prevent="login()"> -->
     <Form class="userinfo" :validation-schema="mySchema" autocomplete="off" v-slot="{ errors }" @submit="login">
       <div class="row">
-        <label for="account" class="col-sm-2 col-form-label align-self-center">学号</label>
+        <label for="account" class="col-sm-2 col-form-label align-self-center">工号</label>
         <div class="col align-self-center">
           <div class="errorShow" v-if="errors.id"><i class="bi bi-exclamation-triangle" />{{ errors.id }}</div>
         </div>
