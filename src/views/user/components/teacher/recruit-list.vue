@@ -19,8 +19,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in list" :key="item.id">
-            <th scope="row">{{ index + 1 }}</th>
+          <tr v-for="(item, i) in list" :key="item.id">
+            <th scope="row">{{ i + 1 }}</th>
             <td>{{ item.direction }}</td>
             <td>{{ item.people }}</td>
             <td class="introduce">{{ item.introduce }}</td>
@@ -33,7 +33,7 @@
             <td>
               <button class="btn btn-secondary btn-sm" @click="deleteMyRecruit(item.id)">删除</button>
               <button class="btn btn-primary btn-sm" @click="editRecruit(item.id)">更新</button>
-              <button class="btn btn-primary btn-sm" @click="showRecruit(item.id, index)">查看</button>
+              <button class="btn btn-primary btn-sm" @click="showRecruit(item.id, i)">查看</button>
             </td>
           </tr>
         </tbody>
@@ -45,7 +45,7 @@
         <div class="card">
           <div class="card-header">
             <h5 v-if="index === -1">请选择一条招新信息</h5>
-            <h5 v-else>招新信息编号：{{ index + 1 }}</h5>
+            <h5 v-else>招新信息编号：{{ index }}</h5>
           </div>
           <div class="card-body">您已经处理完毕，没有待审批的学生</div>
         </div>
@@ -134,7 +134,7 @@ export default {
       const data = await getRecruit(id)
       this.oneRecruit = data
       this.showflag = true
-      this.mindex = index
+      this.mindex = index + 1
     },
     async editRecruit(id) {
       const data = await getRecruit(id)

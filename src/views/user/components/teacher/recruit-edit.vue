@@ -132,6 +132,9 @@ export default {
   .box {
     margin-top: 15px;
   }
+  button {
+    margin-right: 5px;
+  }
   .close {
     position: absolute;
     top: 0;
