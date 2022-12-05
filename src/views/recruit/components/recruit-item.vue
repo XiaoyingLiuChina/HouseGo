@@ -130,6 +130,7 @@ td {
 }
 .mainbox {
   background-color: @appColor;
+  margin: 10px 0;
   display: flex;
   .box {
     padding: 15px 15px 0 15px;

@@ -1,22 +1,28 @@
 <template>
   <div class="recruit row container">
-    <div class="choice"><h4>已选标签：</h4></div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><RouterLink to="/">首页</RouterLink></li>
+        <li class="breadcrumb-item active" aria-current="page">招新信息</li>
+      </ol>
+    </nav>
+    <div class="choice"><h5>搜索已选标签：</h5></div>
     <recruitFilterVue :list="mylist" :key="mylist" @updatelist="filterList" />
     <div ref="target" class="col-10 recruit-list">
       <RouterLink v-for="item in list" class="card mb-2" :key="item.id" :to="`/recruit/${item.recruit.id}`">
+        <div class="card-header">
+          <h5 class="card-title">实验室名称：{{ item.laboratory.name }}</h5>
+          <span>已投递人数：{{ item.recruit.applypeople }}</span>
+        </div>
         <div class="card-body">
-          <div class="firstrow">
-            <div>
-              <h5 class="card-title">实验室名称：{{ item.laboratory.name }}</h5>
-              <p class="card-text mb-2">招新介绍：{{ item.recruit.introduce }}</p>
-            </div>
-            <img :src="item.laboratory.image" class="img-thumbnail" />
-          </div>
-          <div class="card-bottom mb-2 text-muted">
-            <div class="tag">招新方向：{{ item.recruit.direction }}</div>
-            <div class="time">发布日期：{{ item.recruit.starttime }}</div>
-            <div class="time">截止日期：{{ item.recruit.endtime }}</div>
-          </div>
+          <p class="card-text mb-2">招新介绍：{{ item.recruit.introduce }}</p>
+          <img :src="item.laboratory.image" class="img-thumbnail" />
+        </div>
+        <!-- <div class="card-bottom mb-2 text-muted"> -->
+        <div class="card-footer text-muted">
+          <div class="tag">招新方向：{{ item.recruit.direction }}</div>
+          <div class="time">发布日期：{{ item.recruit.starttime }}</div>
+          <div class="time">截止日期：{{ item.recruit.endtime }}</div>
         </div>
       </RouterLink>
     </div>
@@ -43,11 +49,13 @@ export default {
   },
   mounted() {
     this.getList()
+    document.documentElement.scrollTop = 0
   },
   methods: {
     async getList() {
       const data = await getRecruit(-1)
       this.mylist = data.reverse()
+      console.log(this.mylist)
     },
     filterList(newlist) {
       this.list = newlist
@@ -56,34 +64,28 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+nav {
+  margin: 10px 0;
+  font-size: 18px;
+}
 .card {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 240px;
+  .hoverShadow ();
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+  }
   .card-body {
     height: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    .firstrow {
-      display: flex;
-      justify-content: space-between;
-      & > div {
-        display: flex;
-        flex-direction: column;
-        // justify-content: space-between;
-      }
-      img {
-        padding-right: 10px;
-        width: 250px;
-        height: 190px;
-      }
+    img {
+      padding-right: 10px;
+      width: 250px;
+      height: 190px;
     }
   }
-  .hoverShadow ();
 
-  .card-bottom {
+  .card-footer {
     color: #6c757d;
     font-size: 12px;
     span {
@@ -99,11 +101,13 @@ export default {
 .recruit {
   width: 100%;
   padding: 0;
+  margin: 10px auto;
   .choice {
     margin: 10px auto;
   }
   .recruit-list {
     margin-top: 10px;
+    background-color: @appColor;
   }
   .nolist {
     text-align: center;

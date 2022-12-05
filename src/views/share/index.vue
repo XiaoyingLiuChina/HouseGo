@@ -1,6 +1,12 @@
 <template>
   <div class="share-modules" ref="target">
-    <h4 style="padding: 0 20px">来看看加入实验室同学的心得分享，更有利于帮助你了解实验室日常</h4>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><RouterLink to="/">首页</RouterLink></li>
+        <li class="breadcrumb-item active" aria-current="page">分享区</li>
+      </ol>
+    </nav>
+    <h5 style="padding: 10px 20px">来看看加入实验室同学的心得分享，更有利于帮助你了解实验室日常</h5>
     <div class="app-share" v-if="list.length > 0" :key="list">
       <div class="card" v-for="(item, index) in list" :key="index">
         <div class="card-header">
@@ -194,10 +200,14 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+nav {
+  margin: 10px 0;
+  font-size: 18px;
+}
 .share-modules {
-  background-color: @appColor;
-
+  margin-top: 10px;
   .app-share {
+    background-color: @appColor;
     padding: 12px;
     .card {
       margin: 5px;
@@ -208,7 +218,7 @@ export default {
           font-size: 20px;
         }
       }
-      .hoverShadow();
+      // .hoverShadow();
       .card-header {
         display: flex;
         justify-content: space-between;

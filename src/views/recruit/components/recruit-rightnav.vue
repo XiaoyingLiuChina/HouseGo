@@ -4,9 +4,9 @@
     <div class="user" v-if="user.id != ''">
       <img :src="user.image" alt="用户头像" class="img-thumbnail" />
       <div class="resume">
-        <div v-if="user.resume === '' || user.resume === null" style="margin-top: 8px">
+        <div v-if="(user.resume === '' || user.resume === null) && user.type === '1'" style="margin-top: 8px">
           <p>用户名：{{ user.name }}</p>
-          <p>简历还为完善，去<RouterLink to="/user">个人中心</RouterLink>完善</p>
+          <p>去<RouterLink to="/user">个人中心</RouterLink>完善简历</p>
         </div>
         <div v-else style="margin-top: 8px">
           <p>用户名：{{ user.name }}</p>

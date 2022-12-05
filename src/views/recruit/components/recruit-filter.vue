@@ -86,11 +86,11 @@ export default {
 .recruit-filter {
   background: @appColor;
   padding: 15px;
-  display: flex;
-  align-items: center;
+  // display: flex;
+  // align-items: center;
   .item {
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     line-height: 40px;
     .head {
       width: 100px;
@@ -111,7 +111,8 @@ export default {
   }
 }
 button {
+  float: right;
   margin-right: 15px;
-  height: 50%;
+  // height: 50%;
 }
 </style>

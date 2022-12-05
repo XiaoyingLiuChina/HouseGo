@@ -25,6 +25,9 @@
             <li class="nav-item">
               <RouterLink class="nav-link" to="/recruit">招新信息</RouterLink>
             </li>
+            <li class="nav-item">
+              <RouterLink class="nav-link" to="/labs">实验室</RouterLink>
+            </li>
           </ul>
           <slot />
           <Form class="d-flex" role="search" @submit="searchLabs" autocomplete="off">

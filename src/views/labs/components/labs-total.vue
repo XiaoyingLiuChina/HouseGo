@@ -52,6 +52,8 @@ nav {
   font-size: 18px;
 }
 .labs-list {
+  background-color: @appColor;
+  margin-bottom: 10px;
   li {
     margin-bottom: 15px;
     .card {

@@ -3,6 +3,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">首页</RouterLink></li>
+        <li class="breadcrumb-item"><RouterLink to="/labs">实验室</RouterLink></li>
         <li class="breadcrumb-item active" aria-current="page" :key="lab" v-if="lab">{{ lab.name }}</li>
       </ol>
     </nav>
