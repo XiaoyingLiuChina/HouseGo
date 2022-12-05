@@ -1,11 +1,18 @@
 import store from '@/store/index'
 import request from '@/utils/request'
 /**
- * 获取分享列表
+ * 获取个人分享列表
  * @param
  */
 export const getShareList = () => {
   const { id } = store.state.user.profile
+  return request('/share', 'get', { id })
+}
+/**
+ * 获取学生分享列表
+ * @param
+ */
+export const getStudentShareList = (id) => {
   return request('/share', 'get', { id })
 }
 /**
