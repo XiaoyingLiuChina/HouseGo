@@ -4,9 +4,9 @@ import store from '@/store/index'
 export default {
   // 用户名校验
   id(value) {
-    if (!value) return '请输入你的工号'
+    if (!value) return '请输入你的账号'
     // 规则：字母开头6-20字符之间
-    if (!/^(\d){10}$/.test(value)) return '请输入正确的工号'
+    if (!/^(\d){10}$/.test(value)) return '请输入正确的账号'
     return true
   },
   // 用户校验且校验唯一性

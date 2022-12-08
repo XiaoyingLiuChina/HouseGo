@@ -4,11 +4,11 @@
     <!-- <form @submit.prevent="login()"> -->
     <Form class="userinfo" :validation-schema="mySchema" autocomplete="off" v-slot="{ errors }" @submit="login">
       <div class="row">
-        <label for="account" class="col-sm-2 col-form-label align-self-center">工号</label>
+        <label for="account" class="col-sm-2 col-form-label align-self-center">账号</label>
         <div class="col align-self-center">
           <div class="errorShow" v-if="errors.id"><i class="bi bi-exclamation-triangle" />{{ errors.id }}</div>
         </div>
-        <Field :class="{ error: errors.id }" class="form-control" name="id" id="id" type="text" placeholder="请输入学号" />
+        <Field :class="{ error: errors.id }" class="form-control" name="id" id="id" type="text" placeholder="请输入学号/工号" />
       </div>
       <div class="row">
         <label for="pw" class="col-sm-2 col-form-label align-self-center">密码</label>
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="row last-row" style="height: 30px">
-        <div class="forget col"><span @click="ResetPassword">忘记密码？</span></div>
+        <div class="forget col"><span @click="this.dialogFormVisible = true">忘记密码？</span></div>
         <div class="gree col-9">
           <div class="errorShow" v-if="errors.isAgree">
             <i class="bi bi-exclamation-triangle" />
@@ -45,13 +45,40 @@
       </div>
       <button type="submit" class="btn btn-primary">登录</button>
     </Form>
+    <el-dialog v-model="dialogFormVisible" title="重置密码" width="28%">
+      <el-form :model="myform">
+        <el-form-item label="工号" :label-width="formLabelWidth">
+          <el-input v-model="myform.id" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="姓名" :label-width="formLabelWidth">
+          <el-input v-model="myform.name" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="用户类型" :label-width="formLabelWidth">
+          <el-radio-group v-model="myform.type">
+            <el-radio :label="1">学生</el-radio>
+            <el-radio :label="0">老师</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="电话" :label-width="formLabelWidth">
+          <el-input v-model="myform.telephone" autocomplete="off" />
+        </el-form-item>
+        <p style="text-align: end">重置后密码为：000000</p>
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取消</el-button>
+          <el-button type="primary" @click="ResetPassword"> 确定重置 </el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 <script>
 import { Form, Field } from 'vee-validate'
 import veeSchema from '@/utils/vee-validate-schema'
-import { getStudent, userLogin, getUserType, updatePassword } from '@/api/user'
-import { ElMessage, ElMessageBox } from 'element-plus'
+// import { getStudent, userLogin, getUserType, updatePassword } from '@/api/user'
+import { getStudent, userLogin, updatePassword } from '@/api/user'
+import { ElMessage } from 'element-plus'
 export default {
   name: 'LoginForm',
   components: {
@@ -65,7 +92,15 @@ export default {
         password: veeSchema.password,
         type: veeSchema.type,
         isAgree: veeSchema.isAgree
-      }
+      },
+      dialogFormVisible: false,
+      myform: {
+        id: '',
+        name: '',
+        type: '',
+        telephone: ''
+      },
+      formLabelWidth: '70px'
     }
   },
   methods: {
@@ -105,33 +140,26 @@ export default {
       }
     },
     async ResetPassword() {
-      const account = document.getElementById('id')
-      const id = account.value
-      if (/^(\d){10}$/.test(id)) {
-        const data = await getUserType(id)
-        if (data === 2) {
-          ElMessage({ type: 'warning', message: '没有查找到该账号的用户' })
+      let flag = /^\w{6,24}$/.test(this.myform.id) && this.myform.type !== ''
+      flag = flag && /^\d{11}$/.test(this.myform.telephone)
+      flag = flag && this.myform.id !== '' && this.myform.telephone !== '' && this.myform.name !== ''
+      if (flag) {
+        console.log(this.myform)
+        const data = await updatePassword(this.myform)
+        if (data === true) {
+          ElMessage({ type: 'success', message: '重置密码成功！' })
+          this.myform = {
+            id: '',
+            name: '',
+            type: '',
+            telephone: ''
+          }
+          this.dialogFormVisible = false
         } else {
-          ElMessageBox.confirm('确认重置密码为000000？', '温馨提示', {
-            iconClass: 'el-icon-question', // 自定义图标样式
-            confirmButtonText: '确认', // 确认按钮文字更换
-            cancelButtonText: '取消', // 取消按钮文字更换
-            showClose: true, // 是否显示右上角关闭按钮
-            type: 'warning' // 提示类型  success/info/warning/error
-          })
-            .then(async () => {
-              const password = '000000'
-              const type = data
-              const res = await updatePassword({ id, type, password })
-              if (res === true) {
-                ElMessage({ type: 'success', message: '重置密码成功' })
-              }
-            })
-            .catch(function (err) {
-              console.log(err)
-              // ElMessage({ type: 'error', message: '发生错误，重置失败' })
-            })
+          ElMessage({ type: 'warning', message: '重置失败，请确定表单填写正确！' })
         }
+      } else {
+        ElMessage({ type: 'warning', message: '请确定表单填写正确！' })
       }
     }
   }
@@ -189,5 +217,16 @@ export default {
   .last-row {
     font-size: 12px;
   }
+
+  // .el-dialog {
+  //   // width: 458px;
+  //   .el-button--text {
+  //     margin-right: 15px;
+  //   }
+
+  //   .el-input {
+  //     width: 280px;
+  //   }
+  // }
 }
 </style>

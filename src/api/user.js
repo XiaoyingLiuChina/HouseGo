@@ -49,13 +49,13 @@ export const updateUser = (needUpdate) => {
   }
 }
 
-/**
- * 查看用户类型
- * @param
- */
-export const getUserType = (id) => {
-  return request(`user/${id}`, 'post')
-}
+// /**
+//  * 查看用户类型
+//  * @param
+//  */
+// export const getUserType = (id) => {
+//   return request(`user/${id}`, 'post')
+// }
 
 // /**
 //  * 修改头像
@@ -67,21 +67,26 @@ export const getUserType = (id) => {
 //   else return request('user/updatestudent', 'post', jsondata)
 // }
 /**
- * 修改密码(重置密码专用)
+ * 修改密码
  * @param
  */
-export const updatePassword = ({ id, type, password }) => {
-  const data = {}
-  Object.assign(data, { id, password })
-  console.log(data)
+export const updatePassword = (data) => {
   const jsondata = JSON.stringify(data)
-  console.log(jsondata)
-  if (type === 0) {
-    return request('user/updateteacher', 'post', jsondata)
-  } else {
-    return request('user/updatestudent', 'post', jsondata)
-  }
+  return request('user/resetpassword', 'post', jsondata)
 }
+
+// export const updatePassword = ({ id, type, password }) => {
+//   const data = {}
+//   Object.assign(data, { id, password })
+//   console.log(data)
+//   const jsondata = JSON.stringify(data)
+//   console.log(jsondata)
+//   if (type === 0) {
+//     return request('user/updateteacher', 'post', jsondata)
+//   } else {
+//     return request('user/updatestudent', 'post', jsondata)
+//   }
+// }
 
 /**
  * 老师管理获取实验室学生
