@@ -8,7 +8,7 @@
     </nav>
     <h5 style="padding: 10px 20px">来看看加入实验室同学的心得分享，更有利于帮助你了解实验室日常</h5>
     <div class="app-share" v-if="list.length > 0" :key="list">
-      <div class="card" v-for="(item, index) in list" :key="index">
+      <div class="card" v-for="(item, index) in list" :key="index" @click="this.$router.push({ path: `/share/${item.share.id}` })">
         <div class="card-header">
           <div>
             <div v-if="item.student">
@@ -41,7 +41,7 @@
           </div>
           <div class="publish-nice text-muted">
             <small>发布时间：{{ item.share.time }}</small>
-            <span @click="hitLike(item.share.id)"><i class="bi bi-hand-thumbs-up"></i> {{ item.share.like }}</span>
+            <span @click.stop="hitLike(item.share.id)"><i class="bi bi-hand-thumbs-up"></i> {{ item.share.like }}</span>
           </div>
         </div>
       </div>
@@ -68,7 +68,8 @@ export default {
   },
   methods: {
     async hitLike(id) {
-      if (this.$store.state.user.profile.id === '') {
+      const flag = this.$store.state.user.profile.id
+      if (flag === '' || flag === undefined) {
         ElMessage({ type: 'warning', message: '请先登录' })
       } else {
         const data = await hitLikeShare(id)
@@ -218,7 +219,7 @@ nav {
           font-size: 20px;
         }
       }
-      // .hoverShadow();
+      .hoverShadow();
       .card-header {
         display: flex;
         justify-content: space-between;

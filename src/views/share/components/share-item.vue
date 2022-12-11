@@ -180,7 +180,8 @@ export default {
       return `<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif" align="middle">`
     },
     async hitLike(id) {
-      if (this.$store.state.user.profile.id === '') {
+      const flag = this.$store.state.user.profile.id
+      if (flag === '' || flag === undefined) {
         ElMessage({ type: 'warning', message: '请先登录' })
       } else {
         const data = await hitLikeShare(id)
