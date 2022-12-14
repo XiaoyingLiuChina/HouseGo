@@ -47,7 +47,7 @@
     </Form>
     <el-dialog v-model="dialogFormVisible" title="重置密码" width="28%">
       <el-form :model="myform">
-        <el-form-item label="工号" :label-width="formLabelWidth">
+        <el-form-item label="账号" :label-width="formLabelWidth">
           <el-input v-model="myform.id" autocomplete="off" />
         </el-form-item>
         <el-form-item label="姓名" :label-width="formLabelWidth">

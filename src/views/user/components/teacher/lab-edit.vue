@@ -89,7 +89,7 @@ export default {
         })
     },
     async addMyLab() {
-      ElMessageBox.confirm('确认修改实验室简介？', '温馨提示', {
+      ElMessageBox.confirm('确认创建实验室？', '温馨提示', {
         iconClass: 'el-icon-question', // 自定义图标样式
         confirmButtonText: '确认', // 确认按钮文字更换
         cancelButtonText: '取消', // 取消按钮文字更换
